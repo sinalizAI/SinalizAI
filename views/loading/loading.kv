@@ -1,0 +1,32 @@
+<LoadingScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size: self.size
+
+        canvas.before:
+            Color:
+                rgba: 183/255, 199/255, 235/255, 1  
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        MDAnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            size_hint_y: 1 
+
+            FitImage:
+                source: "C:\\frontend\\assets\\images\\Loading_Image.png"
+                size_hint: None, None
+                size: 60, 60
+
+        MDAnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'bottom'  
+            size_hint_y: None
+            height: self.children[0].height  
+            
+            FitImage:
+                source: "C:\\frontend\\assets\\images\\nome_sinalizAI.png"
+                size_hint: None, None
+                size: 200, 200
