@@ -9,12 +9,12 @@
             size_hint_y: None
             height: "56dp"
 
-            title: "[b][font=C:/frontend/assets/fonts/PT_Serif/PTSerif-Bold.ttf][color=#000000][size=30]Sinaliz[/size][/color][/font] [font=C:/frontend/assets/fonts/PT_Serif/PTSerif-Regular.ttf][color=#FFFFFF][size=30]AI[/size][/color][/font][/b]"
+            title: "[b][font=views/assets/fonts/PT_Serif/PTSerif-Bold.ttf][color=#000000][size=30]Sinaliz[/size][/color][/font] [font=views/assets/fonts/PT_Serif/PTSerif-Regular.ttf][color=#FFFFFF][size=30]AI[/size][/color][/font][/b]"
             specific_text_color: 1, 1, 1, 1
 
         FitImage:
             id: intro_image
-            source: "C:/frontend/assets/images/Image_Intro.png"
+            source: "views/assets/images/Image_Intro.png"
             size_hint: None, None
             size: "300dp", "300dp"
             pos_hint: {"center_x": 0.5}
@@ -48,8 +48,8 @@
                 shorten: True  
                 size_hint_y: None
                 height: self.texture_size[1]  
-                font_name: "C:/frontend/assets/fonts/palanquin/palanquin-regular.ttf"
-
+                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                
             MDLabel:
                 text: "Traduza Libras para o português em tempo real."
                 theme_text_color: "Custom"
@@ -61,7 +61,7 @@
                 shorten: True  
                 size_hint_y: None
                 height: self.texture_size[1] 
-                font_name: "C:/frontend/assets/fonts/palanquin/palanquin-regular.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
 
         MDBoxLayout:
             orientation: "vertical"
@@ -73,7 +73,7 @@
 
             MDLabel:
                 text: "Para começar:"
-                font_name: "C:/frontend/assets/fonts/Palanquin_Dark/PalanquinDark-Regular.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
                 font_size: "14sp"
@@ -86,7 +86,7 @@
                 text: "Já tenho uma conta"
                 size_hint_x: 1
                 md_bg_color: 0.788, 0.835, 0.941, 1 
-                font_name: "C:/frontend/assets/fonts/palanquin/palanquin-regular.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
                 elevation: 4  
@@ -94,18 +94,20 @@
                 line_width: 1 
                 
 
+
             MDFillRoundFlatButton:
                 id: criar_button  
                 text: "Criar uma conta"
                 size_hint_x: 1
                 md_bg_color: 1, 1, 1, 1  
-                font_name: "C:/frontend/assets/fonts/palanquin/palanquin-regular.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
                 elevation: 4  
                 line_color: 0.8, 0.8, 0.8, 1 
                 line_width: 1  
                 
+
 
             MDBoxLayout:
                 size_hint: 1, None
@@ -129,10 +131,9 @@
                     theme_text_color: "Custom"
                     text_color: 0, 0, 0, 1
                     font_size: "13sp"
-                    font_name: "C:/frontend/assets/fonts/palanquin/palanquin-regular.ttf"
+                    font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                     halign: "left"
                     valign: "center"
                     pos_hint: {"center_y": 1.01}
                     height: self.texture_size[1]
                     text_size: self.width, None
-                    
