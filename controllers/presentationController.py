@@ -3,15 +3,15 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
 
-Builder.load_file("home.kv")
+Builder.load_file("views/presentation_page/presentation.kv")
 
-class HomeScreen(Screen):
+class PresentationScreen(Screen):
     pass
 
-class Home(MDApp):
+class Presentation(MDApp):  
     def build(self):
         Window.size = (360, 640)  
-        return HomeScreen()     
+        return PresentationScreen()
 
 if __name__ == '__main__':
-    Home().run()
+    Presentation().run()  

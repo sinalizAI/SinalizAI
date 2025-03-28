@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
 
-Builder.load_file("forgot_password.kv")
+Builder.load_file("views/forgot_password_page/forgot_password.kv")
 
 class ForgotScreen(Screen):
     pass

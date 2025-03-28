@@ -4,7 +4,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 
 
-Builder.load_file("loading.kv")
+Builder.load_file("views/loading_page/loading.kv")
 
 class LoadingScreen(Screen):
     pass
