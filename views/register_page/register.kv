@@ -27,11 +27,13 @@
                 spacing: 8
                 pos_hint: {"center_x": 0.5}
 
-                FitImage:
-                    source: "views/assets/images/image_Regis.png"
+                MDIcon:
+                    icon: "account-circle"
                     size_hint: None, None
                     size: 40, 40
-                    pos_hint: {"center_y": 0.5}  
+                    pos_hint: {"center_y": 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
 
                 MDLabel:
                     text: "Vamos Começar!"

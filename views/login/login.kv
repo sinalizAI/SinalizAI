@@ -28,11 +28,13 @@
                 spacing: 8
                 pos_hint: {"center_x": 0.5}
 
-                FitImage:
-                    source: "/views/assets/images/Image_Hi.png"
+                MDIcon:
+                    icon: "hand-wave"
                     size_hint: None, None
                     size: 35, 35
-                    pos_hint: {"center_y": 0.5}  
+                    pos_hint: {"center_y": 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
 
                 MDLabel:
                     text: "Seja Bem-vindo!"
