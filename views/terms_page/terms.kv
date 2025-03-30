@@ -1,0 +1,96 @@
+<TermsScreen>:
+    MDFloatLayout:
+        md_bg_color: 183/255, 199/255, 235/255, 1 
+
+        MDIconButton:
+            id: icon_close_terms
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {"left": 1, "top": 1}
+            size_hint: None, None
+            size: dp(40), dp(40)
+
+        ScrollView:
+            size_hint: 0.9, 0.85
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            do_scroll_x: False
+            do_scroll_y: True
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(20)
+                padding: dp(20)
+
+                MDLabel:
+                    text: "Termos de Serviço do Aplicativo SinalizAI"
+                    font_style: "H5"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    bold: True
+                    halign: "center"
+
+                MDLabel:
+                    text: "[b]1. Aceitação dos Termos[/b]\nAo utilizar o SinalizAI, o usuário concorda com os presentes Termos de Serviço. Caso não concorde, o uso do aplicativo deve ser interrompido imediatamente."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]2. Uso do Aplicativo[/b]\nO SinalizAI é destinado a auxiliar na comunicação por meio do reconhecimento de gestos em Libras e sua tradução para texto. O usuário se compromete a utilizar o aplicativo de maneira adequada e respeitosa."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]3. Cadastro e Conta do Usuário[/b]\n- Para acessar algumas funcionalidades, o usuário poderá precisar criar uma conta, fornecendo informações precisas e atualizadas;\n- O usuário é responsável por manter a segurança de suas credenciais de acesso;\n- O SinalizAI não se responsabiliza por acessos indevidos resultantes de negligência do usuário."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]4. Responsabilidades do Usuário[/b]\nO usuário se compromete a:\n- Não utilizar o aplicativo para fins ilícitos ou prejudiciais a terceiros;\n- Não realizar engenharia reversa, copiar ou modificar o aplicativo;\n- Não tentar acessar indevidamente dados de outros usuários ou sistemas do aplicativo."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]5. Modificações e Suspensão[/b]\nO SinalizAI pode modificar, suspender ou descontinuar funcionalidades a qualquer momento, sem aviso prévio, visando melhorias e segurança."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]6. Limitação de Responsabilidade[/b]\n- O SinalizAI é fornecido \"como está\" e não garantimos que estará livre de falhas ou interrupções;\n- O aplicativo não se responsabiliza por interpretações incorretas dos gestos ou uso indevido das traduções fornecidas;\n- Não garantimos compatibilidade com todos os dispositivos e versões de sistema operacional."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]7. Alterações nos Termos de Serviço[/b]\nOs Termos de Serviço podem ser atualizados periodicamente. O uso contínuo do aplicativo após alterações indica a aceitação dos novos termos."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]8. Contato[/b]\nPara dúvidas sobre os Termos de Serviço, o usuário pode entrar em contato por meio do campo de feedback no aplicativo para tirar dúvidas."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "Data da última atualização: [inserir data]"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "right"
+                    italic: True

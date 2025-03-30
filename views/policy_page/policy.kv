@@ -1,0 +1,96 @@
+<PolicyScreen>:
+    MDFloatLayout:
+        md_bg_color: 183/255, 199/255, 235/255, 1 
+
+        MDIconButton:
+            id: icon_close_policy
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {"left": 1, "top": 1}
+            size_hint: None, None
+            size: dp(40), dp(40)
+
+        ScrollView:
+            size_hint: 0.9, 0.85
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            do_scroll_x: False
+            do_scroll_y: True
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(20)
+                padding: dp(20)
+
+                MDLabel:
+                    text: " Política de Privacidade  Aplicativo SinalizAI"
+                    font_style: "H5"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    bold: True
+                    halign: "center"
+
+                MDLabel:
+                    text: "[b]1. Introdução[/b]\nBem-vindo ao SinalizAI! A sua privacidade é importante para nós. Este Termo de Privacidade explica como coletamos, usamos, armazenamos e protegemos seus dados ao utilizar nosso aplicativo."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]2. Coleta de Dados[/b]\nA coleta de dados é realizada para proporcionar ao usuário um acesso personalizado ao aplicativo. O SinalizAI pode coletar as seguintes informações:\n- Dados de uso do aplicativo, como interações e preferências do usuário;\n- Imagens e vídeos capturados pela câmera, exclusivamente para reconhecimento de gestos em Libras, sem armazenamento ou compartilhamento;\n- Informações fornecidas pelo usuário, como nome e e-mail, caso haja cadastro;\n- Mensagens enviadas pelo usuário através da tela de feedback."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]3. Uso dos Dados[/b]\nOs dados coletados são utilizados para:\n- Melhorar a experiência do usuário e aprimorar os serviços oferecidos;\n- Garantir o funcionamento correto do aplicativo;\n- Personalizar recursos com base nas preferências do usuário;\n- Processar e analisar feedbacks enviados pelos usuários para aprimoramento do aplicativo."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]4. Armazenamento e Proteção dos Dados[/b]\n- Não armazenamos imagens ou vídeos processados pela câmera;\n- As informações fornecidas pelo usuário são protegidas com medidas de segurança apropriadas para evitar acessos não autorizados;\n- Os dados de feedback e informações de login/cadastro são armazenados para melhorias contínuas do aplicativo;\n- O compartilhamento de dados com terceiros ocorre apenas em conformidade com a legislação vigente."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]5. Compartilhamento de Dados[/b]\nO SinalizAI não compartilha informações pessoais dos usuários com terceiros, salvo nos seguintes casos:\n- Quando exigido por lei ou por ordem judicial;\n- Para melhoria dos serviços, com parceiros que seguem nossas diretrizes de privacidade."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]6. Direitos do Usuário[/b]\nO usuário tem direito a:\n- Solicitar acesso, correção ou exclusão dos seus dados;\n- Revogar o consentimento para coleta de dados a qualquer momento;\n- Solicitar informações sobre o uso de seus dados."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]7. Alterações no Termo de Privacidade[/b]\nEste Termo pode ser atualizado periodicamente. Recomendamos que o usuário revise regularmente para se manter informado sobre eventuais mudanças."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "[b]8. Contato[/b]\nCaso tenha dúvidas sobre este Termo de Privacidade, o usuário pode entrar em contato através da opção de feedback no aplicativo."
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "justify"
+
+                MDLabel:
+                    text: "Data da última atualização: [inserir data]"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    halign: "right"
+                    italic: True
