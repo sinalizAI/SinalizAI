@@ -3,7 +3,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 
-Builder.load_file("reset_confirmation.kv")
+Builder.load_file("views/reset_confirmation_page/reset_confirmation.kv")
 
 class ConfirmationScreen(Screen):
     pass

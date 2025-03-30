@@ -14,6 +14,7 @@
             specific_text_color: 1, 1, 1, 1
 
         MDBoxLayout:
+            id: login_box_layout
             orientation: 'vertical'
             size_hint: 0.9, None
             height: self.minimum_height
@@ -22,6 +23,7 @@
             padding: "10dp"
 
             MDBoxLayout:
+                id: welcome_box
                 orientation: 'horizontal'
                 size_hint: None, None
                 size: self.minimum_size
@@ -51,6 +53,7 @@
                     pos_hint: {"center_y": 0.5}  
 
             MDLabel:
+                id: instruction_label
                 text: "Insira seus dados para entrar em sua conta."
                 font_size: "14sp"
                 theme_text_color: "Custom"
@@ -64,6 +67,7 @@
                 pos_hint: {"center_x": 0.5}  
 
             MDBoxLayout:
+                id: credentials_box
                 orientation: 'vertical'
                 size_hint: 1, None
                 height: self.minimum_height
@@ -71,6 +75,7 @@
                 padding: "20dp"  
 
                 MDLabel:
+                    id: email_label
                     text: "E-MAIL"
                     font_size: "14sp"
                     theme_text_color: "Custom"
@@ -95,6 +100,7 @@
                     size_hint_x: 0.9
 
                 MDLabel:
+                    id: password_label
                     text: "SENHA"
                     font_size: "14sp"
                     theme_text_color: "Custom"
@@ -120,6 +126,7 @@
                     size_hint_x: 0.9
                     
                 MDTextButton:
+                    id: forgot_password_button
                     text: "Esqueci a senha"
                     font_size: "17sp"
                     theme_text_color: "Custom"
