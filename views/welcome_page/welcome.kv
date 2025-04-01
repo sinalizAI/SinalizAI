@@ -14,11 +14,12 @@
 
         FitImage:
             id: intro_image
-            source: "views/assets/images/Image_Intro.png"
+            source: "views/assets/images/welcome_image.jpg"
             size_hint: None, None
-            size: "300dp", "300dp"
+            size: "300dp", "280dp"
             pos_hint: {"center_x": 0.5}
             y: self.parent.height - self.height - 80
+            radius: 8
 
         MDBoxLayout:
             id: info_box
@@ -26,9 +27,9 @@
             size_hint: 1, None  
             height: "60dp" 
             pos_hint: {"center_x": 0.5}
-            y: intro_image.y - self.height  
+            y: intro_image.y - self.height  - 2
             padding: "10dp" 
-            spacing: "5dp"  
+            spacing: "7dp"  
 
             canvas.before:
                 Color:
@@ -36,6 +37,7 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
+                    
 
             MDLabel:
                 text: "Quebre barreiras na comunicação!"
@@ -48,7 +50,7 @@
                 shorten: True  
                 size_hint_y: None
                 height: self.texture_size[1]  
-                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
                 
             MDLabel:
                 text: "Traduza Libras para o português em tempo real."
@@ -61,7 +63,7 @@
                 shorten: True  
                 size_hint_y: None
                 height: self.texture_size[1] 
-                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
 
         MDBoxLayout:
             orientation: "vertical"
