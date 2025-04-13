@@ -1,0 +1,87 @@
+<AboutUsScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(10)
+        md_bg_color: 237/255, 241/255, 250/255, 1  # Fundo azul claro (#EDF1FA)
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(40)
+            MDIconButton:
+                id: aboutus_close_button
+                icon: "close"
+                theme_text_color: "Custom"
+                text_color: 0, 0, 0, 1
+                size_hint: None, None
+                size: dp(40), dp(40)
+
+        MDBoxLayout:
+            id: aboutus_header_container
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [dp(5), dp(5), dp(5), 0]
+            pos_hint: {"center_x": 0.5}
+
+            MDBoxLayout:
+                id: aboutus_header_box
+                orientation: 'horizontal'
+                size_hint: None, None
+                size: self.minimum_size
+                spacing: dp(8)
+                pos_hint: {"center_x": 0.5}
+
+                MDIcon:
+                    id: aboutus_icon
+                    icon: "account-group"
+                    size_hint: None, None
+                    size: dp(35), dp(35)
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    pos_hint: {"center_y": 0.5}
+
+                MDLabel:
+                    id: aboutus_title
+                    text: "Sobre Nós"
+                    font_size: "24sp"
+                    font_name: "views/assets/fonts/Palanquin_Dark/PalanquinDark-Regular.ttf"
+                    theme_text_color: "Custom"
+                    text_color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: self.texture_size
+                    halign: 'left'
+                    valign: 'center'
+                    text_size: None, None
+                    pos_hint: {"center_y": 0.5}
+
+        MDLabel:
+            id: aboutus_subtitle
+            text: "Quem Somos ?"
+            font_size: "20sp"
+            theme_text_color: "Custom"
+            text_color: 0.72, 0.78, 0.92, 1
+            font_name: "views/assets/fonts/Palanquin/Palanquin-Medium.ttf"
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign: 'left'
+
+        MDScrollView:
+            id: aboutus_scroll
+            do_scroll_x: False
+
+            MDLabel:
+                id: aboutus_text
+                text: "Nós do SinalizAI acreditamos no poder da comunicação para promover a inclusão. Nosso aplicativo foi desenvolvido com o intuito de quebrar barreiras entre ouvintes e surdos, tornando a Língua Brasileira de Sinais (Libras) mais acessível para todos.\n\nNosso objetivo é facilitar a comunicação diária, proporcionando uma ferramenta prática e eficiente para a tradução de sinais de Libras para o português, contribuindo para um mundo mais inclusivo e igualitário. Acreditamos que, ao juntar tecnologia e empatia, podemos fazer a diferença na vida de muitas pessoas.\n\nSeja bem-vindo ao SinalizAI. Juntos, vamos promover a inclusão!"
+                font_size: "15sp"
+                theme_text_color: "Custom"
+                text_color: 0, 0, 0, 1
+                font_name: "views/assets/fonts/Palanquin/Palanquin-Medium.ttf"
+                size_hint_y: None
+                height: self.texture_size[1]
+                halign: 'justify'
+                valign: 'top'
+                markup: False
+                padding: [dp(0), dp(0), dp(0), dp(10)]
+                line_height: 1.2
+                text_size: self.width - dp(10), None
