@@ -1,0 +1,54 @@
+<Feedback_ConfirmationScreen>:
+    MDFloatLayout:
+        md_bg_color: 237/255, 241/255, 250/255, 1
+
+        MDIconButton:
+            id: icon_Feed_close
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {"left": 1, "top": 1}
+            size_hint: None, Nonec
+            size: dp(40), dp(40)
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            spacing: dp(15)
+
+            MDIcon:
+                icon: "email-check-outline"
+                theme_text_color: "Custom"
+                text_color: 0.717, 0.780, 0.921, 1
+                font_size: "100sp"
+                pos_hint: {"center_x": 0.5}
+                size_hint: None, None
+                size: dp(100), dp(100)
+
+            MDLabel:
+                text: "Sua solicitação foi enviada. Nossa equipe verificará os dados e qualquer retorno será realizado por e-mail. Estamos à disposição e agradecemos seu contato!"
+                theme_text_color: "Custom"
+                text_color: 0, 0, 0, 1
+                font_size: "15sp"
+                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                halign: "center"
+                size_hint_x: 1
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+
+        MDFillRoundFlatButton:
+            id: feedback_button
+            text: "Novo Feedback"
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "y": 0.05}
+            md_bg_color: 0.788, 0.835, 0.941, 1
+            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            elevation: 4
+            line_color: 0.6, 0.7, 0.9, 1
+            line_width: 1
