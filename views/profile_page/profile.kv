@@ -1,0 +1,398 @@
+<ProfileScreen>:
+    id: Profile_screen
+    name: "profile"
+    user_image_source: "views/assets/images/perfil_semfoto.png"
+
+    MDFloatLayout:
+        md_bg_color: 1, 1, 1, 1
+
+        MDScrollView:
+            id: profile_scroll_view
+            size_hint: 1, None
+            height: self.parent.height - dp(80)
+            pos_hint: {"top": 1}
+
+            MDBoxLayout:
+                id: profile_content_box
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "20dp"
+                spacing: "20dp"
+
+                MDBoxLayout:
+                    id: profile_header_box
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: "200dp"
+                    spacing: "10dp"
+                    padding: "10dp"
+                    pos_hint: {"center_x": 0.5}
+
+                    MDCard:
+                        id: profile_image_card
+                        size_hint: None, None
+                        size: "100dp", "100dp"
+                        pos_hint: {"center_x": 0.5}
+                        elevation: 0
+                        radius: [50, 50, 50, 50]
+                        md_bg_color: 0.95, 0.95, 0.95, 1
+
+                        FitImage:
+                            id: profile_image
+                            source: root.user_image_source
+                            radius: [50, 50, 50, 50]
+
+                    MDLabel:
+                        id: profile_username_label
+                        text: "Olá, Nome do usuário"
+                        halign: "center"
+                        font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
+                        bold: False
+                        size_hint_x: 1
+
+                MDCard:
+                    id: edit_profile_card
+                    size_hint: None, None
+                    size: dp(130), dp(50)
+                    pos_hint: {"center_x": 0.5}
+                    radius: [12]
+                    elevation: 0
+                    md_bg_color: 0.878, 0.898, 0.976, 1
+
+                    MDBoxLayout:
+                        id: edit_profile_content
+                        orientation: "horizontal"
+                        padding: "10dp"
+                        spacing: "5dp"
+                        adaptive_size: True
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                        MDIcon:
+                            id: edit_profile_icon
+                            icon: "pencil"
+                            size_hint_x: None
+                            width: dp(24)
+                            pos_hint: {"center_y": 0.5}
+                            theme_text_color: "Custom"
+                            text_color: 0.2, 0.2, 0.2, 1
+
+                        MDLabel:
+                            id: edit_profile_label
+                            text: "Editar Perfil"
+                            halign: "center"
+                            adaptive_width: True
+                            pos_hint: {"center_y": 0.5}
+                            font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                            theme_text_color: "Custom"
+                            text_color: 0.2, 0.2, 0.2, 1
+                            font_size: "14sp"
+
+                MDLabel:
+                    id: help_section_label
+                    text: "Ajuda"
+                    halign: "center"
+                    font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
+                    bold: False
+                    font_size: "16sp"
+                    theme_text_color: "Primary"
+
+                MDGridLayout:
+                    id: help_options_grid
+                    cols: 2
+                    size_hint: 0.9, None
+                    height: dp(190)
+                    spacing: "10dp"
+                    padding: "5dp"
+                    pos_hint: {"center_x": 0.5}
+
+                    MDCard:
+                        id: faq_card
+                        radius: [12]
+                        elevation: 0
+                        md_bg_color: 0.878, 0.898, 0.976, 1
+
+                        MDBoxLayout:
+                            id: faq_content
+                            orientation: "vertical"
+                            padding: "10dp"
+                            spacing: "5dp"
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            size_hint: 1, 1
+
+                            MDIcon:
+                                id: faq_icon
+                                icon: "comment-question"
+                                text_color: 0.2, 0.2, 0.2, 1
+                                halign: "center"
+                                pos_hint:{"center_x": 0.5}
+                                size_hint_y: None
+                                height: "24dp"
+
+                            MDLabel:
+                                id: faq_label
+                                text: "Perguntas Frequentes"
+                                font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                                halign: "center"
+                                font_size: "12sp"
+                                theme_text_color: "Custom"
+                                text_color: 0.2, 0.2, 0.2, 1
+
+                    MDCard:
+                        id: terms_card
+                        radius: [12]
+                        md_bg_color: 0.878, 0.898, 0.976, 1
+
+                        MDBoxLayout:
+                            id: terms_content
+                            orientation: "vertical"
+                            padding: "10dp"
+                            spacing: "5dp"
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            size_hint: 1, 1
+
+                            MDIcon:
+                                id: terms_icon
+                                icon: "file-document"
+                                text_color: 0.2, 0.2, 0.2, 1
+                                halign: "center"
+                                pos_hint:{"center_x": 0.5}
+                                size_hint_y: None
+                                height: "24dp"
+
+                            MDLabel:
+                                id: terms_label
+                                text: "Termo de Uso"
+                                font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                                halign: "center"
+                                font_size: "12sp"
+                                theme_text_color: "Custom"
+                                text_color: 0.2, 0.2, 0.2, 1
+
+                    MDCard:
+                        id: feedback_card
+                        radius: [12]
+                        elevation: 0
+                        md_bg_color: 0.878, 0.898, 0.976, 1
+
+                        MDBoxLayout:
+                            id: feedback_content
+                            orientation: "vertical"
+                            padding: "10dp"
+                            spacing: "5dp"
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            size_hint: 1, 1
+
+                            MDIcon:
+                                id: feedback_icon
+                                icon: "account-multiple-plus"
+                                text_color: 0.2, 0.2, 0.2, 1
+                                pos_hint:{"center_x": 0.5}
+                                halign: "center"
+                                size_hint_y: None
+                                height: "20dp"
+
+                            MDLabel:
+                                id: feedback_label
+                                text: "Dar feedback"
+                                font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                                halign: "center"
+                                font_size: "12sp"
+                                theme_text_color: "Custom"
+                                text_color: 0.2, 0.2, 0.2, 1
+
+                    MDCard:
+                        id: privacy_card
+                        radius: [12]
+                        elevation: 0
+                        md_bg_color: 0.878, 0.898, 0.976, 1
+
+                        MDBoxLayout:
+                            id: privacy_content
+                            orientation: "vertical"
+                            padding: "10dp"
+                            spacing: "5dp"
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            size_hint: 1, 1
+
+                            MDIcon:
+                                id: privacy_icon
+                                icon: "shield-lock"
+                                text_color: 0.2, 0.2, 0.2, 1
+                                halign: "center"
+                                pos_hint:{"center_x": 0.5}
+                                size_hint_y: None
+                                height: "24dp"
+
+                            MDLabel:
+                                id: privacy_label
+                                text: "Política de Privacidade"
+                                font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                                halign: "center"
+                                font_size: "12sp"
+                                theme_text_color: "Custom"
+                                text_color: 0.2, 0.2, 0.2, 1
+
+                MDLabel:
+                    id: about_section_label
+                    text: "Sobre nós"
+                    halign: "center"
+                    font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
+                    bold: False
+                    font_size: "16sp"
+                    theme_text_color: "Primary"
+
+                MDCard:
+                    id: about_us_card
+                    size_hint: None, None
+                    size: dp(130), dp(50)
+                    pos_hint: {"center_x": 0.5}
+                    radius: [12]
+                    elevation: 0
+                    md_bg_color: 0.878, 0.898, 0.976, 1
+
+                    MDBoxLayout:
+                        id: about_us_content
+                        orientation: "horizontal"
+                        padding: "10dp"
+                        spacing: "5dp"
+                        adaptive_size: True
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                        MDIcon:
+                            id: about_us_icon
+                            icon: "human-greeting-variant"
+                            size_hint_x: None
+                            width: dp(24)
+                            pos_hint: {"center_y": 0.5}
+                            theme_text_color: "Custom"
+                            text_color: 0.2, 0.2, 0.2, 1
+
+                        MDLabel:
+                            id: about_us_label
+                            text: "Quem Somos"
+                            halign: "center"
+                            adaptive_width: True
+                            pos_hint: {"center_y": 0.5}
+                            font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                            theme_text_color: "Custom"
+                            text_color: 0.2, 0.2, 0.2, 1
+                            font_size: "14sp"
+
+                MDFillRoundFlatButton:
+                    id: logout_button
+                    text: " Sair"
+                    size_hint_x: 0.9
+                    pos_hint: {"center_x": 0.5}
+                    md_bg_color: 0.976, 0.878, 0.878, 1
+                    font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                    elevation: 4
+                    line_color: 0.9, 0.7, 0.7, 1
+                    line_width: 1
+                    icon: "logout"
+                    icon_color: 1, 0, 0, 1
+                    padding: "10dp"
+                    spacing: "10dp"
+
+                MDFillRoundFlatButton:
+                    id: delete_data_button
+                    text: " Excluir Dados"
+                    size_hint_x: 0.9
+                    pos_hint: {"center_x": 0.5}
+                    md_bg_color: 0.9, 0.9, 0.94, 1
+                    font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                    theme_text_color: "Custom"
+                    text_color: 0.2, 0.2, 0.2, 1
+                    elevation: 4
+                    line_color: 0.8, 0.8, 0.8, 1
+                    line_width: 1
+                    icon: "delete"
+                    icon_color: 0.2, 0.2, 0.2, 1
+                    padding: "10dp"
+                    spacing: "10dp"
+
+                MDLabel:
+                    id: version_label
+                    text: "V.1.0.0"
+                    halign: "center"
+                    font_size: "12sp"
+                    theme_text_color: "Secondary"
+
+        MDBoxLayout:
+            id: bottom_nav
+            size_hint: 1, None
+            height: "80dp"
+            pos_hint: {"bottom": 0}
+            md_bg_color: 0.929, 0.945, 0.980, 1
+            spacing: "5dp"
+            padding: "5dp"
+
+            MDFloatLayout:
+                id: home_tab
+                MDIconButton:
+                    id: home_icon
+                    icon: "home"
+                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    theme_text_color: "Custom"
+                    text_color: 0.2, 0.2, 0.2, 1
+                MDLabel:
+                    id: home_label
+                    text: "Início"
+                    font_size: "12sp"
+                    halign: "center"
+                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    theme_text_color: "Custom"
+                    text_color: 0.2, 0.2, 0.2, 1
+
+            MDFloatLayout:
+                id: translate_tab
+                MDIconButton:
+                    id: translate_icon
+                    icon: "gesture"
+                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    theme_text_color: "Custom"
+                    text_color: 0.2, 0.2, 0.2, 1
+                MDLabel:
+                    id: translate_label
+                    text: "Traduzir sinais"
+                    font_size: "12sp"
+                    halign: "center"
+                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    theme_text_color: "Custom"
+                    text_color: 0.2, 0.2, 0.2, 1
+
+            MDFloatLayout:
+                id: video_tab
+                MDIconButton:
+                    id: video_icon
+                    icon: "video"
+                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    theme_text_color: "Custom"
+                    text_color: 0.2, 0.2, 0.2, 1
+                MDLabel:
+                    id: video_label
+                    text: "Traduzir Vídeo"
+                    font_size: "12sp"
+                    halign: "center"
+                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    theme_text_color: "Custom"
+                    text_color: 0.2, 0.2, 0.2, 1
+
+            MDFloatLayout:
+                id: profile_tab
+                MDIconButton:
+                    id: profile_tab_icon
+                    icon: "account"
+                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    theme_text_color: "Custom"
+                    text_color: 0.718, 0.780, 0.922, 1
+                MDLabel:
+                    id: profile_tab_label
+                    text: "Perfil"
+                    font_size: "12sp"
+                    halign: "center"
+                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    theme_text_color: "Custom"
+                    text_color: 0.718, 0.780, 0.922, 1
