@@ -8,10 +8,11 @@
             theme_text_color: "Custom"
             text_color: 0, 0, 0, 1
             pos_hint: {"left": 1, "top": 1}
-            size_hint: None, Nonec
+            size_hint: None, None
             size: dp(40), dp(40)
 
         MDBoxLayout:
+            id: cont_fb
             orientation: 'vertical'
             size_hint_y: None
             height: self.minimum_height
@@ -20,6 +21,7 @@
             spacing: dp(15)
 
             MDIcon:
+                id: icon_men_fb
                 icon: "email-check-outline"
                 theme_text_color: "Custom"
                 text_color: 0.717, 0.780, 0.921, 1
@@ -29,6 +31,7 @@
                 size: dp(100), dp(100)
 
             MDLabel:
+                id: label_tex_inf
                 text: "Sua solicitação foi enviada. Nossa equipe verificará os dados e qualquer retorno será realizado por e-mail. Estamos à disposição e agradecemos seu contato!"
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
