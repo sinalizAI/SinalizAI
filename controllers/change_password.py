@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
 
-Builder.load_file("change_password.kv")
+Builder.load_file("views/change_password_page/change_password.kv")
 
 class ChangePasswordScreen(Screen):
     pass

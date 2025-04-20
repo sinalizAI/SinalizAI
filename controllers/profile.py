@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.core.window import Window
 
-Builder.load_file("profile.kv")
+Builder.load_file("views/profile_page/profile.kv")
 
 class ProfileScreen(Screen):
     pass

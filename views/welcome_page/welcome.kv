@@ -93,7 +93,8 @@
                 text_color: 0, 0, 0, 1
                 elevation: 4  
                 line_color: 0.6, 0.7, 0.9, 1 
-                line_width: 1 
+                line_width: 1
+                on_release: root.go_to_login()  # Ação de transição para a tela de login
                 
 
 
@@ -107,7 +108,8 @@
                 text_color: 0, 0, 0, 1
                 elevation: 4  
                 line_color: 0.8, 0.8, 0.8, 1 
-                line_width: 1  
+                line_width: 1
+                on_release: root.go_to_register()  
 
             MDBoxLayout:
                 size_hint: 1, None
@@ -126,7 +128,7 @@
                     pos_hint: {"center_y": 1.01}  
 
                 MDLabel:
-                    text:  "Eu aceito os[b][color=B7C7EB] Termos de Serviço[/color][/b] e a [b][color=B7C7EB] Política de Privacidade.[/color][/b]"
+                    text: "Eu aceito os [ref=terms][b][color=B7C7EB]Termos de Serviço[/color][/b][/ref] e a [ref=policy][b][color=B7C7EB]Política de Privacidade[/color][/b][/ref]."
                     markup: True
                     theme_text_color: "Custom"
                     text_color: 0, 0, 0, 1
@@ -137,3 +139,8 @@
                     pos_hint: {"center_y": 1.01}
                     height: self.texture_size[1]
                     text_size: self.width, None
+                    on_ref_press:
+                        if args[1] == "terms": root.go_to_terms()
+                        if args[1] == "policy": root.go_to_policy()
+
+

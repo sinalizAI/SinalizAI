@@ -1,17 +1,20 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen
-from kivy.core.window import Window
+from kivymd.uix.screen import MDScreen
+from kivy.uix.screenmanager import SlideTransition
 
-Builder.load_file("views/welcome_page/welcome.kv")
+class WelcomeScreen(MDScreen):
+    
+    def go_to_login(self):
+        self.manager.transition = SlideTransition(direction='left', duration=0.0)
+        self.manager.current = "login"
 
-class WelcomeScreen(Screen):
-    pass
+    def go_to_register(self):
+        self.manager.transition = SlideTransition(direction='left', duration=0.0)
+        self.manager.current = "register"
+    
+    def go_to_policy(self):
+        self.manager.transition = SlideTransition(direction='left', duration=0.0)
+        self.manager.current = "policy"
 
-class Welcome(MDApp):
-    def build(self):
-        Window.size = (360, 640)  
-        return WelcomeScreen()     
-
-if __name__ == '__main__':
-    Welcome().run()
+    def go_to_terms(self):
+        self.manager.transition = SlideTransition(direction='left', duration=0.0)
+        self.manager.current = "terms"
