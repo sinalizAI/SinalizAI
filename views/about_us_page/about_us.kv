@@ -15,6 +15,7 @@
                 text_color: 0, 0, 0, 1
                 size_hint: None, None
                 size: dp(40), dp(40)
+                on_release:root.go_to_back()
 
         MDBoxLayout:
             id: aboutus_header_container
@@ -32,7 +33,7 @@
                 spacing: dp(8)
                 pos_hint: {"center_x": 0.5}
 
-                MDIcon:
+                MDIconButton:
                     id: aboutus_icon
                     icon: "account-group"
                     size_hint: None, None
@@ -40,6 +41,7 @@
                     theme_text_color: "Custom"
                     text_color: 0, 0, 0, 1
                     pos_hint: {"center_y": 0.5}
+                    
 
                 MDLabel:
                     id: aboutus_title
@@ -61,7 +63,7 @@
             font_size: "20sp"
             theme_text_color: "Custom"
             text_color: 0.72, 0.78, 0.92, 1
-            font_name: "views/assets/fonts/Palanquin/Palanquin-Medium.ttf"
+            font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
             size_hint_y: None
             height: self.texture_size[1]
             halign: 'left'
@@ -76,7 +78,7 @@
                 font_size: "15sp"
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
-                font_name: "views/assets/fonts/Palanquin/Palanquin-Medium.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
                 size_hint_y: None
                 height: self.texture_size[1]
                 halign: 'justify'

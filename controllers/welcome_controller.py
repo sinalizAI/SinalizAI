@@ -1,7 +1,8 @@
 from kivymd.uix.screen import MDScreen
+from controllers.base_screen import BaseScreen
 from kivy.uix.screenmanager import SlideTransition
 
-class WelcomeScreen(MDScreen):
+class WelcomeScreen(BaseScreen):
     
     def go_to_login(self):
         self.manager.transition = SlideTransition(direction='left', duration=0.0)
@@ -11,10 +12,3 @@ class WelcomeScreen(MDScreen):
         self.manager.transition = SlideTransition(direction='left', duration=0.0)
         self.manager.current = "register"
     
-    def go_to_policy(self):
-        self.manager.transition = SlideTransition(direction='left', duration=0.0)
-        self.manager.current = "policy"
-
-    def go_to_terms(self):
-        self.manager.transition = SlideTransition(direction='left', duration=0.0)
-        self.manager.current = "terms"

@@ -15,6 +15,7 @@
             pos_hint: {"left": 1, "top": 1}
             size_hint: None, None
             size: dp(40), dp(40)
+            on_release: root.go_to_back()
 
         MDBoxLayout:
             id: edit_main_box
@@ -85,7 +86,7 @@
                         font_size: "12sp"
                         theme_text_color: "Custom"
                         text_color: 0, 0, 0, 1
-                        font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                        font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                         size_hint_y: None
                         height: self.texture_size[1]
                         padding: "5dp", 0, 0, "1dp"
@@ -110,7 +111,7 @@
                         font_size: "12sp"
                         theme_text_color: "Custom"
                         text_color: 0, 0, 0, 1
-                        font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                        font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                         size_hint_y: None
                         height: self.texture_size[1]
                         bold: False
@@ -136,7 +137,7 @@
                         font_size: "12sp"
                         theme_text_color: "Custom"
                         text_color: 0, 0, 0, 1
-                        font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                        font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                         size_hint_y: None
                         height: self.texture_size[1]
                         bold: False

@@ -68,7 +68,7 @@
                         adaptive_size: True
                         pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
-                        MDIcon:
+                        MDIconButton:
                             id: edit_profile_icon
                             icon: "pencil"
                             size_hint_x: None
@@ -76,6 +76,7 @@
                             pos_hint: {"center_y": 0.5}
                             theme_text_color: "Custom"
                             text_color: 0.2, 0.2, 0.2, 1
+                            on_release: root.go_to_edit()
 
                         MDLabel:
                             id: edit_profile_label
@@ -120,7 +121,7 @@
                             pos_hint: {"center_x": 0.5, "center_y": 0.5}
                             size_hint: 1, 1
 
-                            MDIcon:
+                            MDIconButton:
                                 id: faq_icon
                                 icon: "comment-question"
                                 text_color: 0.2, 0.2, 0.2, 1
@@ -128,6 +129,7 @@
                                 pos_hint:{"center_x": 0.5}
                                 size_hint_y: None
                                 height: "24dp"
+                                on_release: root.go_to_faq()
 
                             MDLabel:
                                 id: faq_label
@@ -142,7 +144,7 @@
                         id: terms_card
                         radius: [12]
                         md_bg_color: 0.878, 0.898, 0.976, 1
-
+            
                         MDBoxLayout:
                             id: terms_content
                             orientation: "vertical"
@@ -151,7 +153,7 @@
                             pos_hint: {"center_x": 0.5, "center_y": 0.5}
                             size_hint: 1, 1
 
-                            MDIcon:
+                            MDIconButton:
                                 id: terms_icon
                                 icon: "file-document"
                                 text_color: 0.2, 0.2, 0.2, 1
@@ -159,6 +161,7 @@
                                 pos_hint:{"center_x": 0.5}
                                 size_hint_y: None
                                 height: "24dp"
+                                on_release: root.go_to_terms()
 
                             MDLabel:
                                 id: terms_label
@@ -183,7 +186,7 @@
                             pos_hint: {"center_x": 0.5, "center_y": 0.5}
                             size_hint: 1, 1
 
-                            MDIcon:
+                            MDIconButton:
                                 id: feedback_icon
                                 icon: "account-multiple-plus"
                                 text_color: 0.2, 0.2, 0.2, 1
@@ -191,6 +194,7 @@
                                 halign: "center"
                                 size_hint_y: None
                                 height: "20dp"
+                                on_release: root.go_to_feedback()
 
                             MDLabel:
                                 id: feedback_label
@@ -215,7 +219,7 @@
                             pos_hint: {"center_x": 0.5, "center_y": 0.5}
                             size_hint: 1, 1
 
-                            MDIcon:
+                            MDIconButton:
                                 id: privacy_icon
                                 icon: "shield-lock"
                                 text_color: 0.2, 0.2, 0.2, 1
@@ -223,6 +227,7 @@
                                 pos_hint:{"center_x": 0.5}
                                 size_hint_y: None
                                 height: "24dp"
+                                on_release: root.go_to_policy()
 
                             MDLabel:
                                 id: privacy_label
@@ -259,7 +264,7 @@
                         adaptive_size: True
                         pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
-                        MDIcon:
+                        MDIconButton:
                             id: about_us_icon
                             icon: "human-greeting-variant"
                             size_hint_x: None
@@ -267,6 +272,7 @@
                             pos_hint: {"center_y": 0.5}
                             theme_text_color: "Custom"
                             text_color: 0.2, 0.2, 0.2, 1
+                            on_release: root.go_to_about()
 
                         MDLabel:
                             id: about_us_label
@@ -295,6 +301,8 @@
                     icon_color: 1, 0, 0, 1
                     padding: "10dp"
                     spacing: "10dp"
+                    on_release: root.go_to_welcome()
+
 
                 MDFillRoundFlatButton:
                     id: delete_data_button
@@ -337,6 +345,8 @@
                     pos_hint: {"center_x": 0.5, "top": 0.9}
                     theme_text_color: "Custom"
                     text_color: 0.2, 0.2, 0.2, 1
+                    on_release: root.go_to_home()
+
                 MDLabel:
                     id: home_label
                     text: "Início"

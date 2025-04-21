@@ -1,17 +1,4 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen
-from kivy.core.window import Window
+from controllers.base_screen import BaseScreen
 
-Builder.load_file("faq.kv")
-
-class FaqScreen(Screen):
+class FaqScreen(BaseScreen):
     pass
-
-class   Faq(MDApp):
-    def build(self):
-        Window.size = (360, 640)  
-        return FaqScreen()     
-
-if __name__ == '__main__':
-    Faq().run()

@@ -1,4 +1,5 @@
 from controllers.base_screen import BaseScreen
 
-class HomeScreen(BaseScreen):
+class AboutUsScreen(BaseScreen):
     pass
+

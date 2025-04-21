@@ -14,6 +14,7 @@
                 id: faq_top_bar
                 size_hint_y: None
                 height: dp(40)
+                
                 MDIconButton:
                     id: faq_close_button
                     icon: "close"
@@ -21,6 +22,7 @@
                     text_color: 0, 0, 0, 1
                     size_hint: None, None
                     size: dp(40), dp(40)
+                    on_release: root.go_to_back()
 
             MDBoxLayout:
                 id: faq_title_box
@@ -59,7 +61,7 @@
                 font_size: "20sp"
                 theme_text_color: "Custom"
                 text_color: 0.72, 0.78, 0.92, 1
-                font_name: "views/assets/fonts/Palanquin/Palanquin-Medium.ttf"
+                font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
                 size_hint_y: None
                 height: self.texture_size[1]
                 halign: 'left'
@@ -216,7 +218,7 @@
                             id: faq_alt_q1_question
                             text: "1. O que é o SinalizAI?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -228,7 +230,7 @@
                             id: faq_alt_q1_answer
                             text: "O SinalizAI é um aplicativo que facilita a comunicação entre pessoas surdas e ouvintes, traduzindo sinais em Libras para o português."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -247,7 +249,7 @@
                             id: faq_alt_q2_question
                             text: "2. Como o aplicativo traduz Libras?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -259,7 +261,7 @@
                             id: faq_alt_q2_answer
                             text: "Ele utiliza inteligência artificial e visão computacional para reconhecer os gestos feitos pelo usuário e traduzir para o português."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -278,7 +280,7 @@
                             id: faq_alt_q3_question
                             text: "3. O aplicativo usa a câmera do celular?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -290,7 +292,7 @@
                             id: faq_alt_q3_answer
                             text: "Sim, ele utiliza a câmera frontal do celular para capturar os sinais em Libras feitos pelo usuário."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -309,7 +311,7 @@
                             id: faq_alt_q4_question
                             text: "4. Meus dados são enviados para a internet?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -321,7 +323,7 @@
                             id: faq_alt_q4_answer
                             text: "Não. Todas as traduções são feitas localmente no dispositivo, garantindo a privacidade do usuário."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -340,7 +342,7 @@
                             id: faq_alt_q5_question
                             text: "5. Quem pode usar o SinalizAI?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -352,7 +354,7 @@
                             id: faq_alt_q5_answer
                             text: "Qualquer pessoa interessada em aprender ou se comunicar em Libras pode usar, seja ouvinte ou surdo."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -371,7 +373,7 @@
                             id: faq_alt_q6_question
                             text: "6. O app precisa de internet para funcionar?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -383,7 +385,7 @@
                             id: faq_alt_q6_answer
                             text: "A maioria das funções de tradução funciona offline. Apenas recursos como atualizações e suporte exigem internet."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -402,7 +404,7 @@
                             id: faq_alt_q7_question
                             text: "7. O SinalizAI tem suporte para outras línguas?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -414,7 +416,7 @@
                             id: faq_alt_q7_answer
                             text: "No momento, ele está focado em Libras e Português, mas há planos de expansão futura."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -433,7 +435,7 @@
                             id: faq_alt_q8_question
                             text: "8. É possível contribuir com novos sinais?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -445,7 +447,7 @@
                             id: faq_alt_q8_answer
                             text: "Sim! Estamos abertos a parcerias e contribuições. Em breve será possível enviar novos sinais para análise."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -464,7 +466,7 @@
                             id: faq_alt_q9_question
                             text: "9. Posso usar o app em escolas?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -476,7 +478,7 @@
                             id: faq_alt_q9_answer
                             text: "Sim! O SinalizAI é uma ótima ferramenta para inclusão em ambientes escolares e educacionais."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -495,7 +497,7 @@
                             id: faq_alt_q10_question
                             text: "10. Como entro em contato com o suporte?"
                             font_size: "16sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Bold.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-bold.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
@@ -507,7 +509,7 @@
                             id: faq_alt_q10_answer
                             text: "Para entrar em contato com o suporte, acesse o app no menu 'Perfil', depois em 'Ajuda' e selecione 'Dar feedback'."
                             font_size: "15sp"
-                            font_name: "views/assets/fonts/Palanquin/Palanquin-Regular.ttf"
+                            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                             theme_text_color: "Custom"
                             text_color: 0, 0, 0, 1
                             size_hint_y: None
