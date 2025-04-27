@@ -1,5 +1,6 @@
 from kivymd.uix.screen import MDScreen
 from kivy.uix.screenmanager import SlideTransition
+from kivymd.toast import toast
 
 class BaseScreen(MDScreen):
     
@@ -47,6 +48,11 @@ class BaseScreen(MDScreen):
         self.manager.previous_screen = self.manager.current  # Salva a tela anterior
         self.manager.transition = SlideTransition(direction='left', duration=0.0)
         self.manager.current = "edit"
+        
+    #def go_to_loading(self):
+        self.manager.previous_screen = self.manager.current  # Salva a tela anterior
+        self.manager.transition = SlideTransition(direction='left', duration=0.0)
+        self.manager.current = "loading"
     
     # Função para voltar à tela anterior
     def go_to_back(self):
