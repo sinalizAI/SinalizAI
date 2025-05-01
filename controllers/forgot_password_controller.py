@@ -1,17 +1,4 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen
-from kivy.core.window import Window
+from controllers.base_screen import BaseScreen
 
-Builder.load_file("views/forgot_password_page/forgot_password.kv")
-
-class ForgotScreen(Screen):
+class ForgotScreen(BaseScreen):
     pass
-
-class ForgotPassword(MDApp):
-    def build(self):
-        Window.size = (360, 640)  
-        return ForgotScreen()
-
-if __name__ == '__main__':
- ForgotPassword().run()

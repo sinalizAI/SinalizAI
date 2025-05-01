@@ -50,6 +50,11 @@ class BaseScreen(MDScreen):
         self.manager.transition = SlideTransition(direction='left', duration=0.0)
         self.manager.current = "edit"
     
+    def go_to_fg_passwd(self):
+        self.manager.previous_screen = self.manager.current
+        self.manager.transition = SlideTransition(direction='left', duration=0.0)
+        self.manager.current = "fg_passwd"       
+    
     # Função para voltar à tela anterior
     def go_to_back(self):
         if hasattr(self.manager, 'previous_screen') and self.manager.previous_screen:
