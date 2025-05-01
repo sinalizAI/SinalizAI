@@ -11,7 +11,6 @@ from controllers.faq_controller import FaqScreen
 from controllers.feedback_controller import FeedbackScreen
 from controllers.about_us_controller import AboutUsScreen
 from controllers.edit_profile_controller import EditScreen
-#from controllers.loading_controller import LoadingScreen
 
 Builder.load_file("views/welcome_page/welcome.kv")
 Builder.load_file("views/login/login.kv")
@@ -24,8 +23,6 @@ Builder.load_file("views/faq_page/faq.kv")
 Builder.load_file("views/feedback_page/feedback.kv")
 Builder.load_file("views/about_us_page/about_us.kv")
 Builder.load_file("views/edit_profile_page/edit_profile.kv")
-#Builder.load_file("views/loading_page/loading.kv")
-
 
 class ScreenManagement(MDScreenManager):
     def __init__(self, **kwargs):
@@ -41,5 +38,5 @@ class ScreenManagement(MDScreenManager):
         self.add_widget(FeedbackScreen(name="feedback"))
         self.add_widget(AboutUsScreen(name="aboutus"))
         self.add_widget(EditScreen(name="edit"))
-        #self.add_widget(LoadingScreen(name="loading"))
+
         self.current = "welcome"

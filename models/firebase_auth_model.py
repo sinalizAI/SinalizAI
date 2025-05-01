@@ -25,7 +25,10 @@ def register(email, password):
     if response.status_code == 200:
         return True, response.json()
     else:
-        return False, response.json()["error"]["message"]
+        try:
+            return False, response.json()
+        except:
+            return False, {"error": {"message": "UNKNOWN_ERROR"}}
 
 # Fazer login
 def login(email, password):
@@ -39,7 +42,10 @@ def login(email, password):
     if response.status_code == 200:
         return True, response.json()
     else:
-        return False, response.json()["error"]["message"]
+        try:
+            return False, response.json()
+        except:
+            return False, {"error": {"message": "UNKNOWN_ERROR"}}
 
 # Resetar senha
 def reset_password(email):
@@ -52,7 +58,10 @@ def reset_password(email):
     if response.status_code == 200:
         return True, "Email de recuperação enviado!"
     else:
-        return False, response.json()["error"]["message"]
+        try:
+            return False, response.json()
+        except:
+            return False, {"error": {"message": "UNKNOWN_ERROR"}}
 
 # Alterar e-mail
 def update_email(id_token, new_email):
@@ -66,7 +75,10 @@ def update_email(id_token, new_email):
     if response.status_code == 200:
         return True, response.json()
     else:
-        return False, response.json()["error"]["message"]
+        try:
+            return False, response.json()
+        except:
+            return False, {"error": {"message": "UNKNOWN_ERROR"}}
 
 # Alterar nome (displayName)
 def update_display_name(id_token, new_name):
@@ -80,4 +92,7 @@ def update_display_name(id_token, new_name):
     if response.status_code == 200:
         return True, response.json()
     else:
-        return False, response.json()["error"]["message"]
+        try:
+            return False, response.json()
+        except:
+            return False, {"error": {"message": "UNKNOWN_ERROR"}}

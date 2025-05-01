@@ -1,9 +1,13 @@
-import re
 from controllers.base_screen import BaseScreen
 from models import firebase_auth_model
-from kivymd.toast import toast
+from controllers.message_helper import show_message
 
 class RegisterScreen(BaseScreen):
+
+    def on_pre_enter(self):
+        # Garante que o botão esteja ativado ao entrar na tela
+        self.ids.create_button.disabled = False
+
     def do_register(self, email, password, confirm_password, name):
         create_button = self.ids.create_button
         create_button.disabled = True  # Impede múltiplos envios
@@ -39,7 +43,7 @@ class RegisterScreen(BaseScreen):
             id_token = response["idToken"]
             name_success, name_response = firebase_auth_model.update_display_name(id_token, name)
             if name_success:
-                toast("Cadastro realizado com sucesso!")
+                show_message("Cadastro realizado com sucesso!")
                 self.go_to_home()
             else:
                 self.show_error(f"Erro ao atualizar nome: {name_response}")
@@ -48,35 +52,5 @@ class RegisterScreen(BaseScreen):
             self.show_error(error_message)
 
     def show_error(self, message):
-        toast(message)
-        create_button = self.ids.create_button
-        create_button.disabled = False  # Reativa o botão se erro
-
-    def get_friendly_error(self, response):
-        try:
-            error_code = response.get("error", {}).get("message", "")
-        except AttributeError:
-            return "Erro desconhecido. Tente novamente."
-
-        friendly_errors = {
-            "EMAIL_EXISTS": "Este email já está cadastrado!",
-            "OPERATION_NOT_ALLOWED": "Cadastro de email/senha não está habilitado!",
-            "TOO_MANY_ATTEMPTS_TRY_LATER": "Muitas tentativas. Tente novamente mais tarde.",
-            "INVALID_EMAIL": "Formato de email inválido!",
-            "WEAK_PASSWORD": "Senha muito fraca!",
-            "EMAIL_NOT_FOUND": "Email não encontrado!",
-            "INVALID_PASSWORD": "Senha incorreta!",
-            "USER_DISABLED": "Conta desativada. Contate o suporte.",
-            "MISSING_PASSWORD": "Senha obrigatória!",
-            "MISSING_EMAIL": "Email obrigatório!",
-        }
-
-        return friendly_errors.get(error_code, "Erro no cadastro. Verifique os dados.")
-
-    def validate_email(self, email):
-        pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
-        return re.match(pattern, email) is not None
-
-    def validate_password(self, password):
-        pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$"
-        return re.match(pattern, password) is not None
+        show_message(message)
+        self.ids.create_button.disabled = False
