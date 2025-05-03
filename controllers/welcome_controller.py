@@ -1,14 +1,16 @@
 from kivymd.uix.screen import MDScreen
 from controllers.base_screen import BaseScreen
 from kivy.uix.screenmanager import SlideTransition
+from controllers.message_helper import show_message  # Import do seu popup customizado
 
 class WelcomeScreen(BaseScreen):
-    
     def go_to_login(self):
         self.manager.transition = SlideTransition(direction='left', duration=0.0)
         self.manager.current = "login"
 
     def go_to_register(self):
-        self.manager.transition = SlideTransition(direction='left', duration=0.0)
-        self.manager.current = "register"
-    
+        if not self.ids.checkbox_termos.active:
+            show_message("Você precisa aceitar os Termos de Serviço e a Política de Privacidade.")
+        else:
+            self.manager.transition = SlideTransition(direction='left', duration=0.0)
+            self.manager.current = "register"
