@@ -1,5 +1,6 @@
 from controllers.base_screen import BaseScreen
 from models import firebase_auth_model
+from models.legal_acceptance_model import save_legal_acceptance  # novo import
 from controllers.message_helper import show_message
 
 class RegisterScreen(BaseScreen):
@@ -41,12 +42,22 @@ class RegisterScreen(BaseScreen):
         success, response = firebase_auth_model.register(email, password)
         if success:
             id_token = response["idToken"]
+            user_id = response["localId"]
+
+            # Salva o nome do usuário
             name_success, name_response = firebase_auth_model.update_display_name(id_token, name)
-            if name_success:
-                show_message("Cadastro realizado com sucesso!")
-                self.go_to_home()
-            else:
+            if not name_success:
                 self.show_error(f"Erro ao atualizar nome: {name_response}")
+                return
+
+            # Salva o aceite dos termos e política
+            acceptance_success, acceptance_error = save_legal_acceptance(user_id, id_token)
+            if not acceptance_success:
+                self.show_error(f"Erro ao registrar aceite dos termos legais: {acceptance_error}")
+                return
+
+            show_message("Cadastro realizado com sucesso!")
+            self.go_to_home()
         else:
             error_message = self.get_friendly_error(response)
             self.show_error(error_message)
