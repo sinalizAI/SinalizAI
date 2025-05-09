@@ -59,7 +59,7 @@ while True:
                 print(f"Erro no processamento da imagem: {e}")
                 continue
 
-            # Desenha landmarks (opcional)
+            # Desenha landmarks
             mp_draw.draw_landmarks(img, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
     cv2.imshow('Reconhecimento de Gestos com MediaPipe', img)
