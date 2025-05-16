@@ -1,6 +1,6 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-# python detect.py --weights yolov5s.pt --source 0
+# python detect.py --weights alfabeto-final.pt --data ./data.yaml --source 0
  
 import pathlib
 temp = pathlib.PosixPath
@@ -48,7 +48,7 @@ from utils.torch_utils import select_device, smart_inference_mode
 def run(
     weights=ROOT / "alfabeto-final.pt",
     source=ROOT / "0",
-    data=ROOT / "ImageNet10.yaml",
+    data=ROOT / "data.yaml",
     imgsz=(640, 640),
     conf_thres=0.45,
     iou_thres=0.45,
@@ -205,18 +205,18 @@ def run(
             if save_img:
                 if dataset.mode == "image":
                     cv2.imwrite(save_path, im0)
-                else:  # 'video' or 'stream'
-                    if vid_path[i] != save_path:  # new video
+                else:
+                    if vid_path[i] != save_path:
                         vid_path[i] = save_path
                         if isinstance(vid_writer[i], cv2.VideoWriter):
-                            vid_writer[i].release()  # release previous video writer
-                        if vid_cap:  # video
+                            vid_writer[i].release()
+                        if vid_cap:
                             fps = vid_cap.get(cv2.CAP_PROP_FPS)
                             w = int(vid_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
                             h = int(vid_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-                        else:  # stream
+                        else:
                             fps, w, h = 30, im0.shape[1], im0.shape[0]
-                        save_path = str(Path(save_path).with_suffix(".mp4"))  # force *.mp4 suffix on results videos
+                        save_path = str(Path(save_path).with_suffix(".mp4"))
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
                     vid_writer[i].write(im0)
 
@@ -224,54 +224,49 @@ def run(
         LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1e3:.1f}ms")
 
     # Print results
-    t = tuple(x.t / seen * 1e3 for x in dt)  # speeds per image
+    t = tuple(x.t / seen * 1e3 for x in dt)
     LOGGER.info(f"Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}" % t)
     if save_txt or save_img:
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ""
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
-        strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
+        strip_optimizer(weights[0])
 
 
 def parse_opt():
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "yolov5s.pt", help="model path or triton URL")
-    parser.add_argument("--source", type=str, default=ROOT / "data/images", help="file/dir/URL/glob/screen/0(webcam)")
-    parser.add_argument("--data", type=str, default=ROOT / "data/coco128.yaml", help="(optional) dataset.yaml path")
-    parser.add_argument("--imgsz", "--img", "--img-size", nargs="+", type=int, default=[640], help="inference size h,w")
-    parser.add_argument("--conf-thres", type=float, default=0.25, help="confidence threshold")
-    parser.add_argument("--iou-thres", type=float, default=0.45, help="NMS IoU threshold")
-    parser.add_argument("--max-det", type=int, default=1000, help="maximum detections per image")
-    parser.add_argument("--device", default="", help="cuda device, i.e. 0 or 0,1,2,3 or cpu")
-    parser.add_argument("--view-img", action="store_true", help="show results")
-    parser.add_argument("--save-txt", action="store_true", help="save results to *.txt")
-    parser.add_argument(
-        "--save-format",
-        type=int,
-        default=0,
-        help="whether to save boxes coordinates in YOLO format or Pascal-VOC format when save-txt is True, 0 for YOLO and 1 for Pascal-VOC",
-    )
-    parser.add_argument("--save-csv", action="store_true", help="save results in CSV format")
-    parser.add_argument("--save-conf", action="store_true", help="save confidences in --save-txt labels")
-    parser.add_argument("--save-crop", action="store_true", help="save cropped prediction boxes")
-    parser.add_argument("--nosave", action="store_true", help="do not save images/videos")
-    parser.add_argument("--classes", nargs="+", type=int, help="filter by class: --classes 0, or --classes 0 2 3")
-    parser.add_argument("--agnostic-nms", action="store_true", help="class-agnostic NMS")
-    parser.add_argument("--augment", action="store_true", help="augmented inference")
-    parser.add_argument("--visualize", action="store_true", help="visualize features")
-    parser.add_argument("--update", action="store_true", help="update all models")
-    parser.add_argument("--project", default=ROOT / "runs/detect", help="save results to project/name")
-    parser.add_argument("--name", default="exp", help="save results to project/name")
-    parser.add_argument("--exist-ok", action="store_true", help="existing project/name ok, do not increment")
-    parser.add_argument("--line-thickness", default=3, type=int, help="bounding box thickness (pixels)")
-    parser.add_argument("--hide-labels", default=False, action="store_true", help="hide labels")
-    parser.add_argument("--hide-conf", default=False, action="store_true", help="hide confidences")
-    parser.add_argument("--half", action="store_true", help="use FP16 half-precision inference")
-    parser.add_argument("--dnn", action="store_true", help="use OpenCV DNN for ONNX inference")
-    parser.add_argument("--vid-stride", type=int, default=1, help="video frame-rate stride")
+    parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "alfabeto-final.pt")
+    parser.add_argument("--source", type=str, default=ROOT / "0")
+    parser.add_argument("--data", type=str, default=ROOT / "data/data.yaml")
+    parser.add_argument("--imgsz", "--img", "--img-size", nargs="+", type=int, default=[640])
+    parser.add_argument("--conf-thres", type=float, default=0.65)
+    parser.add_argument("--iou-thres", type=float, default=0.75)
+    parser.add_argument("--max-det", type=int, default=3)
+    parser.add_argument("--device", default="")
+    parser.add_argument("--view-img", action="store_true")
+    parser.add_argument("--save-txt", action="store_true")
+    parser.add_argument("--save-format", type=int, default=0)
+    parser.add_argument("--save-csv", action="store_true")
+    parser.add_argument("--save-conf", action="store_true")
+    parser.add_argument("--save-crop", action="store_true")
+    parser.add_argument("--nosave", action="store_false")
+    parser.add_argument("--classes", nargs="+", type=int)
+    parser.add_argument("--agnostic-nms", action="store_true")
+    parser.add_argument("--augment", action="store_true")
+    parser.add_argument("--visualize", action="store_true")
+    parser.add_argument("--update", action="store_true")
+    parser.add_argument("--project", default=ROOT / "runs/detect")
+    parser.add_argument("--name", default="exp")
+    parser.add_argument("--exist-ok", action="store_true")
+    parser.add_argument("--line-thickness", default=3, type=int)
+    parser.add_argument("--hide-labels", default=False, action="store_true")
+    parser.add_argument("--hide-conf", default=False, action="store_true")
+    parser.add_argument("--half", action="store_true")
+    parser.add_argument("--dnn", action="store_true")
+    parser.add_argument("--vid-stride", type=int, default=1)
     opt = parser.parse_args()
-    opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # expand
+    opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1
     print_args(vars(opt))
     return opt
 
