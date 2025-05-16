@@ -46,7 +46,7 @@ from utils.torch_utils import select_device, smart_inference_mode
 
 @smart_inference_mode()
 def run(
-    weights=ROOT / "alfabeto-final.pt",
+    weights=ROOT / "models/alfabeto-final.pt",
     source=ROOT / "0",
     data=ROOT / "data.yaml",
     imgsz=(640, 640),
@@ -236,8 +236,8 @@ def run(
 def parse_opt():
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "alfabeto-final.pt")
-    parser.add_argument("--source", type=str, default=ROOT / "0")
+    parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "models/alfabeto-final.pt")
+    parser.add_argument("--source", type=str, default= "0")
     parser.add_argument("--data", type=str, default=ROOT / "data/data.yaml")
     parser.add_argument("--imgsz", "--img", "--img-size", nargs="+", type=int, default=[640])
     parser.add_argument("--conf-thres", type=float, default=0.65)
