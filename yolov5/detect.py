@@ -48,7 +48,7 @@ from utils.torch_utils import select_device, smart_inference_mode
 def run(
     weights=ROOT / "models/alfabeto-final.pt",
     source=ROOT / "0",
-    data=ROOT / "data.yaml",
+    data=ROOT / "data/data.yaml",
     imgsz=(640, 640),
     conf_thres=0.45,
     iou_thres=0.45,
