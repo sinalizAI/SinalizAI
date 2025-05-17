@@ -690,8 +690,8 @@ def pipeline_coreml(model, im, file, names, y, mlmodel, prefix=colorstr("CoreML 
 
 @smart_inference_mode()
 def run(
-    data=ROOT / "data.yaml",
-    weights=ROOT / "alfabeto-final.pt",
+    data=ROOT / "data/data.yaml",
+    weights=ROOT / "models/alfabeto.pt",
     imgsz=(640, 640),
     batch_size=1,
     device="cpu",
@@ -825,8 +825,8 @@ def run(
 
 def parse_opt(known=False):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data", type=str, default=ROOT / "data.yaml")
-    parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "alfabeto-final.pt")
+    parser.add_argument("--data", type=str, default=ROOT / "data/data.yaml")
+    parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "models/alfabeto.pt")
     parser.add_argument("--imgsz", "--img", "--img-size", nargs="+", type=int, default=[640, 640])
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--device", default="cpu")
