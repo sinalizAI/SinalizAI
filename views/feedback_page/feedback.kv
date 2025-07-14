@@ -19,16 +19,17 @@
                 size_hint: None, None
                 size: dp(40), dp(40)
                 pos_hint: {'center_y': 0.5}
-                on_release: root.go_to_back()
 
         MDScrollView:
             id: feedback_screen_scroll_view
             bar_width: dp(4)
             bar_color: 0.6, 0.7, 0.9, 1
+            size_hint_y: 1
+            do_scroll_x: False
 
             MDBoxLayout:
                 orientation: 'vertical'
-                spacing: dp(10)
+                spacing: dp(5)
                 padding: dp(10)
                 size_hint_y: None
                 height: self.minimum_height
@@ -138,7 +139,7 @@
                         id: feedback_screen_subject_container
                         orientation: 'vertical'
                         size_hint: 1, None
-                        height: self.minimum_height
+                        height: dp(70)
                         spacing: "1dp"
 
                         MDLabel:
@@ -155,66 +156,6 @@
                         MDTextField:
                             id: feedback_screen_subject_input
                             hint_text: "Motivo do contato"
-                            hint_text_align: "left"
-                            font_size: "12sp"
-                            mode: "rectangle"
-                            line_color_normal: 0.72, 0.78, 0.92, 1
-                            line_color_focus: 0.72, 0.78, 0.92, 1
-                            size_hint_x: 1
-                            height: "40dp"
-                            radius: [12, 12, 12, 12]
-
-                    MDBoxLayout:
-                        id: feedback_screen_name_container
-                        orientation: 'vertical'
-                        size_hint: 1, None
-                        height: self.minimum_height
-                        spacing: "1dp"
-
-                        MDLabel:
-                            id: feedback_screen_name_label
-                            text: "Nome Completo*"
-                            font_size: "12sp"
-                            theme_text_color: "Custom"
-                            text_color: 0, 0, 0, 1
-                            bold: True
-                            font_name: "views/assets/fonts/Palanquin_Dark/PalanquinDark-Regular.ttf"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-
-                        MDTextField:
-                            id: feedback_screen_name_input
-                            hint_text: "Digite seu nome"
-                            hint_text_align: "left"
-                            font_size: "12sp"
-                            mode: "rectangle"
-                            line_color_normal: 0.72, 0.78, 0.92, 1
-                            line_color_focus: 0.72, 0.78, 0.92, 1
-                            size_hint_x: 1
-                            height: "40dp"
-                            radius: [12, 12, 12, 12]
-
-                    MDBoxLayout:
-                        id: feedback_screen_email_container
-                        orientation: 'vertical'
-                        size_hint: 1, None
-                        height: self.minimum_height
-                        spacing: "1dp"
-
-                        MDLabel:
-                            id: feedback_screen_email_label
-                            text: "E-mail*"
-                            font_size: "12sp"
-                            theme_text_color: "Custom"
-                            text_color: 0, 0, 0, 1
-                            bold: True
-                            font_name: "views/assets/fonts/Palanquin_Dark/PalanquinDark-Regular.ttf"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-
-                        MDTextField:
-                            id: feedback_screen_email_input
-                            hint_text: "Digite seu e-mail"
                             hint_text_align: "left"
                             font_size: "12sp"
                             mode: "rectangle"
