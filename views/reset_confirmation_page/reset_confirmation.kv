@@ -10,6 +10,7 @@
             pos_hint: {"left": 1, "top": 1}
             size_hint: None, None
             size: dp(40), dp(40)
+            on_release: root.close_screen()
 
         MDBoxLayout:
             orientation: 'vertical'
@@ -38,6 +39,7 @@
                 padding_y: dp(5)  
 
             MDLabel:
+                id: email_label
                 text: "Enviamos uma mensagem para\n'email-do-usuário'."
                 halign: "center"
                 theme_text_color: "Custom"
@@ -49,8 +51,8 @@
                 padding_y: dp(5)  
 
         MDFillRoundFlatButton:
-            id: reen_button
-            text: "Reenviar E-mail"
+            id: back_button
+            text: "Voltar"
             size_hint_x: 0.8
             pos_hint: {"center_x": 0.5, "y": 0.05}
             md_bg_color: 0.788, 0.835, 0.941, 1
@@ -60,3 +62,4 @@
             elevation: 4  
             line_color: 0.6, 0.7, 0.9, 1
             line_width: 1
+            on_release: root.go_to_home()

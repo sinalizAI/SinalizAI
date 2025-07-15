@@ -55,6 +55,11 @@ class BaseScreen(MDScreen):
         self.manager.transition = SlideTransition(direction='left', duration=0.0)
         self.manager.current = "fg_passwd"       
     
+    def go_to_reset_confirmation(self):
+        self.manager.previous_screen = self.manager.current
+        self.manager.transition = SlideTransition(direction='left', duration=0.0)
+        self.manager.current = "reset_confirmation"
+    
     # Função para voltar à tela anterior
     def go_to_back(self):
         if hasattr(self.manager, 'previous_screen') and self.manager.previous_screen:
@@ -107,6 +112,10 @@ class BaseScreen(MDScreen):
             # Campos ausentes
             "MISSING_PASSWORD": "Senha obrigatória!",
             "MISSING_EMAIL": "Email obrigatório!",
+            
+            # Erros de rede e sistema
+            "NETWORK_ERROR": "Erro de conexão. Verifique sua internet e tente novamente.",
+            "UNKNOWN_ERROR": "Erro desconhecido. Tente novamente.",
         }
 
-        return friendly_errors.get(error_code, f"Erro no cadastro ou login ({error_code}). Verifique os dados.")   
+        return friendly_errors.get(error_code, f"Erro no cadastro ou login ({error_code}). Verifique os dados.")

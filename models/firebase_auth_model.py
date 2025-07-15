@@ -54,14 +54,35 @@ def reset_password(email):
         "requestType": "PASSWORD_RESET",
         "email": email
     }
-    response = requests.post(url, json=payload)
-    if response.status_code == 200:
-        return True, "Email de recuperação enviado!"
-    else:
-        try:
-            return False, response.json()
-        except:
-            return False, {"error": {"message": "UNKNOWN_ERROR"}}
+    
+    try:
+        print(f"Tentando enviar email de reset para: {email}")
+        print(f"URL: {url}")
+        
+        response = requests.post(url, json=payload)
+        
+        print(f"Status code: {response.status_code}")
+        print(f"Response text: {response.text}")
+        
+        if response.status_code == 200:
+            response_data = response.json()
+            print(f"Sucesso! Response: {response_data}")
+            return True, response_data
+        else:
+            try:
+                error_data = response.json()
+                print(f"Erro retornado pelo Firebase: {error_data}")
+                return False, error_data
+            except:
+                print(f"Erro ao decodificar resposta JSON. Status: {response.status_code}, Text: {response.text}")
+                return False, {"error": {"message": "UNKNOWN_ERROR"}}
+                
+    except requests.exceptions.RequestException as e:
+        print(f"Erro de rede na requisição: {e}")
+        return False, {"error": {"message": "NETWORK_ERROR"}}
+    except Exception as e:
+        print(f"Erro inesperado na requisição de reset: {e}")
+        return False, {"error": {"message": "UNKNOWN_ERROR"}}
 
 # Alterar e-mail
 def update_email(id_token, new_email):
