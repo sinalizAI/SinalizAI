@@ -1,7 +1,7 @@
-from controllers.base_screen import BaseScreen
+from helpers.base_screen import BaseScreen
 from models import firebase_auth_model
 from models.legal_acceptance_model import save_legal_acceptance  # novo import
-from controllers.message_helper import show_message
+from helpers.message_helper import show_message
 
 class RegisterScreen(BaseScreen):
 

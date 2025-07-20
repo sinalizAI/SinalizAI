@@ -1,7 +1,7 @@
 import re
-from controllers.base_screen import BaseScreen
+from helpers.base_screen import BaseScreen
 from models import firebase_auth_model
-from controllers.message_helper import show_message
+from helpers.message_helper import show_message
 from kivy.clock import Clock
 
 class LoginScreen(BaseScreen):

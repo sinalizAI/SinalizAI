@@ -1,6 +1,6 @@
-from controllers.base_screen import BaseScreen
+from helpers.base_screen import BaseScreen
 from models.firebase_auth_model import reset_password
-from controllers.message_helper import show_message
+from helpers.message_helper import show_message
 
 class ForgotScreen(BaseScreen):
     def __init__(self, **kwargs):
@@ -15,8 +15,6 @@ class ForgotScreen(BaseScreen):
         """Envia email de recuperação de senha"""
         email = self.ids.forgot_input.text.strip()
         
-        print(f"[DEBUG] Email digitado: '{email}'")
-        
         # Validação básica
         if not email:
             show_message("Por favor, digite seu e-mail.")
@@ -27,12 +25,8 @@ class ForgotScreen(BaseScreen):
             show_message("Formato de e-mail inválido!")
             return
         
-        print(f"[DEBUG] Email validado, enviando requisição para: {email}")
-        
         # Chama a função do Firebase para resetar senha
         success, response = reset_password(email)
-        
-        print(f"[DEBUG] Resultado - Sucesso: {success}, Response: {response}")
         
         if success:
             # Salva o email para usar na tela de confirmação
@@ -41,16 +35,14 @@ class ForgotScreen(BaseScreen):
             try:
                 confirmation_screen = self.manager.get_screen('reset_confirmation')
                 confirmation_screen.user_email = email
-                print(f"[DEBUG] Email passado para tela de confirmação: {email}")
-            except Exception as e:
-                print(f"[ERROR] Erro ao passar email para tela de confirmação: {e}")
+            except Exception:
+                pass
             
             show_message("E-mail de recuperação enviado!")
             self.go_to_reset_confirmation()
         else:
             # Trata os erros do Firebase
             error_message = self.get_friendly_error(response)
-            print(f"[DEBUG] Erro tratado: {error_message}")
             
             # Mensagens específicas para reset de senha
             error_code = response.get("error", {}).get("message", "")
