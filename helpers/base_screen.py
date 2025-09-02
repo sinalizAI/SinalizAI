@@ -65,6 +65,10 @@ class BaseScreen(MDScreen):
         if hasattr(self.manager, 'previous_screen') and self.manager.previous_screen:
             self.manager.transition = SlideTransition(direction='right', duration=0.0)
             self.manager.current = self.manager.previous_screen
+        else:
+            # Fallback: se não há tela anterior definida, vai para o perfil
+            self.manager.transition = SlideTransition(direction='right', duration=0.0)
+            self.manager.current = "profile"
     
     #Função que cuida das validações
     def validate_email(self, email):

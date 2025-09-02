@@ -56,6 +56,14 @@ class RegisterScreen(BaseScreen):
                 self.show_error(f"Erro ao registrar aceite dos termos legais: {acceptance_error}")
                 return
 
+            # Salva os dados do usuário na sessão
+            self.manager.user_data = {
+                "email": email,
+                "idToken": id_token,
+                "displayName": name,
+                "localId": user_id
+            }
+
             show_message("Cadastro realizado com sucesso!")
             self.go_to_home()
         else:

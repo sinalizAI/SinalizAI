@@ -138,6 +138,68 @@
                     spacing: dp(10)
 
                     MDBoxLayout:
+                        id: feedback_screen_name_container
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        height: dp(70)
+                        spacing: "1dp"
+
+                        MDLabel:
+                            id: feedback_screen_name_label
+                            text: "Nome*"
+                            font_size: "12sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            bold: True
+                            font_name: "views/assets/fonts/Palanquin_Dark/PalanquinDark-Regular.ttf"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+
+                        MDTextField:
+                            id: feedback_screen_name_input
+                            hint_text: "Seu nome completo"
+                            hint_text_align: "left"
+                            font_size: "12sp"
+                            mode: "rectangle"
+                            line_color_normal: 0.72, 0.78, 0.92, 1
+                            line_color_focus: 0.72, 0.78, 0.92, 1
+                            size_hint_x: 1
+                            height: "40dp"
+                            radius: [12, 12, 12, 12]
+
+                    MDBoxLayout:
+                        id: feedback_screen_email_container
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        height: dp(70)
+                        spacing: "1dp"
+
+                        MDLabel:
+                            id: feedback_screen_email_label
+                            text: "E-mail (preenchido automaticamente)"
+                            font_size: "12sp"
+                            theme_text_color: "Custom"
+                            text_color: 0.5, 0.5, 0.5, 1
+                            bold: True
+                            font_name: "views/assets/fonts/Palanquin_Dark/PalanquinDark-Regular.ttf"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+
+                        MDTextField:
+                            id: feedback_screen_email_input
+                            hint_text: "Email do usuário logado"
+                            hint_text_align: "left"
+                            font_size: "12sp"
+                            mode: "rectangle"
+                            line_color_normal: 0.5, 0.5, 0.5, 1
+                            line_color_focus: 0.5, 0.5, 0.5, 1
+                            text_color: 0.5, 0.5, 0.5, 1
+                            size_hint_x: 1
+                            height: "40dp"
+                            radius: [12, 12, 12, 12]
+                            readonly: True
+
+                    MDBoxLayout:
                         id: feedback_screen_subject_container
                         orientation: 'vertical'
                         size_hint: 1, None
@@ -212,6 +274,7 @@
                                     cursor_color: 0, 0, 0, 1
                                     cursor_width: "2sp"
                                     write_tab: False
+                                    on_text: root.update_character_count(self)
 
                         MDLabel:
                             id: feedback_screen_counter_label
@@ -252,3 +315,4 @@
                 elevation: 4
                 radius: [12, 12]
                 line_color: 0.6, 0.7, 0.9, 1
+                on_release: root.send_feedback()

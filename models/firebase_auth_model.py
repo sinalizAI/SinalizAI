@@ -81,12 +81,15 @@ def update_email(id_token, new_email):
         "email": new_email,
         "returnSecureToken": True
     }
+    
     response = requests.post(url, json=payload)
+    
     if response.status_code == 200:
         return True, response.json()
     else:
         try:
-            return False, response.json()
+            error_data = response.json()
+            return False, error_data
         except:
             return False, {"error": {"message": "UNKNOWN_ERROR"}}
 
@@ -104,5 +107,30 @@ def update_display_name(id_token, new_name):
     else:
         try:
             return False, response.json()
+        except:
+            return False, {"error": {"message": "UNKNOWN_ERROR"}}
+# Função combinada para atualizar perfil (nome e/ou email)
+def update_profile(id_token, new_email=None, new_display_name=None):
+    """Atualiza perfil do usuário - pode atualizar email e/ou nome em uma requisição"""
+    url = f"{FIREBASE_AUTH_URL}:update?key={firebase_config['apiKey']}"
+    payload = {
+        "idToken": id_token,
+        "returnSecureToken": True
+    }
+    
+    # Adiciona campos que foram fornecidos
+    if new_email:
+        payload["email"] = new_email
+    if new_display_name:
+        payload["displayName"] = new_display_name
+    
+    response = requests.post(url, json=payload)
+    
+    if response.status_code == 200:
+        return True, response.json()
+    else:
+        try:
+            error_data = response.json()
+            return False, error_data
         except:
             return False, {"error": {"message": "UNKNOWN_ERROR"}}

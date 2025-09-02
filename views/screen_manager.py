@@ -13,6 +13,7 @@ from controllers.about_us_controller import AboutUsScreen
 from controllers.edit_profile_controller import EditScreen
 from controllers.forgot_password_controller import ForgotScreen
 from controllers.reset_confirmation_controller import ConfirmationScreen
+from controllers.feedback_confirmation import FeedbackConfirmationScreen
 
 Builder.load_file("views/welcome_page/welcome.kv")
 Builder.load_file("views/login/login.kv")
@@ -27,6 +28,7 @@ Builder.load_file("views/about_us_page/about_us.kv")
 Builder.load_file("views/edit_profile_page/edit_profile.kv")
 Builder.load_file("views/forgot_password_page/forgot_password.kv")
 Builder.load_file("views/reset_confirmation_page/reset_confirmation.kv")
+Builder.load_file("views/feedback_confirmation_page/feedback_confirmation.kv")
 
 class ScreenManagement(MDScreenManager):
     def __init__(self, **kwargs):
@@ -44,5 +46,6 @@ class ScreenManagement(MDScreenManager):
         self.add_widget(EditScreen(name="edit"))
         self.add_widget(ForgotScreen(name="fg_passwd"))
         self.add_widget(ConfirmationScreen(name="reset_confirmation"))
+        self.add_widget(FeedbackConfirmationScreen(name="feedback_confirmation"))
 
         self.current = "welcome"

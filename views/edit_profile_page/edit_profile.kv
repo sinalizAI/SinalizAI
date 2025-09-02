@@ -107,10 +107,10 @@
 
                     MDLabel:
                         id: edit_email_label
-                        text: "E-mail"
+                        text: "E-mail (somente leitura)"
                         font_size: "12sp"
                         theme_text_color: "Custom"
-                        text_color: 0, 0, 0, 1
+                        text_color: 0.5, 0.5, 0.5, 1
                         font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                         size_hint_y: None
                         height: self.texture_size[1]
@@ -120,16 +120,17 @@
                     MDTextField:
                         id: edit_input_email
                         text: root.user_email
-                        hint_text: "Seu e-mail"
+                        hint_text: "E-mail não pode ser alterado"
                         font_size: "14sp"
                         mode: "rectangle"
-                        line_color_normal: 0.72, 0.78, 0.92, 1
-                        line_color_focus: 0.72, 0.78, 0.92, 1
+                        line_color_normal: 0.5, 0.5, 0.5, 1
+                        line_color_focus: 0.5, 0.5, 0.5, 1
                         size_hint_x: 1
                         height: "40dp"
                         radius: [12, 12, 12, 12]
                         padding: "10dp"
-                        foreground_color: 0, 0, 0, 1
+                        foreground_color: 0.5, 0.5, 0.5, 1
+                        disabled: True
 
                     MDLabel:
                         id: edit_password_label
@@ -151,6 +152,7 @@
                         elevation: 0
                         md_bg_color: 0.835, 0.858, 0.97, 1
                         radius: [12, 12, 12, 12]
+                        on_release: root.go_to_change_password()
                         
                         MDBoxLayout:
                             id: edit_password_card_content
@@ -194,3 +196,4 @@
                 line_color: 0.6, 0.7, 0.9, 1 
                 line_width: 1  
                 pos_hint: {"center_x": 0.5}
+                on_release: root.save_changes()
