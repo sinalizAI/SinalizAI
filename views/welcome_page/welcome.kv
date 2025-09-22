@@ -1,146 +1,134 @@
 <WelcomeScreen>:
     MDFloatLayout:
-        md_bg_color: 1, 1, 1, 1 
-
-        MDTopAppBar:
-            md_bg_color: 0.718, 0.780, 0.922, 1 
+        md_bg_color: 1, 1, 1, 1  
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.67
+            md_bg_color: 0.717, 0.780, 0.922, 1
             pos_hint: {"top": 1}
-            elevation: 0
-            size_hint_y: None
-            height: "56dp"
 
-            title: "[b][font=views/assets/fonts/PT_Serif/PTSerif-Bold.ttf][color=#000000][size=30]Sinaliz[/size][/color][/font] [font=views/assets/fonts/PT_Serif/PTSerif-Regular.ttf][color=#FFFFFF][size=30]AI[/size][/color][/font][/b]"
-            specific_text_color: 1, 1, 1, 1
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "center"
 
-        FitImage:
-            id: intro_image
-            source: "views/assets/images/welcome_image.jpg"
-            size_hint: None, None
-            size: "300dp", "280dp"
-            pos_hint: {"center_x": 0.5}
-            y: self.parent.height - self.height - 80
-            radius: 8
+                FitImage:
+                    source: "views/assets/images/SinalizAI.png"
+                    size_hint: None, None
+                    size: "400dp", "200dp"
 
         MDBoxLayout:
-            id: info_box
             orientation: "vertical"
-            size_hint: 1, None  
-            height: "60dp" 
-            pos_hint: {"center_x": 0.5}
-            y: intro_image.y - self.height  - 2
-            padding: "10dp" 
-            spacing: "7dp"  
+            size_hint_x: 0.95
+            size_hint_y: None
+            height: "70dp"
+            pos_hint: {"center_x": 0.5, "center_y": 0.34}  
+            padding: [10, 5, 10, 5]
+            spacing: "4dp"
+            elevation: 8
 
             canvas.before:
                 Color:
-                    rgba: 0.933, 0.941, 0.98, 1  
-                Rectangle:
+                    rgba: 0.933, 0.941, 0.98, 1
+                RoundedRectangle:
                     pos: self.pos
                     size: self.size
-                    
+                    radius: [10]
 
-            MDLabel:
-                text: "Quebre barreiras na comunicação!"
-                theme_text_color: "Custom"
-                text_color: 0, 0, 0, 1
-                font_size: "12sp"
-                halign: "center" 
-                valign: "middle"  
-                text_size: self.width, None  
-                shorten: True  
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "center"
                 size_hint_y: None
-                height: self.texture_size[1]  
-                font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
-                
-            MDLabel:
-                text: "Traduza Libras para o português em tempo real."
-                theme_text_color: "Custom"
-                text_color: 0, 0, 0, 1
-                font_size: "12sp"
-                halign: "center"  
-                valign: "middle"  
-                text_size: self.width, None 
-                shorten: True  
-                size_hint_y: None
-                height: self.texture_size[1] 
-                font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
+                height: self.parent.height
 
+                MDBoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: "2dp"
+
+                    MDLabel:
+                        text: "Quebre barreiras na comunicação!"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0, 1
+                        font_size: "14sp"
+                        halign: "center"
+                        valign: "middle"
+                        font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        text: "Traduza Libras para o português em tempo real."
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0, 1
+                        font_size: "14sp"
+                        halign: "center"
+                        valign: "middle"
+                        font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+        # Botões
         MDBoxLayout:
             orientation: "vertical"
-            size_hint: 0.9, None  
-            height: self.minimum_height
-            pos_hint: {"center_x": 0.5}
-            y: info_box.y - self.height   
-            spacing: 15  
+            adaptive_height: True
+            spacing: "14dp"
+            size_hint_x: 0.9
+            pos_hint: {"center_x": 0.5, "center_y": 0.18}
 
             MDLabel:
                 text: "Para começar:"
                 font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
-                font_size: "14sp"
-                halign: "left"
                 size_hint_y: None
                 height: "25dp"
+                halign: "left"
 
             MDFillRoundFlatButton:
-                id: conta_button
-                text: "Já tenho uma conta"
+                text: "[b]Já tenho uma conta[/b]"
                 size_hint_x: 1
-                md_bg_color: 0.788, 0.835, 0.941, 1 
-                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                md_bg_color: 0.717, 0.780, 0.922, 1
                 theme_text_color: "Custom"
-                text_color: 0, 0, 0, 1
-                elevation: 4  
-                line_color: 0.6, 0.7, 0.9, 1 
+                text_color: 1, 1, 1, 1
+                elevation: 7
+                line_color: 0.717, 0.780, 0.922, 1
                 line_width: 1
-                on_release: root.go_to_login()  # Ação de transição para a tela de login
-                
-
+                on_release: root.go_to_login()
 
             MDFillRoundFlatButton:
-                id: criar_button  
-                text: "Criar uma conta"
+                text: "[b]Criar uma conta[/b]"
                 size_hint_x: 1
-                md_bg_color: 1, 1, 1, 1  
-                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                md_bg_color: 1, 1, 1, 1
+                theme_text_color: "Custom"
+                text_color: 0.717, 0.780, 0.922, 1
+                elevation: 7
+                line_color: 0.717, 0.780, 0.922, 1
+                line_width: 1
+                on_release: root.go_to_register()
+
+        MDBoxLayout:
+            size_hint_x: 0.9
+            adaptive_height: True
+            spacing: "10dp"
+            pos_hint: {"center_x": 0.5, "y": 0.02}
+
+            MDCheckbox:
+                id: checkbox_termos
+                size_hint: None, None
+                size: "30dp", "30dp"
+                active: False
+                color_active: 0.718, 0.780, 0.922, 1
+
+            MDLabel:
+                text: "Eu aceito os [ref=terms][u][color=B7C7EB]Termos de Serviço[/color][/u][/ref] e a [ref=policy][u][color=B7C7EB]Política de Privacidade[/color][/u][/ref]."
+                markup: True
+                halign: "left"
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
-                elevation: 4  
-                line_color: 0.8, 0.8, 0.8, 1 
-                line_width: 1
-                on_release: root.go_to_register()  
-
-            MDBoxLayout:
-                size_hint: 1, None
-                height: "60dp"  
-                spacing: "10dp"
-                padding: "10dp"
-                pos_hint: {"center_x": 0.5}  
-
-                MDCheckbox:
-                    id: checkbox_termos
-                    size_hint: None, None
-                    size: "30dp", "20dp"
-                    active: False
-                    color: 0.788, 0.835, 0.941, 1 
-                    color_active: 0.788, 0.835, 0.941, 1 
-                    pos_hint: {"center_y": 1.01}  
-
-                MDLabel:
-                    text: "Eu aceito os [ref=terms][b][u][color=B7C7EB]Termos de Serviço[/color][/b][/u][/ref] e a [ref=policy][u][b][color=B7C7EB]Política de Privacidade[/color][/b][/u][/ref]."
-                    markup: True
-                    theme_text_color: "Custom"
-                    text_color: 0, 0, 0, 1
-                    font_size: "13sp"
-                    font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
-                    halign: "left"
-                    valign: "center"
-                    pos_hint: {"center_y": 1.01}
-                    height: self.texture_size[1]
-                    text_size: self.width, None
-                    on_ref_press:
-                        if args[1] == "terms": root.go_to_terms()
-                        if args[1] == "policy": root.go_to_policy()
-
-
+                font_size: "13sp"
+                font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+                on_ref_press:
+                    if args[1] == "terms": root.go_to_terms()
+                    if args[1] == "policy": root.go_to_policy()

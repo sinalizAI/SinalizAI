@@ -1,269 +1,317 @@
 <HomeScreen>:
     MDFloatLayout:
         md_bg_color: 1, 1, 1, 1
-        do_scroll_x: False
-        do_scroll_y: False
 
         MDTopAppBar:
             id: toolbar
             md_bg_color: 0.718, 0.780, 0.922, 1
             pos_hint: {"top": 1}
-            elevation: 0
             size_hint_y: None
             height: "56dp"
-            title: "[font=views/assets/fonts/PT_Serif/PTSerif-Bold.ttf][color=#000000][size=30]Sinaliz[/size][/color][/font] [font=views/assets/fonts/PT_Serif/PTSerif-Regular.ttf][color=#FFFFFF][size=30]AI[/size][/color][/font]"
+            elevation: 0
+            title: "[font=views/assets/fonts/PT_Serif/PTSerif-Bold.ttf][color=#000000][size=70]Sinaliz[/size][/color][/font] [font=views/assets/fonts/PT_Serif/PTSerif-Regular.ttf][color=#FFFFFF][size=70]AI[/size][/color][/font]"
             specific_text_color: 0, 0, 0, 1
 
-        MDCard:
-            id: card_traduzir
-            size_hint: 0.9, None
-            height: "140dp"
-            pos_hint: {"center_x": 0.5}
-            y: root.height - self.height - dp(150)
-            elevation: 0
-            radius: [15]
-            md_bg_color: 0.965, 0.972, 0.996, 1
-            line_color: 0.788, 0.835, 0.941, 1
-            line_width: "1dp"
-
-            MDBoxLayout:
-                orientation: "vertical"
-                padding: "12dp"
-                spacing: "8dp"
-                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                size_hint_y: None
-                height: self.minimum_height
-
-                MDBoxLayout:
-                    orientation: "horizontal"
-                    size_hint: None, None
-                    size: self.minimum_size
-                    spacing: 8
-                    pos_hint: {"center_x": 0.5}
-
-                    MDIcon:
-                        id: icon_traducao
-                        icon: "gesture"
-                        size_hint: None, None
-                        size: "24dp", "24dp"
-                        theme_text_color: "Custom"
-                        text_color: 0, 0, 0, 1
-                        pos_hint: {"center_y": 0.5}
-
-                    MDBoxLayout:
-                        orientation: "vertical"
-                        size_hint: None, None
-                        size: self.minimum_size
-                        spacing: -5
-                        pos_hint: {"center_y": 0.5}
-
-                        MDLabel:
-                            id: lbl_titulo_traducao
-                            text: "Traduzir Sinais"
-                            font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
-                            font_size: "18sp"
-                            theme_text_color: "Custom"
-                            text_color: 0, 0, 0, 1
-                            size_hint: None, None
-                            width: self.texture_size[0]
-                            height: self.texture_size[1]
-                            halign: "left"
-                            valign: "center"
-                            text_size: None, None
-
-                        MDLabel:
-                            id: lbl_subtitulo_traducao
-                            text: "Gravar e traduzir"
-                            font_name: "views/assets/fonts/palanquin/palanquin-semibold.ttf"
-                            font_size: "12sp"
-                            theme_text_color: "Custom"
-                            text_color: 0, 0, 0, 1
-                            size_hint: None, None
-                            width: self.texture_size[0]
-                            height: self.texture_size[1]
-                            halign: "left"
-                            valign: "center"
-                            text_size: None, None
-                            padding_x: "10dp"
-
-                MDLabel:
-                    id: lbl_desc_traducao
-                    text: "Utilize a câmera para traduzir Libras para português instantaneamente."
-                    font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
-                    font_size: "14sp"
-                    theme_text_color: "Custom"
-                    text_color: 0, 0, 0, 1
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    halign: "center"
-                    pos_hint: {"center_x": 0.5}
-
-        MDCard:
-            id: card_video
-            size_hint: 0.9, None
-            height: "140dp"
-            pos_hint: {"center_x": 0.5}
-            y: card_traduzir.y - self.height - dp(20)
-            elevation: 0
-            radius: [15]
-            md_bg_color: 0.965, 0.972, 0.996, 1
-            line_color: 0.788, 0.835, 0.941, 1
-            line_width: "1dp"
-
-            MDBoxLayout:
-                orientation: "vertical"
-                padding: "12dp"
-                spacing: "8dp"
-                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                size_hint_y: None
-                height: self.minimum_height
-
-                MDBoxLayout:
-                    orientation: "horizontal"
-                    size_hint: None, None
-                    size: self.minimum_size
-                    spacing: 8
-                    pos_hint: {"center_x": 0.5}
-
-                    MDIcon:
-                        id: icon_video
-                        icon: "video"
-                        size_hint: None, None
-                        size: "24dp", "24dp"
-                        theme_text_color: "Custom"
-                        text_color: 0, 0, 0, 1
-                        pos_hint: {"center_y": 0.5}
-
-                    MDBoxLayout:
-                        orientation: "vertical"
-                        size_hint: None, None
-                        size: self.minimum_size
-                        spacing: -5
-                        pos_hint: {"center_y": 0.5}
-
-                        MDLabel:
-                            id: lbl_titulo_video
-                            text: "Traduzir Vídeo"
-                            font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
-                            font_size: "18sp"
-                            theme_text_color: "Custom"
-                            text_color: 0, 0, 0, 1
-                            size_hint: None, None
-                            width: self.texture_size[0]
-                            height: self.texture_size[1]
-                            halign: "left"
-                            valign: "center"
-                            text_size: None, None
-
-                        MDLabel:
-                            id: lbl_subtitulo_video
-                            text: "Escolher um Vídeo"
-                            font_name: "views/assets/fonts/palanquin/palanquin-semibold.ttf"
-                            font_size: "12sp"
-                            theme_text_color: "Custom"
-                            text_color: 0, 0, 0, 1
-                            size_hint: None, None
-                            width: self.texture_size[0]
-                            height: self.texture_size[1]
-                            halign: "left"
-                            valign: "center"
-                            text_size: None, None
-                            padding_x: "10dp"
-
-                MDLabel:
-                    id: lbl_desc_video
-                    text: "Selecione um vídeo da galeria para traduzir Libras para português."
-                    font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
-                    font_size: "14sp"
-                    theme_text_color: "Custom"
-                    text_color: 0, 0, 0, 1
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    halign: "center"
-                    pos_hint: {"center_x": 0.5}
-
-        MDBoxLayout:
-            id: bottom_nav
+        MDScrollView:
             size_hint: 1, None
-            height: "80dp"
+            height: root.height - dp(126)  
+            pos_hint: {"top": 0.88, "center_x": 0.5}  
+            do_scroll_x: False
+            bar_width: dp(4)
+            bar_color: 0.788, 0.835, 0.941, 1
+
+            MDBoxLayout:
+                id: content_container
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "20dp"
+                spacing: "20dp"
+                pos_hint: {"center_x": 0.5}
+
+                MDCard:
+                    id: card_traduzir
+                    size_hint: 0.9, None
+                    height: "140dp"
+                    pos_hint: {"center_x": 0.5}
+                    elevation: 0
+                    radius: [15]
+                    md_bg_color: 0.965, 0.972, 0.996, 1
+                    line_color: 0.788, 0.835, 0.941, 1
+                    line_width: "1dp"
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: "12dp"
+                        spacing: "8dp"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            size_hint: None, None
+                            size: self.minimum_size
+                            spacing: 8
+                            pos_hint: {"center_x": 0.5}
+
+                            MDIcon:
+                                icon: "gesture"
+                                size_hint: None, None
+                                size: "24dp", "24dp"
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                                pos_hint: {"center_y": 0.5}
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: self.minimum_size
+                                spacing: -5
+                                pos_hint: {"center_y": 0.5}
+
+                                MDLabel:
+                                    text: "Traduzir Sinais"
+                                    font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
+                                    font_size: "18sp"
+                                    theme_text_color: "Custom"
+                                    text_color: 0, 0, 0, 1
+                                    size_hint: None, None
+                                    width: self.texture_size[0]
+                                    height: self.texture_size[1]
+                                    halign: "left"
+                                    valign: "center"
+                                    text_size: None, None
+
+                                MDLabel:
+                                    text: "Gravar e traduzir"
+                                    font_name: "views/assets/fonts/palanquin/palanquin-semibold.ttf"
+                                    font_size: "12sp"
+                                    theme_text_color: "Custom"
+                                    text_color: 0, 0, 0, 1
+                                    size_hint: None, None
+                                    width: self.texture_size[0]
+                                    height: self.texture_size[1]
+                                    halign: "left"
+                                    valign: "center"
+                                    text_size: None, None
+                                    padding_x: "10dp"
+
+                        MDLabel:
+                            text: "Utilize a câmera para traduzir Libras para português instantaneamente."
+                            font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                            font_size: "14sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            halign: "center"
+                            pos_hint: {"center_x": 0.5}
+
+                MDCard:
+                    id: card_video
+                    size_hint: 0.9, None
+                    height: "140dp"
+                    pos_hint: {"center_x": 0.5}
+                    elevation: 0
+                    radius: [15]
+                    md_bg_color: 0.965, 0.972, 0.996, 1
+                    line_color: 0.788, 0.835, 0.941, 1
+                    line_width: "1dp"
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: "12dp"
+                        spacing: "8dp"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            size_hint: None, None
+                            size: self.minimum_size
+                            spacing: 8
+                            pos_hint: {"center_x": 0.5}
+
+                            MDIcon:
+                                icon: "video"
+                                size_hint: None, None
+                                size: "24dp", "24dp"
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                                pos_hint: {"center_y": 0.5}
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: self.minimum_size
+                                spacing: -5
+                                pos_hint: {"center_y": 0.5}
+
+                                MDLabel:
+                                    text: "Traduzir Vídeo"
+                                    font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
+                                    font_size: "18sp"
+                                    theme_text_color: "Custom"
+                                    text_color: 0, 0, 0, 1
+                                    size_hint: None, None
+                                    width: self.texture_size[0]
+                                    height: self.texture_size[1]
+                                    halign: "left"
+                                    valign: "center"
+                                    text_size: None, None
+
+                                MDLabel:
+                                    text: "Escolher um vídeo"
+                                    font_name: "views/assets/fonts/palanquin/palanquin-semibold.ttf"
+                                    font_size: "12sp"
+                                    theme_text_color: "Custom"
+                                    text_color: 0, 0, 0, 1
+                                    size_hint: None, None
+                                    width: self.texture_size[0]
+                                    height: self.texture_size[1]
+                                    halign: "left"
+                                    valign: "center"
+                                    text_size: None, None
+                                    padding_x: "10dp"
+
+                        MDLabel:
+                            text: "Selecione um vídeo da galeria para traduzir Libras para português."
+                            font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                            font_size: "14sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            halign: "center"
+                            pos_hint: {"center_x": 0.5}
+
+                MDCard:
+                    id: card_alfabeto
+                    size_hint: 0.9, None
+                    height: "140dp"
+                    pos_hint: {"center_x": 0.5}
+                    elevation: 0
+                    radius: [15]
+                    md_bg_color: 0.965, 0.972, 0.996, 1
+                    line_color: 0.788, 0.835, 0.941, 1
+                    line_width: "1dp"
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: "12dp"
+                        spacing: "8dp"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            size_hint: None, None
+                            size: self.minimum_size
+                            spacing: 8
+                            pos_hint: {"center_x": 0.5}
+
+                            MDIcon:
+                                icon: "book"
+                                size_hint: None, None
+                                size: "24dp", "24dp"
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                                pos_hint: {"center_y": 0.5}
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: self.minimum_size
+                                spacing: -5
+                                pos_hint: {"center_y": 0.5}
+
+                                MDLabel:
+                                    text: "Traduzir Alfabeto"
+                                    font_name: "views/assets/fonts/palanquin/palanquindark-regular.ttf"
+                                    font_size: "18sp"
+                                    theme_text_color: "Custom"
+                                    text_color: 0, 0, 0, 1
+                                    size_hint: None, None
+                                    width: self.texture_size[0]
+                                    height: self.texture_size[1]
+                                    halign: "left"
+                                    valign: "center"
+                                    text_size: None, None
+
+                        MDLabel:
+                            text: "Tradução de algumas letras do alfabeto de Libras para o português: A, B, C, D, E, F, G, I, L, M, N, O, P, Q, R, S, T, U, V, W."
+                            font_name: "views/assets/fonts/palanquin/palanquin-medium.ttf"
+                            font_size: "14sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            halign: "center"
+                            pos_hint: {"center_x": 0.5}
+        MDBoxLayout:
+            size_hint_y: None
+            height: "70dp"
             pos_hint: {"bottom": 0}
             md_bg_color: 0.965, 0.972, 0.996, 1
-            spacing: "5dp"
-            padding: "5dp"
+            spacing: "0dp"
+            padding: "0dp"
 
             MDFloatLayout:
-                size_hint_x: 1
-
                 MDIconButton:
-                    id: btn_home
                     icon: "home"
-                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.7}
                     theme_text_color: "Custom"
                     text_color: 0.718, 0.780, 0.922, 1
-
                 MDLabel:
-                    id: lbl_home
                     text: "Início"
                     font_size: "12sp"
                     halign: "center"
-                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.25}
                     theme_text_color: "Custom"
                     text_color: 0.718, 0.780, 0.922, 1
 
             MDFloatLayout:
-                size_hint_x: 1
-
                 MDIconButton:
-                    id: btn_translate
                     icon: "gesture"
-                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.7}
                     theme_text_color: "Custom"
-                    text_color: 0.2, 0.2, 0.2, 1
-
+                    text_color: 0.2, 0.2, 0.2, 1            
                 MDLabel:
-                    id: lbl_translate
                     text: "Traduzir Sinais"
                     font_size: "12sp"
                     halign: "center"
-                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.25}
                     theme_text_color: "Custom"
                     text_color: 0.2, 0.2, 0.2, 1
 
             MDFloatLayout:
-                size_hint_x: 1
-
                 MDIconButton:
-                    id: btn_video
                     icon: "video"
-                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.7}
                     theme_text_color: "Custom"
                     text_color: 0.2, 0.2, 0.2, 1
-
                 MDLabel:
-                    id: lbl_video
                     text: "Traduzir Vídeo"
                     font_size: "12sp"
                     halign: "center"
-                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.25}
                     theme_text_color: "Custom"
                     text_color: 0.2, 0.2, 0.2, 1
 
             MDFloatLayout:
-                size_hint_x: 1
-
                 MDIconButton:
-                    id: btn_profile
                     icon: "account"
-                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.7}
                     theme_text_color: "Custom"
                     text_color: 0.2, 0.2, 0.2, 1
                     on_release: root.go_to_profile()
-
                 MDLabel:
-                    id: lbl_profile
                     text: "Perfil"
                     font_size: "12sp"
                     halign: "center"
-                    pos_hint: {"center_x": 0.5, "top": 0.6}
+                    pos_hint: {"center_x": 0.5, "center_y": 0.25}
                     theme_text_color: "Custom"
                     text_color: 0.2, 0.2, 0.2, 1

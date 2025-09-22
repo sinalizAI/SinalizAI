@@ -52,14 +52,15 @@
 
         MDFillRoundFlatButton:
             id: back_button
-            text: "Voltar"
+            text: "[b]Voltar[/b]"
             size_hint_x: 0.8
-            pos_hint: {"center_x": 0.5, "y": 0.05}
-            md_bg_color: 0.788, 0.835, 0.941, 1
-            font_name: "views/assets/fonts/palanquin/palanquin-regular.ttf"
+            size_hint_y: None
+            height: dp(50)
+            pos_hint: {"center_x": 0.5, "y": dp(10)/self.parent.height} 
+            md_bg_color: 0.717, 0.780, 0.922, 1
             theme_text_color: "Custom"
-            text_color: 0, 0, 0, 1
-            elevation: 4  
-            line_color: 0.6, 0.7, 0.9, 1
+            text_color: 1, 1, 1, 1
+            elevation: 7
+            line_color: 0.717, 0.780, 0.922, 1
             line_width: 1
             on_release: root.go_to_home()
