@@ -2,10 +2,6 @@
 
 # python detect.py --weights alfabeto-final.pt --data ./data.yaml --source 0
  
-import pathlib
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
-
 import argparse
 import csv
 import os
@@ -46,7 +42,7 @@ from utils.torch_utils import select_device, smart_inference_mode
 
 @smart_inference_mode()
 def run(
-    weights=ROOT / "models/alfabeto.pt",
+    weights=ROOT / "/home/hebert/Área de Trabalho/TCC/TCC/alfabeto.pt",
     source=ROOT / "0",
     data=ROOT / "data/data.yaml",
     imgsz=(640, 640),

@@ -1,10 +1,6 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 # python export.py --weights yolov5s.pt --include torchscript onnx openvino engine coreml tflite ...
 
-import pathlib
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
-
 import argparse
 import contextlib
 import json
