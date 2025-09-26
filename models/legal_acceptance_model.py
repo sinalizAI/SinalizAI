@@ -1,6 +1,6 @@
 import requests
 from datetime import datetime
-from models.firebase_auth_model import firebase_config
+from config.config_manager import firebase_config
 
 FIRESTORE_URL = f"https://firestore.googleapis.com/v1/projects/{firebase_config['projectId']}/databases/(default)/documents"
 

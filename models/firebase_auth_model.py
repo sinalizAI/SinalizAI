@@ -1,14 +1,5 @@
 import requests
-
-# Configurações do Firebase
-firebase_config = {
-    "apiKey": "***REMOVED***",
-    "authDomain": "sinalizai.firebaseapp.com",
-    "projectId": "sinalizai",
-    "storageBucket": "sinalizai.firebasestorage.app",
-    "messagingSenderId": "531928981509",
-    "appId": "1:531928981509:web:91ee8b599aa29bbe25fc6c"
-}
+from config.config_manager import firebase_config
 
 # URL base de autenticação Firebase
 FIREBASE_AUTH_URL = "https://identitytoolkit.googleapis.com/v1/accounts"
