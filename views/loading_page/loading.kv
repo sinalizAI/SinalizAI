@@ -1,0 +1,29 @@
+<LoadingScreen>:
+    MDFloatLayout:
+        id: loading_screen
+        size: self.size
+
+        canvas.before:
+            Color:
+                rgba: 183/255, 199/255, 235/255, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        MDSpinner:
+            size_hint: None, None
+            size: dp(56), dp(56)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            active: True
+            palette: [0.2, 0.2, 0.2, 1, 0, 0, 0, 1]
+            line_width: dp(3)
+
+        Image:
+            source: "assets/images/nome_sinalizAI.png"
+            size_hint: None, None
+            size: dp(150), dp(50)
+            pos_hint: {'center_x': 0.5, 'bottom': 1}
+            allow_stretch: True
+            keep_ratio: True
+            mipmap: True
+            margin_bottom: dp(20)

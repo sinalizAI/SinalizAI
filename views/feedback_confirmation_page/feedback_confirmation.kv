@@ -1,0 +1,115 @@
+<FeedbackConfirmationScreen>:
+    MDFloatLayout:
+        md_bg_color: 237/255, 241/255, 250/255, 1
+
+        MDIconButton:
+            id: icon_close
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {"left": 1, "top": 1}
+            size_hint: None, None
+            size: dp(40), dp(40)
+            on_release: root.close_screen()
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6} 
+            spacing: dp(15) 
+
+            MDIcon:
+                icon: "email-check-outline"
+                theme_text_color: "Custom"
+                text_color: 0.2, 0.7, 0.2, 1
+                font_size: "80sp"
+                pos_hint: {"center_x": 0.5}
+                size_hint: None, None
+                size: dp(80), dp(80)  
+
+            MDLabel:
+                text: "Feedback Enviado!"
+                halign: "center"
+                theme_text_color: "Primary"
+                font_size: "26sp"
+                font_name: "assets/fonts/Palanquin_Dark/PalanquinDark-Regular.ttf"
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: dp(10)  
+
+            MDLabel:
+                id: feedback_message_label
+                text: "Seu feedback foi enviado com sucesso!\\nRecebemos sua mensagem e entraremos\\nem contato em breve."
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 0, 0, 0, 1
+                font_size: "16sp"
+                font_name: "assets/fonts/palanquin/palanquin-regular.ttf"
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: dp(10)
+                text_size: self.width, None
+                
+            MDLabel:
+                id: email_info_label
+                text: "Email enviado para: ***EMAIL_REMOVED***"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 0.5, 0.5, 0.5, 1
+                font_size: "14sp"
+                font_name: "assets/fonts/palanquin/palanquin-regular.ttf"
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: dp(5)
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(10)
+                padding: dp(20), 0
+
+                MDCard:
+                    size_hint_y: None
+                    height: dp(80)
+                    elevation: 2
+                    md_bg_color: 1, 1, 1, 1
+                    radius: [12, 12, 12, 12]
+                    padding: dp(15)
+
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        spacing: dp(15)
+
+                        MDIcon:
+                            icon: "information-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0.717, 0.780, 0.921, 1
+                            font_size: "24sp"
+                            size_hint_x: None
+                            width: dp(24)
+                            pos_hint: {"center_y": 0.5}
+
+                        MDLabel:
+                            text: "Agradecemos seu feedback! Sua opinião é muito importante para melhorarmos o SinalizAI."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0, 1
+                            font_size: "14sp"
+                            font_name: "assets/fonts/palanquin/palanquin-regular.ttf"
+                            text_size: self.width, None
+                            valign: "center"
+
+        MDFillRoundFlatButton:
+            id: back_button
+            text: "[b]Voltar ao Perfil[/b]"
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "y": 0.02} 
+            md_bg_color: 0.717, 0.780, 0.922, 1 
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1  
+            elevation: 7
+            line_color: 0.717, 0.780, 0.922, 1  
+            line_width: 1
+            radius: [12, 12]
+            on_release: root.go_to_profile()

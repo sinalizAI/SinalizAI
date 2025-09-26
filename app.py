@@ -1,17 +1,16 @@
-#!/usr/bin/env python3
-"""
-TCC - SinalizAI Application
-Main application entry point following MVC architecture
-"""
 
-import sys
 import os
+import sys
+from pathlib import Path
 
-# Add app directory to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'app'))
+ROOT_DIR = Path(__file__).parent
+sys.path.insert(0, str(ROOT_DIR))
 
-# Import main application
-from main import main
+from main import SinalizAIApp
 
 if __name__ == '__main__':
-    main()
+    try:
+        SinalizAIApp().run()
+    except Exception as e:
+        print(f"Erro ao iniciar a aplicação: {e}")
+        sys.exit(1)

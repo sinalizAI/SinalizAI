@@ -1,49 +1,59 @@
-# TCC - SinalizAI
+# TCC - SinalizAI 📱
 
-Sistema de reconhecimento de letras em Libras usando Machine Learning
+**Aplicativo Mobile KivyMD** para reconhecimento de letras em Libras usando Machine Learning
 
-## 📁 Estrutura do Projeto (MVC)
+## � Estrutura Mobile MVC (KivyMD)
 
 ```
 TCC/
 ├── app.py                      # 🚀 Ponto de entrada principal
-├── app/                        # 📱 Aplicação principal
-│   ├── main.py                 # Core da aplicação
-│   ├── controllers/            # 🎮 Controladores (lógica de controle)
-│   ├── models/                 # 🗃️ Modelos de dados
-│   ├── views/                  # 🖼️ Interface de usuário (UI)
-│   ├── helpers/                # 🛠️ Utilitários e helpers
-│   └── services/               # ⚙️ Camada de serviços
-│       └── ml/                 # 🤖 Serviços de Machine Learning
-│           ├── alfabeto.pt     # Modelo treinado principal
-│           ├── alfabeto.torchscript.zip
-│           ├── modelo_extraido/
-│           ├── treinamento_colab.ipynb
-│           └── yolov5/         # Framework YOLOv5
-├── config/                     # ⚙️ Configurações
-│   └── kivy_config.py
-├── static/                     # 🎨 Arquivos estáticos
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── public/                     # 🌐 Arquivos públicos
-├── logs/                       # 📝 Logs da aplicação
-└── tests/                      # 🧪 Testes
+├── main.py                     # 📱 Aplicação KivyMD principal
+├── models/                     # 🗃️ MODELS - Modelos de dados
+│   ├── firebase_auth_model.py
+│   ├── email_service.py
+│   └── legal_acceptance_model.py
+├── views/                      # 📱 VIEWS - Telas e interfaces KivyMD
+│   ├── screen_manager.py       # Gerenciador de telas
+│   ├── login/                  # Telas de autenticação
+│   ├── home_page/             # Tela principal
+│   ├── profile_page/          # Perfil do usuário
+│   ├── welcome_page/          # Tela de boas-vindas
+│   └── [outras_telas]/        # Demais telas do app
+├── controllers/                # 🎮 CONTROLLERS - Lógica de controle
+│   └── [controladores]/       # Lógica de negócio das telas
+├── services/                   # ⚙️ SERVICES - Serviços externos
+│   └── ml/                     # 🤖 Machine Learning
+│       ├── alfabeto.pt         # Modelo treinado YOLOv5
+│       ├── modelo_extraido/    # Modelo serializado
+│       ├── treinamento_colab.ipynb
+│       └── yolov5/             # Framework YOLOv5
+├── utils/                      # 🛠️ UTILS - Utilitários e helpers
+├── assets/                     # 🎨 ASSETS - Recursos visuais
+│   ├── fonts/                  # Fontes personalizadas
+│   │   ├── Athiti/
+│   │   ├── PT_Serif/
+│   │   └── palanquin/
+│   └── images/                 # Imagens e ícones
+│       ├── SinalizAI.png
+│       ├── welcome_image.jpg
+│       └── perfil_semfoto.png
+└── config/                     # ⚙️ Configurações
+    └── kivy_config.py          # Configurações do Kivy
 ```
 
-## 🏗️ Arquitetura MVC
+## 🏗️ Arquitetura MVC Mobile (KivyMD)
 
 ### **Model (Modelo)**
-- `app/models/` - Modelos de dados e estruturas
-- `app/services/ml/` - Lógica de Machine Learning
+- `models/` - Modelos de dados, entidades e lógica de negócio
+- `services/` - Serviços de ML, autenticação e APIs
 
 ### **View (Visão)**  
-- `app/views/` - Interface de usuário
-- `static/` - Assets visuais (CSS, JS, imagens)
+- `views/` - Telas e componentes de interface KivyMD
+- `assets/` - Recursos visuais (fontes, imagens, ícones)
 
 ### **Controller (Controlador)**
-- `app/controllers/` - Lógica de controle e coordenação
-- `app/helpers/` - Funções auxiliares
+- `controllers/` - Controladores de tela e lógica de coordenação
+- `utils/` - Utilitários e funções auxiliares
 
 ## 🚀 Como Executar
 
@@ -55,7 +65,7 @@ conda activate kivymd_app
 python app.py
 
 # Executar detecção de letras (ML)
-cd app/services/ml/yolov5
+cd services/ml/yolov5
 python detect.py --source 0
 ```
 
@@ -63,7 +73,7 @@ python detect.py --source 0
 
 O sistema utiliza YOLOv5 para detecção e reconhecimento de letras em Libras:
 
-- **Modelo**: `app/services/ml/alfabeto.pt`
+- **Modelo**: `services/ml/alfabeto.pt`
 - **Framework**: YOLOv5
 - **Treinamento**: Notebook Colab disponível
 - **Deployment**: TorchScript para produção
@@ -79,4 +89,4 @@ O sistema utiliza YOLOv5 para detecção e reconhecimento de letras em Libras:
 
 ---
 
-🔬 **Projeto de TCC** - Sistema de reconhecimento de Libras com IA
+🔬 **Projeto de TCC** - Sistema de reconhecimento de Libras com IA'

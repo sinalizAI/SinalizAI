@@ -1,0 +1,197 @@
+<EditScreen>:
+    user_image_source: "assets/images/perfil_semfoto.png"
+    user_name: ""
+    user_email: ""
+
+    MDFloatLayout:
+        id: edit_screen_layout
+        md_bg_color: 237/255, 241/255, 250/255, 1
+
+        MDIconButton:
+            id: edit_btn_close
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {"left": 1, "top": 1}
+            size_hint: None, None
+            size: dp(40), dp(40)
+            on_release: root.go_to_back()
+
+        MDBoxLayout:
+            id: edit_main_box
+            orientation: "vertical"
+            size_hint: 1, 1
+            padding: "20dp", "20dp"
+            spacing: "15dp"  
+
+            MDScrollView:
+                id: edit_scroll_view
+                
+                MDBoxLayout:
+                    id: edit_scroll_content
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: "10dp"  
+                    padding: 0, 0, 0, "60dp"
+
+                    MDFloatLayout:
+                        id: edit_photo_container
+                        size_hint_y: None
+                        height: "140dp" 
+
+                        MDCard:
+                            id: edit_profile_card
+                            size_hint: None, None
+                            size: "120dp", "120dp"  
+                            pos_hint: {"center_x": 0.5, "top": 1}
+                            elevation: 0
+                            radius: [60, 60, 60, 60] 
+                            md_bg_color: 0.95, 0.95, 0.95, 1
+
+                            MDFloatLayout:
+                                FitImage:
+                                    id: edit_profile_image
+                                    source: root.user_image_source
+                                    radius: [60, 60, 60, 60]  
+                                    size_hint: 1, 1
+                                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                                MDIconButton:
+                                    id: edit_btn_change_photo
+                                    icon: "camera-plus"
+                                    theme_text_color: "Custom"
+                                    text_color: 0, 0, 0, 1
+                                    pos_hint: {"right": 1, "y": 0}
+                                    icon_size: "22sp"  
+                                    md_bg_color: 1, 1, 1, 1
+                                    elevation: 4
+                                    size_hint: None, None
+                                    size: dp(32), dp(32)  
+                    MDLabel:
+                        id: edit_title_label
+                        text: "Alterar dados cadastrais"
+                        halign: "center"
+                        font_name: "assets/fonts/palanquin/palanquin-bold.ttf"
+                        font_size: "20sp" 
+                        bold: True
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        padding: 0, 0, 0, "10dp"  
+
+                    MDLabel:
+                        id: edit_name_label
+                        text: "Nome"
+                        font_size: "14sp"  
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0, 1
+                        font_name: "assets/fonts/palanquin/palanquin-regular.ttf"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        padding: "5dp", 0, 0, "2dp"  
+
+                    MDTextField:
+                        id: edit_input_name
+                        text: root.user_name
+                        hint_text: "Nome completo" 
+                        font_size: "16sp"  
+                        mode: "rectangle"
+                        line_color_normal: 0.72, 0.78, 0.92, 1
+                        line_color_focus: 0.72, 0.78, 0.92, 1
+                        size_hint_x: 1
+                        height: "50dp"  
+                        radius: [12, 12, 12, 12]
+                        padding: "15dp"  
+                        foreground_color: 0, 0, 0, 1
+
+                    MDLabel:
+                        id: edit_email_label
+                        text: "E-mail (somente leitura)"
+                        font_size: "14sp"  
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        font_name: "assets/fonts/palanquin/palanquin-regular.ttf"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        bold: False
+                        padding: "5dp", 0, 0, "2dp" 
+
+                    MDTextField:
+                        id: edit_input_email
+                        text: root.user_email
+                        hint_text: "E-mail não pode ser alterado"
+                        font_size: "16sp"  
+                        mode: "rectangle"
+                        line_color_normal: 0.5, 0.5, 0.5, 1
+                        line_color_focus: 0.5, 0.5, 0.5, 1
+                        size_hint_x: 1
+                        height: "50dp"  
+                        radius: [12, 12, 12, 12]
+                        padding: "15dp"  
+                        foreground_color: 0.5, 0.5, 0.5, 1
+                        disabled: True
+
+                    MDLabel:
+                        id: edit_password_label
+                        text: "Alteração de senha"
+                        font_size: "14sp"  
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0, 1
+                        font_name: "assets/fonts/palanquin/palanquin-regular.ttf"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        bold: False
+                        padding: "5dp", 0, 0, "2dp"  
+
+                    MDCard:
+                        id: edit_card_change_password
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: "40dp"  
+                        elevation: 0
+                        md_bg_color: 0.835, 0.858, 0.97, 1
+                        radius: [12, 12, 12, 12]
+                        on_release: root.go_to_change_password()
+                        
+                        MDBoxLayout:
+                            id: edit_password_card_content
+                            orientation: "horizontal"
+                            padding: "15dp", 0  
+                            spacing: "10dp"  
+                            valign: "center"
+                            
+                            MDLabel:
+                                id: edit_password_text
+                                text: "Alterar senha"
+                                font_size: "14sp"  
+                                valign: "center"
+                                size_hint_x: 0.9
+                                font_name: "assets/fonts/palanquin/palanquin-regular.ttf"
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                            
+                            MDIcon:
+                                id: edit_password_icon
+                                icon: "chevron-right"
+                                size_hint_x: None
+                                width: "24dp"  
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                                valign: "center"
+                                pos_hint: {"center_y": 0.5}
+
+            MDFillRoundFlatButton:
+                id: edit_btn_save
+                text: "[b]Salvar Alterações[/b]"
+                size_hint_x: 1
+                height: "55dp"  
+                md_bg_color: 0.788, 0.835, 0.941, 1
+                font_size: "12sp"  
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                elevation: 7
+                radius: [12, 12]
+                line_color: 0.717, 0.780, 0.922, 1
+                line_width: 1  
+                pos_hint: {"center_x": 0.5}
+                on_release: root.save_changes()
