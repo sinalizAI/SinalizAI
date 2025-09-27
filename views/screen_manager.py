@@ -14,6 +14,7 @@ from controllers.edit_profile_controller import EditScreen
 from controllers.forgot_password_controller import ForgotScreen
 from controllers.reset_confirmation_controller import ConfirmationScreen
 from controllers.feedback_confirmation import FeedbackConfirmationScreen
+from controllers.camera_controller import CameraScreen
 
 Builder.load_file("views/welcome_page/welcome.kv")
 Builder.load_file("views/login/login.kv")
@@ -29,6 +30,7 @@ Builder.load_file("views/edit_profile_page/edit_profile.kv")
 Builder.load_file("views/forgot_password_page/forgot_password.kv")
 Builder.load_file("views/reset_confirmation_page/reset_confirmation.kv")
 Builder.load_file("views/feedback_confirmation_page/feedback_confirmation.kv")
+Builder.load_file("views/camera_page/camera.kv")
 
 class ScreenManagement(MDScreenManager):
     def __init__(self, **kwargs):
@@ -47,5 +49,6 @@ class ScreenManagement(MDScreenManager):
         self.add_widget(ForgotScreen(name="fg_passwd"))
         self.add_widget(ConfirmationScreen(name="reset_confirmation"))
         self.add_widget(FeedbackConfirmationScreen(name="feedback_confirmation"))
+        self.add_widget(CameraScreen(name="camera"))
 
         self.current = "welcome"
