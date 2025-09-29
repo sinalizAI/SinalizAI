@@ -1,0 +1,66 @@
+<DetectionScreen>:
+    name: 'detection'
+    
+    # Layout principal sobre a câmera
+    FloatLayout:
+        id: camera_display
+        size: root.size
+        pos: root.pos
+        
+        # Botão X para sair (canto superior direito)
+        MDIconButton:
+            id: close_button
+            icon: "close"
+            size_hint: None, None
+            size: "60dp", "60dp"
+            pos_hint: {"right": 0.95, "top": 0.95}
+            theme_text_color: "Custom" 
+            text_color: 1, 1, 1, 1  # Branco
+            md_bg_color: 1, 0, 0, 0.8  # Fundo vermelho semi-transparente para destacar
+            radius: [30]
+            elevation: 10
+            # Força o ícone a aparecer em cima de tudo
+            canvas.before:
+                Color:
+                    rgba: 1, 0, 0, 0.8  # Vermelho semi-transparente
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [30]
+            on_release: root.go_back()
+                
+        # Indicador de status (canto inferior esquerdo)
+        MDLabel:
+            id: status_label
+            text: "Iniciando detecção..."
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {"x": 0.05, "y": 0.1}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1  # Branco
+            font_size: "18sp"
+            bold: True
+            
+        # Instruções (canto superior esquerdo)
+        MDLabel:
+            id: instructions_label
+            text: "Faça um sinal LIBRAS com a mão"
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {"x": 0.05, "top": 0.95}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1  # Branco
+            font_size: "16sp"
+            
+        # Label para mostrar a letra detectada (centro superior)
+        MDLabel:
+            id: detection_result
+            text: ""
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {"center_x": 0.5, "top": 0.85}
+            theme_text_color: "Custom"
+            text_color: 0, 1, 0, 1  # Verde
+            font_size: "32sp"
+            bold: True
+            halign: "center"
