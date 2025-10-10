@@ -7,50 +7,16 @@
         size: root.size
         pos: root.pos
         
-        # Botão X para sair (canto superior direito)
-        MDIconButton:
-            id: close_button
-            icon: "close"
-            size_hint: None, None
-            size: "60dp", "60dp"
-            pos_hint: {"right": 0.95, "top": 0.95}
-            theme_text_color: "Custom" 
-            text_color: 1, 1, 1, 1  # Branco
-            md_bg_color: 1, 0, 0, 0.8  # Fundo vermelho semi-transparente para destacar
-            radius: [30]
-            elevation: 10
-            # Força o ícone a aparecer em cima de tudo
-            canvas.before:
-                Color:
-                    rgba: 1, 0, 0, 0.8  # Vermelho semi-transparente
-                RoundedRectangle:
-                    pos: self.pos
-                    size: self.size
-                    radius: [30]
-            on_release: root.go_back()
-                
-        # Indicador de status (canto inferior esquerdo)
+        # Indicador de status (discreto)
         MDLabel:
             id: status_label
-            text: "Iniciando detecção..."
+            text: ""
             size_hint: None, None
             size: self.texture_size
-            pos_hint: {"x": 0.05, "y": 0.1}
+            pos_hint: {"x": 0.05, "y": 0.05}
             theme_text_color: "Custom"
-            text_color: 1, 1, 1, 1  # Branco
-            font_size: "18sp"
-            bold: True
-            
-        # Instruções (canto superior esquerdo)
-        MDLabel:
-            id: instructions_label
-            text: "Faça um sinal LIBRAS com a mão"
-            size_hint: None, None
-            size: self.texture_size
-            pos_hint: {"x": 0.05, "top": 0.95}
-            theme_text_color: "Custom"
-            text_color: 1, 1, 1, 1  # Branco
-            font_size: "16sp"
+            text_color: 1, 1, 1, 0.7  # Branco semi-transparente
+            font_size: "14sp"
             
         # Label para mostrar a letra detectada (centro superior)
         MDLabel:
@@ -64,3 +30,32 @@
             font_size: "32sp"
             bold: True
             halign: "center"
+
+    # Botão X SEMPRE POR CIMA - quadrado branco simples
+    RelativeLayout:
+        size: root.size
+        pos: root.pos
+        
+        Button:
+            id: close_button
+            text: "X"
+            size_hint: None, None
+            size: "60dp", "60dp"
+            pos_hint: {"right": 0.95, "top": 0.95}
+            background_color: 1, 1, 1, 1  # Fundo branco sólido
+            color: 0, 0, 0, 1  # Texto preto
+            font_size: "24sp"
+            bold: True
+            # Design simples e limpo - quadrado branco
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1  # Fundo branco
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                Color:
+                    rgba: 0, 0, 0, 1  # Borda preta
+                Line:
+                    rectangle: (self.x, self.y, self.width, self.height)
+                    width: 2
+            on_release: root.go_back()

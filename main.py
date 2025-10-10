@@ -10,8 +10,7 @@ from views.screen_manager import ScreenManagement
 
 class SinalizAIApp(MDApp):
     def build(self):
-        Window.size = (360, 640)  # garante o tamanho mesmo se o Config falhar
-
+        Window.size = (360, 640)  # Tamanho médio mobile (padrão smartphone)
         return ScreenManagement()
         
 if __name__ == "__main__":

@@ -5,9 +5,8 @@ class HomeScreen(BaseScreen):
     def translate_alphabet(self):
         """Chama a tela de reconhecimento de alfabeto LIBRAS"""
         try:
-            from kivy.app import App
-            app = App.get_running_app()
-            app.root.current = 'camera'
+            # Usa o método correto do BaseScreen para navegar
+            self.manager.current = 'detection'
         except Exception as e:
             print(f"Erro ao abrir câmera: {e}")
             show_message("Não foi possível abrir a câmera para reconhecimento.")

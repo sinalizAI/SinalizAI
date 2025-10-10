@@ -15,8 +15,50 @@ import time
 # Classes do alfabeto em LIBRAS
 CLASSES = ['A','B','C','D','E','F','G','I','L','M','N','O','P','Q','R','S','T','U','V','W']
 
-# Cores para cada classe
-COLORS = [(0, 255, 0)] * len(CLASSES)  # Verde para todas
+# Cores vibrantes para cada classe (formato BGR para OpenCV)
+COLORS = [
+    (255, 87, 51),    # A - Laranja vibrante
+    (0, 123, 255),    # B - Azul
+    (255, 193, 7),    # C - Amarelo dourado
+    (220, 53, 69),    # D - Vermelho
+    (25, 135, 84),    # E - Verde escuro
+    (111, 66, 193),   # F - Roxo
+    (255, 105, 180),  # G - Rosa choque
+    (32, 201, 151),   # I - Verde água
+    (255, 69, 0),     # L - Laranja vermelho
+    (138, 43, 226),   # M - Azul violeta
+    (255, 20, 147),   # N - Rosa profundo
+    (0, 191, 255),    # O - Azul céu
+    (50, 205, 50),    # P - Verde lima
+    (255, 140, 0),    # Q - Laranja escuro
+    (199, 21, 133),   # R - Magenta escuro
+    (0, 206, 209),    # S - Turquesa
+    (148, 0, 211),    # T - Violeta escuro
+    (255, 215, 0),    # U - Dourado
+    (70, 130, 180),   # V - Azul aço
+    (34, 139, 34)     # W - Verde floresta
+]
+
+# Cores normalizadas para Kivy (0-1)
+COLORS_KIVY = [(b/255.0, g/255.0, r/255.0, 1.0) for r, g, b in COLORS]
+
+def get_contrast_color(bg_color):
+    """Retorna cor de texto contrastante (branco ou preto) baseada na cor de fundo"""
+    if len(bg_color) >= 3:
+        # Calcula luminância usando fórmula padrão
+        r, g, b = bg_color[2], bg_color[1], bg_color[0]  # BGR para RGB
+        luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255.0
+        return (255, 255, 255) if luminance < 0.5 else (0, 0, 0)  # Branco ou preto
+    return (255, 255, 255)  # Branco como padrão
+
+def get_contrast_color_kivy(bg_color):
+    """Retorna cor de texto contrastante para Kivy (0-1)"""
+    if len(bg_color) >= 3:
+        # Converte de Kivy (0-1) para RGB (0-255) temporariamente
+        r, g, b = bg_color[0] * 255, bg_color[1] * 255, bg_color[2] * 255
+        luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255.0
+        return (1, 1, 1, 1) if luminance < 0.5 else (0, 0, 0, 1)  # Branco ou preto
+    return (1, 1, 1, 1)  # Branco como padrão
 
 
 def letterbox(im, new_shape=(640, 640), color=(114, 114, 114)):
@@ -199,7 +241,7 @@ def detect_frame(interpreter, frame, conf_threshold=0.65, iou_threshold=0.75, ma
 
 
 def draw_detections(frame, boxes, scores, classes, line_thickness=3, hide_labels=False, hide_conf=False):
-    """Desenha as detecções exatamente como o YOLOv5"""
+    """Desenha as detecções com cores diferenciadas e texto contrastante"""
     for box, score, class_id in zip(boxes, scores, classes):
         x1, y1, x2, y2 = box.astype(int)
         
@@ -207,9 +249,9 @@ def draw_detections(frame, boxes, scores, classes, line_thickness=3, hide_labels
         if class_id < len(COLORS):
             color = COLORS[class_id]
         else:
-            color = (255, 255, 255)
+            color = (128, 128, 128)  # Cinza para classes desconhecidas
         
-        # Desenhar retângulo
+        # Desenhar retângulo com linha mais espessa para destaque
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, line_thickness)
         
         # Label
@@ -218,24 +260,33 @@ def draw_detections(frame, boxes, scores, classes, line_thickness=3, hide_labels
                 if hide_conf:
                     label = f"{CLASSES[class_id]}"
                 else:
-                    label = f"{CLASSES[class_id]} {score:.2f}"
+                    label = f"{CLASSES[class_id]} {score:.0%}"  # Percentual em vez de decimal
             else:
-                label = f"Class {class_id} {score:.2f}"
+                label = f"Class {class_id} {score:.0%}"
             
             # Calcular tamanho do texto
             font = cv2.FONT_HERSHEY_SIMPLEX
-            font_scale = 0.6
+            font_scale = 0.7  # Texto um pouco maior
             thickness = max(line_thickness - 1, 1)
             
             (text_width, text_height), baseline = cv2.getTextSize(label, font, font_scale, thickness)
             
-            # Fundo do texto
-            cv2.rectangle(frame, (x1, y1 - text_height - baseline - 2), 
-                         (x1 + text_width, y1), color, -1)
+            # Adicionar padding ao fundo do texto
+            padding = 4
+            bg_x1 = x1
+            bg_y1 = y1 - text_height - baseline - padding
+            bg_x2 = x1 + text_width + padding * 2
+            bg_y2 = y1
             
-            # Texto
-            cv2.putText(frame, label, (x1, y1 - baseline - 2), 
-                       font, font_scale, (0, 0, 0), thickness)
+            # Fundo do texto com a mesma cor da caixa
+            cv2.rectangle(frame, (bg_x1, bg_y1), (bg_x2, bg_y2), color, -1)
+            
+            # Cor do texto contrastante
+            text_color = get_contrast_color(color)
+            
+            # Texto com cor contrastante
+            cv2.putText(frame, label, (x1 + padding, y1 - baseline - padding//2), 
+                       font, font_scale, text_color, thickness)
     
     return frame
 
@@ -411,35 +462,57 @@ class BoxDetectionPreview(Preview):
             self.detections = []
     
     def canvas_instructions_callback(self, texture, tex_size, tex_pos):
-        """Desenha bounding boxes e labels sobre o preview da câmera"""
+        """Desenha bounding boxes e labels com cores diferenciadas sobre o preview da câmera"""
         from kivy.graphics import Color, Line, Rectangle
         from kivy.core.text import Label as CoreLabel
         
         # Desenhar bounding boxes e labels
         for det in self.detections:
-            # Bounding box verde
-            Color(0, 1, 0, 1)  # Verde
-            Line(rectangle=(det['x'], det['y'], det['w'], det['h']), width=3)
+            # Obter índice da classe para a cor
+            class_index = -1
+            if det['label'] in CLASSES:
+                class_index = CLASSES.index(det['label'])
             
-            # Background do texto (semi-transparente)
-            Color(0, 1, 0, 0.8)  # Verde semi-transparente
-            text_height = 30
-            Rectangle(pos=(det['x'], det['y'] + det['h']), size=(max(100, det['w']), text_height))
+            # Cor da bounding box
+            if class_index >= 0 and class_index < len(COLORS_KIVY):
+                box_color = COLORS_KIVY[class_index]
+            else:
+                box_color = (0.5, 0.5, 0.5, 1.0)  # Cinza para classes desconhecidas
+            
+            # Desenhar bounding box
+            Color(*box_color)
+            Line(rectangle=(det['x'], det['y'], det['w'], det['h']), width=4)
             
             # Texto com letra e confiança
             text = f"{det['label']} {det['score']:.0%}"
             
             # Criar label de texto
-            label = CoreLabel(text=text, font_size=16)
+            label = CoreLabel(text=text, font_size=18, bold=True)
             label.refresh()
-            texture = label.texture
+            text_texture = label.texture
             
-            if texture:
-                Color(1, 1, 1, 1)  # Branco
+            if text_texture:
+                # Calcular tamanho do fundo do texto
+                padding = 8
+                bg_width = max(120, text_texture.width + padding * 2)
+                bg_height = text_texture.height + padding
+                
+                # Background do texto com a cor da classe
+                Color(*box_color)
                 Rectangle(
-                    texture=texture,
-                    pos=(det['x'] + 5, det['y'] + det['h'] + 5),
-                    size=texture.size
+                    pos=(det['x'], det['y'] + det['h']), 
+                    size=(bg_width, bg_height)
+                )
+                
+                # Cor do texto contrastante
+                text_color = get_contrast_color_kivy(box_color)
+                Color(*text_color)
+                
+                # Texto com cor contrastante
+                Rectangle(
+                    texture=text_texture,
+                    pos=(det['x'] + padding, det['y'] + det['h'] + padding//2),
+                    size=text_texture.size
                 )
 
 
@@ -457,6 +530,9 @@ class DetectionScreen(BaseScreen):
         self._load_model()
         self._start_camera()
         
+        # Garante que o botão X seja visível após carregar tudo
+        Clock.schedule_once(lambda dt: self._ensure_button_visibility(), 2.0)
+        
     def _load_model(self):
         """Carrega o modelo TensorFlow Lite"""
         try:
@@ -468,18 +544,11 @@ class DetectionScreen(BaseScreen):
             
             if self.interpreter:
                 print("✅ Modelo carregado com sucesso")
-                # Atualizar status na tela se existir
-                if hasattr(self, 'ids') and 'status_label' in self.ids:
-                    self.ids.status_label.text = "Modelo carregado - Câmera ativa"
             else:
                 print("❌ Erro ao carregar modelo")
-                if hasattr(self, 'ids') and 'status_label' in self.ids:
-                    self.ids.status_label.text = "Erro ao carregar modelo"
                 
         except Exception as e:
             print(f"❌ Erro ao carregar modelo: {e}")
-            if hasattr(self, 'ids') and 'status_label' in self.ids:
-                self.ids.status_label.text = f"Erro: {e}"
     
     def _start_camera(self):
         """Inicia a câmera com preview personalizado"""
@@ -513,20 +582,31 @@ class DetectionScreen(BaseScreen):
                     mirror=True
                 )
                 print("✅ Camera4kivy iniciada")
-                if hasattr(self, 'ids') and 'status_label' in self.ids:
-                    self.ids.status_label.text = "Detecção ativa - Faça um sinal"
+                
+                # FORÇA o botão X para ficar sempre visível após conectar a câmera
+                self._ensure_button_visibility()
             else:
                 print("❌ Erro: camera_display não encontrado")
-                if hasattr(self, 'ids') and 'status_label' in self.ids:
-                    self.ids.status_label.text = "Erro na câmera"
                 
         except Exception as e:
             print(f"❌ Erro ao conectar câmera: {e}")
-            if hasattr(self, 'ids') and 'status_label' in self.ids:
-                self.ids.status_label.text = f"Erro câmera: {e}"
+            
+    def _ensure_button_visibility(self):
+        """Garante que o botão X sempre fique visível por cima da câmera"""
+        try:
+            close_button = self.ids.get('close_button')
+            if close_button:
+                # Remove e re-adiciona o botão para colocá-lo no topo da pilha de widgets
+                parent = close_button.parent
+                if parent:
+                    parent.remove_widget(close_button)
+                    parent.add_widget(close_button)
+                    print("🔴 Botão X reposicionado para frente")
+        except Exception as e:
+            print(f"⚠️ Erro ao reposicionar botão: {e}")
     
     def go_back(self):
-        """Volta para a tela anterior usando BaseScreen"""
+        """Volta para a tela de home após limpar recursos da câmera"""
         print("📹 Saindo da detecção...")
         
         # Parar câmera e limpar recursos
@@ -537,5 +617,7 @@ class DetectionScreen(BaseScreen):
         except Exception as e:
             print(f"⚠️ Erro ao desconectar câmera: {e}")
         
-        # Usa o método go_to_back do BaseScreen
-        self.go_to_back()
+        # Volta para home diretamente (não usa BaseScreen fallback)
+        print("🏠 Voltando para home...")
+        self.manager.transition.direction = 'right'
+        self.manager.current = 'home'
