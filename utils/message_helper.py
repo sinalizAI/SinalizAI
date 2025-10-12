@@ -1,3 +1,31 @@
+_delete_data_dialog = None
+
+def show_delete_data_dialog(screen_instance):
+    global _delete_data_dialog
+    if not _delete_data_dialog:
+        _delete_data_dialog = MDDialog(
+            text="Tem certeza que deseja excluir seus dados? Essa ação é permanente",
+            buttons=[
+                MDFlatButton(
+                    text="EXCLUIR",
+                    text_color=(1, 0, 0, 1),
+                    md_bg_color=(0, 0, 0, 0),
+                    on_release=lambda *args: _confirm_delete_data(screen_instance)
+                ),
+                MDFlatButton(
+                    text="CANCELAR",
+                    text_color=get_color_from_hex("#2196F3"),
+                    on_release=lambda *args: _delete_data_dialog.dismiss()
+                ),
+            ],
+            radius=[dp(16)] * 4,
+        )
+    _delete_data_dialog.open()
+
+def _confirm_delete_data(screen_instance):
+    global _delete_data_dialog
+    _delete_data_dialog.dismiss()
+    screen_instance.excluir_dados_usuario()
 from kivymd.uix.snackbar import MDSnackbar
 from kivymd.uix.label import MDLabel
 from kivy.clock import Clock

@@ -1,7 +1,4 @@
 # Arquivos de configuração sensível
-.env
-.env.local
-.env.*.local
 
 # Arquivos Python
 __pycache__/
@@ -97,7 +94,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/

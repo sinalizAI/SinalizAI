@@ -1,3 +1,20 @@
+# Deletar conta do usuário
+def delete_account(id_token):
+    url = f"{FIREBASE_AUTH_URL}:delete?key={firebase_config['apiKey']}"
+    payload = {
+        "idToken": id_token
+    }
+    try:
+        response = requests.post(url, json=payload)
+        if response.status_code == 200:
+            return True, None
+        else:
+            try:
+                return False, response.json()
+            except:
+                return False, {"error": {"message": "UNKNOWN_ERROR"}}
+    except Exception as e:
+        return False, {"error": {"message": str(e)}}
 import requests
 from config.config_manager import firebase_config
 

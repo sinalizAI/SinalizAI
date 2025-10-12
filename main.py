@@ -1,7 +1,7 @@
 
 from kivy.config import Config
-Config.set('graphics', 'width', '360')
-Config.set('graphics', 'height', '640')
+Config.set('graphics', 'width', '900')
+Config.set('graphics', 'height', '700')
 
 from kivy.core.window import Window
 from kivymd.app import MDApp
@@ -10,7 +10,7 @@ from views.screen_manager import ScreenManagement
 
 class SinalizAIApp(MDApp):
     def build(self):
-        Window.size = (360, 640)  # Tamanho médio mobile (padrão smartphone)
+        Window.size = (900, 700)  # Tamanho intermediário (aba minimizada)
         return ScreenManagement()
         
 if __name__ == "__main__":

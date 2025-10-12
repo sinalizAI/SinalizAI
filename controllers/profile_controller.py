@@ -2,6 +2,27 @@ from utils.base_screen import BaseScreen
 from utils.message_helper import show_exit_dialog
 
 class ProfileScreen(BaseScreen):
+    def confirmar_exclusao_dados(self):
+        from utils.message_helper import show_delete_data_dialog
+        show_delete_data_dialog(self)
+
+    def excluir_dados_usuario(self):
+        # Remove conta do Firebase Authenticator, mantém aceite legal
+        from models.firebase_auth_model import delete_account
+        from utils.message_helper import show_message
+        user_data = getattr(self.manager, 'user_data', None)
+        id_token = user_data.get('idToken') if user_data else None
+        if id_token:
+            ok, resp = delete_account(id_token)
+            if ok:
+                self.manager.user_data = None
+                show_message("Dados excluídos com sucesso.")
+                self.go_to_welcome()
+            else:
+                msg = resp['error']['message'] if resp and 'error' in resp else 'Erro ao excluir dados.'
+                show_message(f"Erro: {msg}")
+        else:
+            show_message("Usuário não autenticado.")
     
     def on_enter(self):
         """Carrega os dados do usuário quando a tela é aberta"""
