@@ -1,18 +1,73 @@
+import os
 import requests
 import json
 
+try:
+    # prefer usar python-dotenv se estiver instalado
+    from dotenv import load_dotenv
+except Exception:
+    load_dotenv = None
+
+
 class EmailService:
-    """Serviço para envio de emails via EmailJS"""
-    
-    # Configurações do EmailJS
+    """Serviço para envio de emails via EmailJS
+
+    Carrega configurações de `.env_emailJS` primeiro. Se não existir,
+    tenta `.env`. As variáveis esperadas são:
+      - EMAILJS_SERVICE_ID
+      - EMAILJS_TEMPLATE_ID
+      - EMAILJS_PUBLIC_KEY
+      - FEEDBACK_EMAIL
+
+    Se as variáveis não existirem, valores hardcoded antigos são usados como
+    fallback para manter compatibilidade.
+    """
+
+    # Carregar arquivo .env específico para EmailJS, com fallback para .env
+    ENV_EMAILJS = os.path.join(os.getcwd(), '.env_emailJS')
+    ENV_DEFAULT = os.path.join(os.getcwd(), '.env')
+
+    if load_dotenv:
+        # tenta carregar .env_emailJS primeiro
+        if os.path.exists(ENV_EMAILJS):
+            load_dotenv(ENV_EMAILJS, override=False)
+        elif os.path.exists(ENV_DEFAULT):
+            load_dotenv(ENV_DEFAULT, override=False)
+    else:
+        # fallback simples: parsear linha a linha se existir
+        def _load_simple(path):
+            try:
+                with open(path, 'r', encoding='utf-8') as f:
+                    for ln in f:
+                        ln = ln.strip()
+                        if not ln or ln.startswith('#') or '=' not in ln:
+                            continue
+                        k, v = ln.split('=', 1)
+                        k = k.strip()
+                        v = v.strip().strip('\"').strip('\'')
+                        if k not in os.environ:
+                            os.environ[k] = v
+            except FileNotFoundError:
+                pass
+
+        if os.path.exists(ENV_EMAILJS):
+            _load_simple(ENV_EMAILJS)
+        elif os.path.exists(ENV_DEFAULT):
+            _load_simple(ENV_DEFAULT)
+
+    # Valores default (fallback) mantidos para compatibilidade
+    _DEFAULT_SERVICE_ID = "service_4vex1zl"
+    _DEFAULT_TEMPLATE_ID = "template_9lyg2p5"
+    _DEFAULT_PUBLIC_KEY = "AETagjMuO4_iJD8dj"
+    _DEFAULT_FEEDBACK_EMAIL = "***EMAIL_REMOVED***"
+
     EMAILJS_CONFIG = {
-        "service_id": "service_4vex1zl",
-        "template_id": "template_9lyg2p5",
-        "public_key": "AETagjMuO4_iJD8dj"
+        "service_id": os.environ.get('EMAILJS_SERVICE_ID', _DEFAULT_SERVICE_ID),
+        "template_id": os.environ.get('EMAILJS_TEMPLATE_ID', _DEFAULT_TEMPLATE_ID),
+        "public_key": os.environ.get('EMAILJS_PUBLIC_KEY', _DEFAULT_PUBLIC_KEY)
     }
-    
-    # Email de destino para feedbacks
-    FEEDBACK_EMAIL = "***EMAIL_REMOVED***"
+
+    FEEDBACK_EMAIL = os.environ.get('FEEDBACK_EMAIL', _DEFAULT_FEEDBACK_EMAIL)
     
     @staticmethod
     def send_feedback(user_email, user_name, subject, message):
