@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de e-mail - %APP_NAME%</title>
+    <style>
+        /* Mobile-first base styles */
+        body { margin:0; padding:0; font-family: Arial, sans-serif; background-color:#edf1fa; }
+        .email-wrapper { width:100%; background-color:#edf1fa; padding:20px 12px; }
+        .email-content { max-width:600px; margin:0 auto; background:#ffffff; border-radius:15px; box-shadow:0 4px 20px rgba(183,199,235,0.3); overflow:hidden; }
+        .header { background: linear-gradient(135deg,#b7c7eb 0%,#c9d5f0 100%); padding:34px 20px; text-align:center; }
+        .brand { margin:0; font-size:32px; font-weight:700; color:#000; }
+        .brand span { color:#ffffff; }
+        .tagline { margin:6px 0 0 0; color:#4a5568; font-size:13px; }
+        .content { padding:36px 28px; }
+        .icon-circle { width:72px; height:72px; border-radius:50%; display:inline-block; line-height:72px; text-align:center; background:linear-gradient(135deg,#b7c7eb 0%,#d5dff0 100%); box-shadow:0 4px 15px rgba(183,199,235,0.4); font-size:32px; }
+        .title { margin:18px 0 8px 0; font-size:22px; font-weight:600; color:#2d3748; text-align:center; }
+        .subtitle { margin:0 0 18px 0; color:#4a5568; font-size:15px; text-align:center; }
+        .message { margin:0 0 18px 0; color:#2d3748; font-size:15px; text-align:center; line-height:1.5; }
+        .token-box { display:inline-block; padding:18px 26px; border-radius:12px; background:linear-gradient(135deg,#c9d5f0 0%,#b7c7eb 100%); font-size:30px; font-weight:700; letter-spacing:6px; color:#000; }
+        .divider { height:1px; background:#e2e8f0; margin:18px 0; }
+        .note { background:#f7fafc; border-left:4px solid #b7c7eb; padding:16px; border-radius:0 8px 8px 0; color:#4a5568; font-size:14px; }
+        .footer { background:#f8fafc; padding:20px 24px; text-align:center; color:#a0aec0; font-size:12px; }
+
+        /* Desktop enhancements */
+        @media screen and (min-width: 601px) {
+            .brand { font-size:36px; }
+            .content { padding:50px 40px; }
+            .icon-circle { width:80px; height:80px; line-height:80px; font-size:36px; }
+            .title { font-size:28px; }
+            .subtitle, .message { font-size:16px; }
+            .token-box { padding:20px 30px; font-size:28px; }
+            .footer { padding:30px 40px; }
+        }
+
+        /* Small screens */
+        @media only screen and (max-width: 600px) {
+            .content { padding:22px 16px !important; }
+            .brand { font-size:26px !important; }
+            .title { font-size:20px !important; }
+            .token-box { font-size:22px !important; padding:14px 18px !important; letter-spacing:4px !important; }
+        }
+        /* Outlook-specific safe rules kept inline where possible */
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-content" role="article">
+            <div class="header" role="presentation">
+                <h1 class="brand">Sinaliz<span>AI</span></h1>
+                <p class="tagline">Quebre barreiras na comunicação!</p>
+            </div>
+
+            <div class="content">
+                <div style="text-align:center; padding-bottom:18px;">
+                    <div class="icon-circle">🔐</div>
+                </div>
+
+                <h2 class="title">Verificação de e-mail</h2>
+                <p class="subtitle">Recebemos um pedido para verificar o e-mail <strong>%EMAIL%</strong>.</p>
+                <p class="message">Use o código abaixo para concluir sua verificação. Este código expira em <strong>%EXPIRY_MINUTES% minutos</strong>.</p>
+
+                <div style="text-align:center; padding:16px 0;">
+                    <div class="token-box">%TOKEN%</div>
+                </div>
+
+                <div class="divider" aria-hidden="true"></div>
+
+                <div class="note">
+                    <p style="margin:0;"><strong>🛡️ Nota de Segurança:</strong><br>Se você não solicitou esta verificação, pode ignorar este e-mail. Se alguém estiver tentando acessar sua conta sem autorização, entre em contato com %SUPPORT_EMAIL%.</p>
+                </div>
+
+                <p style="margin:18px 0 0 0; text-align:center; color:#2d3748; font-size:14px;">Atenciosamente,<br><strong>Equipe %APP_NAME%</strong></p>
+            </div>
+
+            <div class="footer">
+                © 2025 %APP_NAME% - Facilitando a comunicação em Libras<br>
+                Este é um e-mail automático, não responda esta mensagem.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -136,3 +136,7 @@ Thumbs.db
 
 # Kivy
 .buildozer/
+
+# Environment files
+.env
+.env_emailJS

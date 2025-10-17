@@ -1,6 +1,6 @@
 import re
 from utils.base_screen import BaseScreen
-from models import firebase_auth_model
+from services import backend_client
 from utils.message_helper import show_message
 from kivy.clock import Clock
 
@@ -21,16 +21,23 @@ class LoginScreen(BaseScreen):
         Clock.schedule_once(lambda dt: self._perform_login(email, password), 0.1)
 
     def _perform_login(self, email, password):
-        success, response = firebase_auth_model.login(email, password)
+        status, response = backend_client.login(email, password)
 
-        if success:
+        if status == 200 and isinstance(response, dict) and response.get('success', True) is not False:
+            # response.data is returned by the functions; backend_client returns the parsed JSON
+            data = response.get('data') if 'data' in response else response
             self.manager.user_data = {
-                "email": response["email"],
-                "idToken": response["idToken"],
-                "displayName": response.get("displayName", "")
+                "email": data.get("email"),
+                "idToken": data.get("idToken"),
+                "displayName": data.get("displayName", ""),
+                "localId": data.get("localId") or data.get("userId")
             }
             show_message("Login realizado com sucesso!")
             self.go_to_home()
         else:
-            error_message = self.get_friendly_error(response)
-            show_message(error_message)
+            # tentar extrair mensagem amigável via BaseScreen
+            try:
+                friendly = self.get_friendly_error(response if isinstance(response, dict) else { 'error': { 'message': str(response) } })
+            except Exception:
+                friendly = 'Erro no login. Verifique seu email e senha.'
+            show_message(friendly)

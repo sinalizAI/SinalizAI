@@ -67,75 +67,82 @@ class EditScreen(BaseScreen):
     def save_changes(self):
         """Salva as alterações do perfil"""
         from utils.message_helper import show_message
-        from models import firebase_auth_model
-        
+
         # Verifica se o usuário está logado
         if not hasattr(self.manager, 'user_data') or not self.manager.user_data.get('idToken'):
             show_message("Erro: Usuário não autenticado. Faça login novamente.")
             self.go_to_welcome()
             return
-        
+
         # Pega os valores dos campos
         name_field = self.ids.get('edit_input_name')
         email_field = self.ids.get('edit_input_email')
-        
+
         if not name_field or not email_field:
             show_message("Erro ao acessar os campos do formulário")
             return
-        
+
         new_name = name_field.text.strip()
         new_email = email_field.text.strip()
-        
+
         # Validações básicas
         if not new_name:
             show_message("O nome não pode estar vazio")
             return
-        
+
         if not new_email:
             show_message("O e-mail não pode estar vazio")
             return
-        
+
         if not self.validate_email(new_email):
             show_message("Formato de e-mail inválido")
             return
-        
+
         # Obtém dados atuais do usuário
         current_name = self.manager.user_data.get('displayName', '')
         current_email = self.manager.user_data.get('email', '')
         id_token = self.manager.user_data['idToken']
-        
-                # Verifica se há mudanças
+
+        # Verifica se há mudanças
         name_changed = new_name != current_name
         email_changed = new_email != current_email
-        
+
         if not name_changed and not email_changed:
             show_message("Nenhuma alteração foi feita")
             return
-        
+
         # Tratamento especial para alteração de email
         if email_changed:
             show_message("Alteração de email não é permitida pelo Firebase. Para alterar o email, entre em contato com o suporte ou use a função 'Esqueceu a senha' para redefinir sua conta.")
             return
-        
+
         # Atualiza apenas o nome se mudou
         if name_changed:
             show_message("Atualizando nome...")
-            
-            # Usa a função específica para nome
-            success, response = firebase_auth_model.update_display_name(id_token, new_name)
-            
-            if not success:
-                error_message = self.get_friendly_error(response)
-                show_message(f"Erro ao atualizar nome: {error_message}")
+
+            # Usa o backend functions para atualizar o perfil (nome)
+            from services import backend_client
+            status, response = backend_client.update_profile(id_token, newDisplayName=new_name)
+
+            if status != 200 or not isinstance(response, dict) or not response.get('success'):
+                # tenta extrair mensagem de erro
+                msg = None
+                if isinstance(response, dict):
+                    msg = response.get('message') or (response.get('error') and response.get('error').get('message'))
+                if not msg:
+                    msg = self.get_friendly_error(response)
+                show_message(f"Erro ao atualizar nome: {msg}")
                 return
-            
+
             # Atualiza dados locais
             self.manager.user_data['displayName'] = new_name
-            self.manager.user_data['idToken'] = response.get('idToken', id_token)
-        
+            # se backend retornou novo idToken, atualiza
+            if isinstance(response.get('data'), dict) and response['data'].get('idToken'):
+                self.manager.user_data['idToken'] = response['data'].get('idToken')
+
         # Sucesso
         show_message("Perfil atualizado com sucesso!")
-        
+
         # Atualiza a tela de perfil se existir
         try:
             profile_screen = self.manager.get_screen('profile')
@@ -143,6 +150,6 @@ class EditScreen(BaseScreen):
             profile_screen.load_user_profile()
         except Exception:
             pass
-        
+
         # Volta para a tela de perfil
         self.go_to_back()

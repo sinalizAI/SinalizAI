@@ -1,5 +1,5 @@
 from utils.base_screen import BaseScreen
-from models.firebase_auth_model import reset_password
+from services import backend_client
 from utils.message_helper import show_message
 
 class ForgotScreen(BaseScreen):
@@ -43,10 +43,10 @@ class ForgotScreen(BaseScreen):
             show_message("Formato de e-mail inválido!")
             return
         
-        # Chama a função do Firebase para resetar senha
-        success, response = reset_password(email)
-        
-        if success:
+        # Chama a função do backend (functions) para resetar senha
+        status, response = backend_client.reset_password(email)
+        if status == 200 and isinstance(response, dict) and response.get('success'):
+            
             # Salva o email para usar na tela de confirmação
             self.user_email = email
             # Passa o email para a tela de confirmação
@@ -62,17 +62,17 @@ class ForgotScreen(BaseScreen):
             show_message("E-mail de recuperação enviado!")
             self.go_to_reset_confirmation()
         else:
-            # Trata os erros do Firebase
+            # Tratamento de erro: tenta extrair mensagem
             error_message = self.get_friendly_error(response)
-            
-            # Mensagens específicas para reset de senha
-            error_code = response.get("error", {}).get("message", "")
-            
-            if "EMAIL_NOT_FOUND" in error_code:
+            error_code = None
+            if isinstance(response, dict):
+                error_code = response.get('message') or (response.get('error') and response.get('error').get('message'))
+
+            if error_code and "EMAIL_NOT_FOUND" in error_code:
                 show_message("Este e-mail não está cadastrado ou foi digitado errado. Por favor, corrija e tente novamente.")
-            elif "INVALID_EMAIL" in error_code:
+            elif error_code and "INVALID_EMAIL" in error_code:
                 show_message("Formato de e-mail inválido!")
-            elif "TOO_MANY_ATTEMPTS_TRY_LATER" in error_code:
+            elif error_code and "TOO_MANY_ATTEMPTS_TRY_LATER" in error_code:
                 show_message("Muitas tentativas. Tente novamente mais tarde.")
             else:
                 show_message(error_message)

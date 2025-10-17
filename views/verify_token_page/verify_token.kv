@@ -1,0 +1,18 @@
+<VerifyTokenScreen>:
+    name: 'verify_token'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(24)
+        spacing: dp(12)
+        MDLabel:
+            text: 'Digite o código de verificação enviado por email'
+            halign: 'center'
+        MDTextField:
+            id: verify_input
+            hint_text: 'Código (ex: 123456)'
+            helper_text_mode: 'on_focus'
+            size_hint_y: None
+            height: self.minimum_height
+        MDRaisedButton:
+            text: 'Verificar'
+            on_release: app.root.get_screen('verify_token').submit_token(verify_input.text)

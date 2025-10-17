@@ -434,7 +434,13 @@ class SignsDetectionScreen(BaseScreen):
             
             if elapsed >= self.RECORDING_DURATION:
                 print(f"⏱️ Gravação finalizada. {len(self.recorded_frames)} frames capturados")
+                # Entrando em processamento: inicializa o timer de processamento
                 self.current_state = "PROCESSING"
+                # garante que o timeout de processamento comece a contar agora
+                try:
+                    self.processing_start_time = current_time
+                except Exception:
+                    self.processing_start_time = time.time()
                 self.update_feedback_display()  # Atualiza para "Processando..."
         
         elif self.current_state == "PROCESSING":
@@ -542,6 +548,15 @@ class SignsDetectionScreen(BaseScreen):
                     self.recorded_frames.clear()
                     import gc
                     gc.collect()
+                    # remover o marker de tempo de processamento para não causar timeout em execuções seguintes
+                    try:
+                        if hasattr(self, 'processing_start_time'):
+                            delattr(self, 'processing_start_time')
+                    except Exception:
+                        try:
+                            del self.processing_start_time
+                        except Exception:
+                            pass
             else:
                 self.prediction_result = "Sinal não identificado"
                 print(f"❌ Poucos frames: {len(self.recorded_frames)}")
@@ -562,6 +577,15 @@ class SignsDetectionScreen(BaseScreen):
             print("[COOLDOWN DEBUG] Finalizando cooldown, voltando para WAITING")
             self.current_state = "WAITING"
             self.update_feedback_display()  # Volta para estado inicial
+            # garantir que qualquer processing_start_time antigo seja removido
+            try:
+                if hasattr(self, 'processing_start_time'):
+                    delattr(self, 'processing_start_time')
+            except Exception:
+                try:
+                    del self.processing_start_time
+                except Exception:
+                    pass
             print("🔄 Pronto para nova gravação")
         else:
             # Continua agendando enquanto estiver no cooldown
@@ -583,6 +607,15 @@ class SignsDetectionScreen(BaseScreen):
             self.current_state = "RECORDING"
             self.recorded_frames = []
             self.recording_start_time = time.time()
+            # Limpa qualquer timer de processamento pendente
+            try:
+                if hasattr(self, 'processing_start_time'):
+                    delattr(self, 'processing_start_time')
+            except Exception:
+                try:
+                    del self.processing_start_time
+                except Exception:
+                    pass
             self.update_feedback_display()  # Atualiza para "GRAVANDO..."
         else:
             print(f"⚠️ Não é possível gravar no estado atual: {self.current_state}")
