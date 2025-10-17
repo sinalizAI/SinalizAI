@@ -87,9 +87,29 @@ class BaseScreen(MDScreen):
         toast(message)
     # Função que cuida dos erros do Firebase
     def get_friendly_error(self, response):
+        # Normalize different response shapes into a single error code/message
         try:
-            error_code = response.get("error", {}).get("message", "")
-        except AttributeError:
+            error_code = ''
+            if response is None:
+                error_code = 'UNKNOWN_ERROR'
+            elif isinstance(response, str):
+                error_code = response
+            elif isinstance(response, dict):
+                # Identity Toolkit often returns { error: { message: 'EMAIL_NOT_FOUND' } }
+                if 'error' in response and isinstance(response['error'], dict) and 'message' in response['error']:
+                    error_code = response['error']['message']
+                # Some handlers return { message: '...' }
+                elif 'message' in response:
+                    error_code = response['message']
+                # Some functions return { success:false, data: { error: { message: '...' } } }
+                elif 'data' in response and isinstance(response['data'], dict) and 'error' in response['data'] and isinstance(response['data']['error'], dict) and 'message' in response['data']['error']:
+                    error_code = response['data']['error']['message']
+                else:
+                    # fallback: stringify
+                    error_code = str(response)
+            else:
+                error_code = str(response)
+        except Exception:
             return "Erro desconhecido. Tente novamente."
 
         friendly_errors = {
@@ -122,4 +142,9 @@ class BaseScreen(MDScreen):
             "UNKNOWN_ERROR": "Erro desconhecido. Tente novamente.",
         }
 
+        # Map exact tokens or partial matches
+        if isinstance(error_code, str):
+            for key, val in friendly_errors.items():
+                if key in error_code:
+                    return val
         return friendly_errors.get(error_code, f"Erro no cadastro ou login ({error_code}). Verifique os dados.")

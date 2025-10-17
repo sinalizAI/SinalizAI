@@ -55,6 +55,43 @@ def login(email, password):
         except:
             return False, {"error": {"message": "UNKNOWN_ERROR"}}
 
+
+# Fazer signInWithCustomToken (útil para trocar customToken por idToken no cliente)
+def sign_in_with_custom_token(custom_token):
+    """Troca um custom token por idToken usando Identity Toolkit REST e a apiKey configurada."""
+    try:
+        from config.config_manager import get_config_value
+        api_key = get_config_value('FIREBASE_API_KEY')
+    except Exception:
+        api_key = None
+    # fallback para firebase_config se estiver disponível
+    try:
+        from config.config_manager import firebase_config
+        if not api_key:
+            api_key = firebase_config.get('apiKey')
+    except Exception:
+        pass
+
+    if not api_key:
+        return False, {"error": {"message": "FIREBASE_API_KEY not configured"}}
+
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key={api_key}"
+    payload = {
+        "token": custom_token,
+        "returnSecureToken": True
+    }
+    try:
+        resp = requests.post(url, json=payload)
+        if resp.status_code == 200:
+            return True, resp.json()
+        else:
+            try:
+                return False, resp.json()
+            except:
+                return False, {"error": {"message": "UNKNOWN_ERROR"}}
+    except Exception as e:
+        return False, {"error": {"message": str(e)}}
+
 # Resetar senha
 def reset_password(email):
     url = f"{FIREBASE_AUTH_URL}:sendOobCode?key={firebase_config['apiKey']}"

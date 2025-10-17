@@ -1,6 +1,26 @@
 from utils.base_screen import BaseScreen
 from utils.message_helper import show_message
-from models.email_service import EmailService
+from services import backend_client
+def validate_feedback_data(user_email, user_name, subject, message):
+    errors = []
+    if not user_name or len(user_name.strip()) < 3:
+        errors.append("Nome deve ter pelo menos 3 caracteres")
+    if not user_email:
+        errors.append("Email é obrigatório")
+    elif len(user_email.strip()) == 0:
+        errors.append("Email não pode estar vazio")
+    elif "@" not in user_email or "." not in user_email:
+        errors.append("Email inválido - deve conter @ e domínio")
+    elif len(user_email.strip()) < 5:
+        errors.append("Email muito curto")
+    if not subject or len(subject.strip()) < 5:
+        errors.append("Motivo do contato deve ter pelo menos 5 caracteres")
+    if not message or len(message.strip()) < 10:
+        errors.append("Mensagem deve ter pelo menos 10 caracteres")
+    if message and len(message) > 1500:
+        errors.append("Mensagem deve ter no máximo 1500 caracteres")
+    return errors
+from services import backend_client
 
 class FeedbackScreen(BaseScreen):
     
@@ -69,10 +89,10 @@ class FeedbackScreen(BaseScreen):
         # Fallback: se o email do campo estiver vazio, pega dos dados do usuário
         if not user_email and hasattr(self.manager, 'user_data') and self.manager.user_data:
             user_email = self.manager.user_data.get('email', '')
-        
+
         # Valida os dados
-        errors = EmailService.validate_feedback_data(user_email, user_name, subject, message)
-        
+        errors = validate_feedback_data(user_email, user_name, subject, message)
+
         if errors:
             show_message("\n".join(errors))
             return
@@ -85,8 +105,19 @@ class FeedbackScreen(BaseScreen):
         if send_button:
             send_button.disabled = True
         
-        # Envia o feedback
-        result = EmailService.send_feedback(user_email, user_name, subject, message)
+        # Envia o feedback via backend functions
+        status, result = backend_client.send_feedback(user_email, user_name, subject, message)
+        # Normalize result shape
+        if isinstance(result, dict) and result.get('success') is True:
+            result = {"success": True, "message": "Feedback enviado com sucesso!"}
+        elif status != 200:
+            # try to extract message from result
+            msg = None
+            if isinstance(result, dict):
+                msg = result.get('message') or result.get('error') or str(result)
+            else:
+                msg = str(result)
+            result = {"success": False, "message": f"Erro ao enviar feedback (status {status}): {msg}"}
         
         # Reabilita o botão
         if send_button:
