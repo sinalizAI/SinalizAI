@@ -15,6 +15,7 @@ import tensorflow as tf
 from pathlib import Path
 import time
 from collections import deque
+import traceback
 
 # Classes de sinais LIBRAS do modelo treinado - IGUAL ao teste_janela.py
 SIGNS_CLASSES = sorted([
@@ -473,43 +474,43 @@ class SignsDetectionScreen(BaseScreen):
                     # PREDIÇÃO EM PROCESSO ISOLADO - EVITA SEGMENTATION FAULT
                     try:
                         print(f"🔧 Executando predição em processo isolado...")
-                        
+
                         import pickle
                         import tempfile
                         import subprocess
-                        
+
                         # Cria arquivos temporários
                         with tempfile.NamedTemporaryFile(delete=False, suffix='.pkl') as input_tmp:
                             input_file = input_tmp.name
                             pickle.dump(input_tensor, input_tmp)
-                        
+
                         with tempfile.NamedTemporaryFile(delete=False, suffix='.pkl') as output_tmp:
                             output_file = output_tmp.name
-                        
+
                         # Executa predição em processo separado
                         script_path = os.path.join("services", "ml", "isolated_prediction.py")
                         python_cmd = "/home/hebert/anaconda3/envs/kivymd_tensorflow/bin/python"
-                        
+
                         result = subprocess.run([
                             python_cmd, script_path, input_file, output_file
                         ], capture_output=True, text=True, timeout=30)
-                        
+
                         print(f"🔧 Processo isolado stdout: {result.stdout}")
                         if result.stderr:
                             print(f"🔧 Processo isolado stderr: {result.stderr}")
-                        
+
                         # Lê resultado
                         if os.path.exists(output_file):
                             with open(output_file, 'rb') as f:
                                 prediction_result = pickle.load(f)
-                            
+
                             if prediction_result['success']:
                                 predictions = prediction_result['predictions']
                                 predicted_index = np.argmax(predictions[0])
                                 confidence = predictions[0][predicted_index]
-                                
+
                                 print(f"🎯 Predição isolada: índice={predicted_index}, confiança={confidence:.3f}")
-                                
+
                                 if confidence > self.CONFIDENCE_THRESHOLD:
                                     predicted_class = SIGNS_CLASSES[predicted_index]
                                     self.prediction_result = f"{predicted_class} ({confidence:.2f})"
@@ -523,20 +524,42 @@ class SignsDetectionScreen(BaseScreen):
                         else:
                             print("❌ Arquivo de resultado não encontrado")
                             self.prediction_result = "Erro: sem resultado"
-                        
+
                         # Limpa arquivos temporários
                         try:
                             os.unlink(input_file)
                             os.unlink(output_file)
                         except:
                             pass
-                            
+
                     except subprocess.TimeoutExpired:
                         print("❌ Timeout na predição isolada")
                         self.prediction_result = "Timeout"
                     except Exception as pred_exception:
                         print(f"❌ Erro específico na predição isolada: {pred_exception}")
+                        traceback.print_exc()
+                        # Em caso de erro grave, entrar em cooldown para evitar loop de erros
                         self.prediction_result = "Erro na predição"
+                        # limpa frames e marca cooldown imediatamente
+                        try:
+                            self.recorded_frames.clear()
+                        except Exception:
+                            pass
+                        try:
+                            if hasattr(self, 'processing_start_time'):
+                                del self.processing_start_time
+                        except Exception:
+                            try:
+                                del self.processing_start_time
+                            except Exception:
+                                pass
+                        # define cooldown e atualiza UI
+                        self.current_state = "COOLDOWN"
+                        self.cooldown_start_time = current_time
+                        self.update_feedback_display()
+                        Clock.schedule_once(self.cooldown_tick, 0.1)
+                        # garante que a função saia logo que possível
+                        return
                         
                 except Exception as pred_error:
                     print(f"❌ Erro na predição Keras: {pred_error}")
