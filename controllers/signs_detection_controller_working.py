@@ -594,11 +594,36 @@ class SignsDetectionScreen(BaseScreen):
 
     def cooldown_tick(self, dt):
         current_time = time.time()
-        elapsed = current_time - self.cooldown_start_time
+        # Se não estivermos mais em COOLDOWN, cancelar qualquer agendamento pendente
+        if self.current_state != "COOLDOWN":
+            print(f"[COOLDOWN DEBUG] cooldown_tick chamado, mas estado atual é '{self.current_state}' — cancelando agendamento")
+            # Limpa resultado antigo para evitar exibição em WAITING
+            try:
+                self.prediction_result = ""
+                if hasattr(self, 'ids') and hasattr(self.ids, 'result_label'):
+                    self.ids.result_label.text = ""
+                if hasattr(self, 'ids') and hasattr(self.ids, 'side_result_label'):
+                    self.ids.side_result_label.text = ""
+            except Exception:
+                pass
+            return
+
+        # Protege caso cooldown_start_time não exista
+        try:
+            elapsed = current_time - self.cooldown_start_time
+        except Exception:
+            elapsed = 0
         print(f"[COOLDOWN DEBUG] elapsed: {elapsed:.2f}s, state: {self.current_state}")
         if elapsed >= self.COOLDOWN_DURATION:
             print("[COOLDOWN DEBUG] Finalizando cooldown, voltando para WAITING")
             self.current_state = "WAITING"
+            # Limpa o resultado anterior para não mostrar mensagens de erro na tela de espera
+            try:
+                self.prediction_result = ""
+                if hasattr(self, 'ids') and hasattr(self.ids, 'result_label'):
+                    self.ids.result_label.text = ""
+            except Exception:
+                pass
             self.update_feedback_display()  # Volta para estado inicial
             # garantir que qualquer processing_start_time antigo seja removido
             try:
@@ -629,6 +654,15 @@ class SignsDetectionScreen(BaseScreen):
             print("🎬 Iniciando gravação...")
             self.current_state = "RECORDING"
             self.recorded_frames = []
+            # Limpa resultado anterior para evitar reuso de erro antigo
+            try:
+                self.prediction_result = ""
+                if hasattr(self, 'ids') and hasattr(self.ids, 'result_label'):
+                    self.ids.result_label.text = ""
+                if hasattr(self, 'ids') and hasattr(self.ids, 'side_result_label'):
+                    self.ids.side_result_label.text = ""
+            except Exception:
+                pass
             self.recording_start_time = time.time()
             # Limpa qualquer timer de processamento pendente
             try:
