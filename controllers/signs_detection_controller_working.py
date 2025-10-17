@@ -16,6 +16,8 @@ from pathlib import Path
 import time
 from collections import deque
 import traceback
+import sys
+import datetime
 
 # Classes de sinais LIBRAS do modelo treinado - IGUAL ao teste_janela.py
 SIGNS_CLASSES = sorted([
@@ -570,6 +572,44 @@ class SignsDetectionScreen(BaseScreen):
                     except Exception as pred_exception:
                         print(f"❌ Erro específico na predição isolada: {pred_exception}")
                         traceback.print_exc()
+                        # Salva diagnóstico detalhado para inspeção (útil em Windows)
+                        try:
+                            diag_lines = []
+                            diag_lines.append(f"Timestamp: {datetime.datetime.utcnow().isoformat()}Z")
+                            diag_lines.append(f"Exception: {repr(pred_exception)}")
+                            diag_lines.append("Traceback:")
+                            diag_lines.append(traceback.format_exc())
+                            py_exec = sys.executable
+                            diag_lines.append(f"Python executable: {py_exec}")
+                            try:
+                                import platform
+                                diag_lines.append(f"Python version: {platform.python_version()} {platform.platform()}")
+                            except Exception:
+                                pass
+                            script_abspath = os.path.abspath(script_path) if 'script_path' in locals() else 'N/A'
+                            diag_lines.append(f"script_path: {script_abspath}")
+                            diag_lines.append(f"script_exists: {os.path.exists(script_abspath) if script_abspath!='N/A' else 'N/A'}")
+                            if 'input_file' in locals():
+                                try:
+                                    diag_lines.append(f"input_file: {input_file} size={os.path.getsize(input_file)}")
+                                except Exception:
+                                    diag_lines.append(f"input_file: {input_file} (size unknown)")
+                            if 'output_file' in locals():
+                                diag_lines.append(f"output_file: {output_file}")
+                            if 'result' in locals():
+                                try:
+                                    diag_lines.append("--- subprocess stdout ---")
+                                    diag_lines.append(getattr(result, 'stdout', '<no stdout>'))
+                                    diag_lines.append("--- subprocess stderr ---")
+                                    diag_lines.append(getattr(result, 'stderr', '<no stderr>'))
+                                except Exception:
+                                    pass
+                            logname = f"prediction_diag_{int(time.time())}.log"
+                            with open(logname, 'w', encoding='utf-8') as lf:
+                                lf.write('\n'.join(str(x) for x in diag_lines))
+                            print(f"📝 Diagnostic saved to {os.path.abspath(logname)}")
+                        except Exception as diag_exc:
+                            print(f"❌ Falha ao gravar diagnóstico: {diag_exc}")
                         # Em caso de erro grave, entrar em cooldown para evitar loop de erros
                         self.prediction_result = "Erro na predição"
                         # limpa frames e marca cooldown imediatamente
@@ -597,6 +637,17 @@ class SignsDetectionScreen(BaseScreen):
                     print(f"❌ Erro na predição Keras: {pred_error}")
                     import traceback
                     traceback.print_exc()
+                    # Também gravar diagnóstico resumido
+                    try:
+                        short_log = f"prediction_error_short_{int(time.time())}.log"
+                        with open(short_log, 'w', encoding='utf-8') as sf:
+                            sf.write(f"Time: {datetime.datetime.utcnow().isoformat()}Z\n")
+                            sf.write(f"Error: {repr(pred_error)}\n")
+                            sf.write(traceback.format_exc())
+                            sf.write(f"\nPython: {sys.executable}\n")
+                        print(f"📝 Short diagnostic saved to {os.path.abspath(short_log)}")
+                    except Exception:
+                        pass
                     self.prediction_result = "Erro na predição Keras"
                 finally:
                     # LIMPA MEMÓRIA após processamento
