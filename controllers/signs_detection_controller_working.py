@@ -83,6 +83,11 @@ class SignsDetectionScreen(BaseScreen):
                 if self.current_state == "WAITING":
                     feedback_label.text = "Pressione REC para gravar"
                     result_label.opacity = 0
+                    # limpa texto do result_label para evitar exibição de valor antigo
+                    try:
+                        result_label.text = ""
+                    except Exception:
+                        pass
                     side_result_label.text = ""
                     side_result_label.opacity = 0
                 elif self.current_state == "RECORDING":
@@ -489,11 +494,38 @@ class SignsDetectionScreen(BaseScreen):
 
                         # Executa predição em processo separado
                         script_path = os.path.join("services", "ml", "isolated_prediction.py")
-                        python_cmd = "/home/hebert/anaconda3/envs/kivymd_tensorflow/bin/python"
+                        # Use o mesmo interpretador Python que está executando a aplicação
+                        import sys
+                        python_cmd = sys.executable
+                        print(f"🔧 Usando python para predição isolada: {python_cmd}")
+                        print(f"🔧 script_path (absoluto): {os.path.abspath(script_path)} exists={os.path.exists(script_path)}")
 
-                        result = subprocess.run([
-                            python_cmd, script_path, input_file, output_file
-                        ], capture_output=True, text=True, timeout=30)
+                        try:
+                            result = subprocess.run([
+                                python_cmd, script_path, input_file, output_file
+                            ], capture_output=True, text=True, timeout=int(self.processing_timeout))
+                        except FileNotFoundError as fnf:
+                            # Erro comum ao usar caminho fixo em outra máquina (Windows)
+                            print(f"❌ Executável não encontrado ao tentar executar o subprocesso: {fnf}")
+                            self.prediction_result = "Erro: executável Python não encontrado"
+                            # limpa frames e entra em cooldown imediatamente
+                            try:
+                                self.recorded_frames.clear()
+                            except Exception:
+                                pass
+                            try:
+                                if hasattr(self, 'processing_start_time'):
+                                    del self.processing_start_time
+                            except Exception:
+                                try:
+                                    del self.processing_start_time
+                                except Exception:
+                                    pass
+                            self.current_state = "COOLDOWN"
+                            self.cooldown_start_time = current_time
+                            self.update_feedback_display()
+                            Clock.schedule_once(self.cooldown_tick, 0.1)
+                            return
 
                         print(f"🔧 Processo isolado stdout: {result.stdout}")
                         if result.stderr:
@@ -716,6 +748,15 @@ class SignsDetectionScreen(BaseScreen):
         super().on_leave()
         print("📹 Saindo da detecção de sinais...")
     # self._cancel_feedback_update()  # Removido: método não existe
+        # Limpa qualquer resultado pendente ao sair da tela
+        try:
+            self.prediction_result = ""
+            if hasattr(self, 'ids') and hasattr(self.ids, 'result_label'):
+                self.ids.result_label.text = ""
+            if hasattr(self, 'ids') and hasattr(self.ids, 'side_result_label'):
+                self.ids.side_result_label.text = ""
+        except Exception:
+            pass
         # Limpa estado primeiro
         self.current_state = "WAITING"
         self.recorded_frames.clear()
@@ -741,7 +782,16 @@ class SignsDetectionScreen(BaseScreen):
         print("🏠 Voltando para home...")
         
         # Limpa recursos antes de sair
-        self.current_state = "WAITING" 
+        self.current_state = "WAITING"
+        # Limpa qualquer resultado pendente
+        try:
+            self.prediction_result = ""
+            if hasattr(self, 'ids') and hasattr(self.ids, 'result_label'):
+                self.ids.result_label.text = ""
+            if hasattr(self, 'ids') and hasattr(self.ids, 'side_result_label'):
+                self.ids.side_result_label.text = ""
+        except Exception:
+            pass
         if hasattr(self, 'recorded_frames'):
             self.recorded_frames.clear()
         
