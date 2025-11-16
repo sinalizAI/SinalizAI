@@ -1,4 +1,4 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
 
 import argparse
 import json
@@ -12,24 +12,22 @@ import comet_ml
 logger = logging.getLogger(__name__)
 
 FILE = Path(__file__).resolve()
-ROOT = FILE.parents[3]  # YOLOv5 root directory
+ROOT = FILE.parents[3]
 if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))  # add ROOT to PATH
+    sys.path.append(str(ROOT))
 
 from train import train
 from utils.callbacks import Callbacks
 from utils.general import increment_path
 from utils.torch_utils import select_device
 
-# Project Configuration
+
 config = comet_ml.config.get_config()
 COMET_PROJECT_NAME = config.get_string(os.getenv("COMET_PROJECT_NAME"), "comet.project_name", default="yolov5")
 
 
 def get_args(known=False):
-    """Parses command-line arguments for YOLOv5 training, supporting configuration of weights, data paths,
-    hyperparameters, and more.
-    """
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("--weights", type=str, default=ROOT / "yolov5s.pt", help="initial weights path")
     parser.add_argument("--cfg", type=str, default="", help="model.yaml path")
@@ -66,13 +64,13 @@ def get_args(known=False):
     parser.add_argument("--seed", type=int, default=0, help="Global training seed")
     parser.add_argument("--local_rank", type=int, default=-1, help="Automatic DDP Multi-GPU argument, do not modify")
 
-    # Weights & Biases arguments
+
     parser.add_argument("--entity", default=None, help="W&B: Entity")
     parser.add_argument("--upload_dataset", nargs="?", const=True, default=False, help='W&B: Upload data, "val" option')
     parser.add_argument("--bbox_interval", type=int, default=-1, help="W&B: Set bounding-box image logging interval")
     parser.add_argument("--artifact_alias", type=str, default="latest", help="W&B: Version of dataset artifact to use")
 
-    # Comet Arguments
+
     parser.add_argument("--comet_optimizer_config", type=str, help="Comet: Path to a Comet Optimizer Config File.")
     parser.add_argument("--comet_optimizer_id", type=str, help="Comet: ID of the Comet Optimizer sweep.")
     parser.add_argument("--comet_optimizer_objective", type=str, help="Comet: Set to 'minimize' or 'maximize'.")
@@ -88,7 +86,7 @@ def get_args(known=False):
 
 
 def run(parameters, opt):
-    """Executes YOLOv5 training with given hyperparameters and options, setting up device and training directories."""
+    
     hyp_dict = {k: v for k, v in parameters.items() if k not in ["epochs", "batch_size"]}
 
     opt.save_dir = str(increment_path(Path(opt.project) / opt.name, exist_ok=opt.exist_ok or opt.evolve))

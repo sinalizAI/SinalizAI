@@ -1,4 +1,4 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
 
 import argparse
 import json
@@ -79,7 +79,7 @@ def process_batch(detections, labels, iouv):
             if x[0].shape[0] > 1:
                 matches = matches[matches[:, 2].argsort()[::-1]]
                 matches = matches[np.unique(matches[:, 1], return_index=True)[1]]
-                # matches = matches[matches[:, 2].argsort()[::-1]]
+
                 matches = matches[np.unique(matches[:, 0], return_index=True)[1]]
             correct[matches[:, 1].astype(int), i] = True
     return torch.tensor(correct, dtype=torch.bool, device=iouv.device)
@@ -128,7 +128,7 @@ def run(
         save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  
         (save_dir / "labels" if save_txt else save_dir).mkdir(parents=True, exist_ok=True) 
 
-        # Load model
+
         model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
         stride, pt, jit, engine = model.stride, model.pt, model.jit, model.engine
         imgsz = check_img_size(imgsz, s=stride)  
@@ -259,7 +259,7 @@ def run(
     pf = "%22s" + "%11i" * 2 + "%11.3g" * 4  
     LOGGER.info(pf % ("all", seen, nt.sum(), mp, mr, map50, map))
     if nt.sum() == 0:
-        LOGGER.warning(f"WARNING ⚠️ no labels found in {task} set, can not compute metrics without labels")
+        LOGGER.warning(f"WARNING  no labels found in {task} set, can not compute metrics without labels")
 
     if (verbose or (nc < 50 and not training)) and nc > 1 and len(stats):
         for i, c in enumerate(ap_class):
@@ -348,9 +348,9 @@ def main(opt):
 
     if opt.task in ("train", "val", "test"):  
         if opt.conf_thres > 0.001:  
-            LOGGER.info(f"WARNING ⚠️ confidence threshold {opt.conf_thres} > 0.001 produces invalid results")
+            LOGGER.info(f"WARNING  confidence threshold {opt.conf_thres} > 0.001 produces invalid results")
         if opt.save_hybrid:
-            LOGGER.info("WARNING ⚠️ --save-hybrid will return high mAP from hybrid labels, not from predictions alone")
+            LOGGER.info("WARNING  --save-hybrid will return high mAP from hybrid labels, not from predictions alone")
         run(**vars(opt))
 
     else:

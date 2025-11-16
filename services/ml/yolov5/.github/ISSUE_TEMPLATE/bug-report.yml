@@ -1,6 +1,6 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+# Ultralytics  AGPL-3.0 License - https://ultralytics.com/license
 
-name: 🐛 Bug Report
+name:  Bug Report
 # title: " "
 description: Problems with YOLOv5
 labels: [bug, triage]
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for submitting a YOLOv5 🐛 Bug Report!
+        Thank you for submitting a YOLOv5  Bug Report!
 
   - type: checkboxes
     attributes:
@@ -44,7 +44,7 @@ body:
       label: Bug
       description: Provide console output with error messages and/or screenshots of the bug.
       placeholder: |
-        💡 ProTip! Include as much information as possible (screenshots, logs, tracebacks etc.) to receive the most helpful response.
+         ProTip! Include as much information as possible (screenshots, logs, tracebacks etc.) to receive the most helpful response.
     validations:
       required: true
 
@@ -53,7 +53,7 @@ body:
       label: Environment
       description: Please specify the software and hardware you used to produce the bug.
       placeholder: |
-        - YOLO: YOLOv5 🚀 v6.0-67-g60e42e1 torch 1.9.0+cu111 CUDA:0 (A100-SXM4-40GB, 40536MiB)
+        - YOLO: YOLOv5  v6.0-67-g60e42e1 torch 1.9.0+cu111 CUDA:0 (A100-SXM4-40GB, 40536MiB)
         - OS: Ubuntu 20.04
         - Python: 3.9.0
     validations:

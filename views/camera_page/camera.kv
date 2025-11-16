@@ -3,12 +3,12 @@
 
     MDBoxLayout:
         orientation: 'vertical'
-        md_bg_color: 237/255, 241/255, 250/255, 1  # #EDF1FA
+        md_bg_color: 237/255, 241/255, 250/255, 1
 
-        # Barra superior com botão X
+
         MDTopAppBar:
             title: "Detecção LIBRAS"
-            md_bg_color: 183/255, 199/255, 235/255, 1  # #B7C7EB
+            md_bg_color: 183/255, 199/255, 235/255, 1
             size_hint_y: None
             height: "56dp"
             left_action_items: [["close", lambda x: root.go_back()]]
@@ -16,12 +16,12 @@
             specific_text_color: 1, 1, 1, 1
             elevation: 0
 
-        # ScrollView para mobile
+
         MDScrollView:
             size_hint: 1, 1
             do_scroll_x: False
 
-            # Conteúdo principal adaptado para mobile
+
             MDBoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
@@ -29,7 +29,7 @@
                 padding: "20dp"
                 spacing: "20dp"
 
-                # Status da detecção (compacto para mobile)
+
                 MDLabel:
                     id: status_label
                     text: "Detecção ativa"
@@ -42,11 +42,11 @@
                     size_hint_y: None
                     height: "40dp"
 
-                # Card de instruções (otimizado para mobile)
+
                 MDCard:
                     size_hint_y: None
                     height: "180dp"
-                    md_bg_color: 219/255, 227/255, 245/255, 1  # #DBE3F5
+                    md_bg_color: 219/255, 227/255, 245/255, 1
                     radius: [12]
                     elevation: 0
 
@@ -90,18 +90,18 @@
                             size_hint_y: None
                             height: "20dp"
 
-                # Espaçador pequeno
+
                 Widget:
                     size_hint_y: None
                     height: "20dp"
 
-                # Botão principal (adaptado para mobile)
+
                 MDRaisedButton:
                     id: camera_button
                     text: "Parar Detecção"
                     font_size: "14sp"
                     font_name: "Roboto-Medium"
-                    md_bg_color: 183/255, 199/255, 235/255, 1  # #B7C7EB
+                    md_bg_color: 183/255, 199/255, 235/255, 1
                     theme_text_color: "Custom"
                     text_color: 1, 1, 1, 1
                     size_hint: None, None
@@ -111,12 +111,12 @@
                     radius: [18]
                     on_release: root.toggle_camera()
 
-                # Espaçador pequeno
+
                 Widget:
                     size_hint_y: None
                     height: "15dp"
 
-                # Botão voltar (compacto)
+
                 MDFlatButton:
                     text: "Voltar"
                     font_size: "13sp"
@@ -127,7 +127,7 @@
                     pos_hint: {"center_x": 0.5}
                     on_release: root.go_back()
 
-                # Espaçador final pequeno
+
                 Widget:
                     size_hint_y: None
                     height: "20dp"

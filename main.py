@@ -10,7 +10,7 @@ from views.screen_manager import ScreenManagement
 
 class SinalizAIApp(MDApp):
     def build(self):
-        Window.size = (900, 700)  # Tamanho intermediário (aba minimizada)
+        Window.size = (900, 700)
         return ScreenManagement()
         
 if __name__ == "__main__":

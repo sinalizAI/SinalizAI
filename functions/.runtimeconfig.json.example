@@ -1,0 +1,15 @@
+{
+  "emailjs": {
+    "service_id": "seu_service_id_aqui",
+    "template_id": "seu_template_id_aqui", 
+    "public_key": "sua_public_key_aqui",
+    "feedback_email": "seu_email_feedback@exemplo.com"
+  },
+  "sendgrid": {
+    "api_key": "***SENDGRID_KEY_REMOVED***sua_api_key_sendgrid_aqui",
+    "from": "seu_email_remetente@exemplo.com"
+  },
+  "firebase": {
+    "api_key": "sua_firebase_api_key_aqui"
+  }
+}

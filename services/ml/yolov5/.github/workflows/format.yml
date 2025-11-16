@@ -1,4 +1,4 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+# Ultralytics  AGPL-3.0 License - https://ultralytics.com/license
 
 # Ultralytics Actions https://github.com/ultralytics/actions
 # This workflow automatically formats code and documentation in PRs to official Ultralytics standards
@@ -28,11 +28,11 @@ jobs:
           summary: true # print PR summary with GPT4o (requires 'openai_api_key')
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           first_issue_response: |
-            👋 Hello @${{ github.actor }}, thank you for your interest in YOLOv5 🚀! Please visit our ⭐️ [Tutorials](https://docs.ultralytics.com/yolov5/) to get started, where you can find quickstart guides for simple tasks like [Custom Data Training](https://docs.ultralytics.com/yolov5/tutorials/train_custom_data/) all the way to advanced concepts like [Hyperparameter Evolution](https://docs.ultralytics.com/yolov5/tutorials/hyperparameter_evolution/).
+             Hello @${{ github.actor }}, thank you for your interest in YOLOv5 ! Please visit our  [Tutorials](https://docs.ultralytics.com/yolov5/) to get started, where you can find quickstart guides for simple tasks like [Custom Data Training](https://docs.ultralytics.com/yolov5/tutorials/train_custom_data/) all the way to advanced concepts like [Hyperparameter Evolution](https://docs.ultralytics.com/yolov5/tutorials/hyperparameter_evolution/).
 
-            If this is a 🐛 Bug Report, please provide a **minimum reproducible example** to help us debug it.
+            If this is a  Bug Report, please provide a **minimum reproducible example** to help us debug it.
 
-            If this is a custom training ❓ Question, please provide as much information as possible, including dataset image examples and training logs, and verify you are following our [Tips for Best Training Results](https://docs.ultralytics.com/guides/model-training-tips/).
+            If this is a custom training  Question, please provide as much information as possible, including dataset image examples and training logs, and verify you are following our [Tips for Best Training Results](https://docs.ultralytics.com/guides/model-training-tips/).
 
             ## Requirements
 

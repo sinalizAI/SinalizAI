@@ -1,8 +1,8 @@
-# Detecção com TensorFlow Lite - Adaptado para SinalizAI# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-# Baseado no código original detect.py do YOLOv5
 
-# python detect.py --weights alfabeto-final.pt --data ./data.yaml --source 0
+
+
+
 
 import argparse 
 
@@ -36,7 +36,7 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))ROOT = Path(os.path.relpath(ROOT, 
 
 
 
-# Classes do alfabeto (adaptado para o seu modelo)from ultralytics.utils.plotting import Annotator, colors, save_one_box
+
 
 CLASSES = [
 
@@ -50,9 +50,9 @@ CLASSES = [
 
 def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleFill=False, scaleup=True, stride=32):    Profile,
 
-    """Redimensiona e faz padding da imagem para o formato YOLO"""    check_file,
+        check_file,
 
-    shape = im.shape[:2]  # current shape [height, width]    check_img_size,
+    shape = im.shape[:2]
 
     if isinstance(new_shape, int):    check_imshow,
 
@@ -60,47 +60,47 @@ def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleF
 
     colorstr,
 
-    # Scale ratio (new / old)    cv2,
+
 
     r = min(new_shape[0] / shape[0], new_shape[1] / shape[1])    increment_path,
 
-    if not scaleup:  # only scale down, do not scale up (for better val mAP)    non_max_suppression,
+    if not scaleup:
 
         r = min(r, 1.0)    print_args,
 
     scale_boxes,
 
-    # Compute padding    strip_optimizer,
 
-    ratio = r, r  # width, height ratios    xyxy2xywh,
+
+    ratio = r, r
 
     new_unpad = int(round(shape[1] * r)), int(round(shape[0] * r)))
 
-    dw, dh = new_shape[1] - new_unpad[0], new_shape[0] - new_unpad[1]  # wh paddingfrom utils.torch_utils import select_device, smart_inference_mode
+    dw, dh = new_shape[1] - new_unpad[0], new_shape[0] - new_unpad[1]
 
 
 
-    if auto:  # minimum rectangle
+    if auto:
 
-        dw, dh = np.mod(dw, stride), np.mod(dh, stride)  # wh padding@smart_inference_mode()
+        dw, dh = np.mod(dw, stride), np.mod(dh, stride)
 
-    elif scaleFill:  # stretchdef run(
+    elif scaleFill:
 
         dw, dh = 0.0, 0.0    weights=ROOT / "../alfabeto.pt",
 
         new_unpad = (new_shape[1], new_shape[0])    source=ROOT / "0",
 
-        ratio = new_shape[1] / shape[1], new_shape[0] / shape[0]  # width, height ratios    data=ROOT / "data/data.yaml",
+        ratio = new_shape[1] / shape[1], new_shape[0] / shape[0]
 
     imgsz=(640, 640),
 
-    dw /= 2  # divide padding into 2 sides    conf_thres=0.45,
+    dw /= 2
 
     dh /= 2    iou_thres=0.45,
 
     max_det=1000,
 
-    if shape[::-1] != new_unpad:  # resize    device="0",
+    if shape[::-1] != new_unpad:
 
         im = cv2.resize(im, new_unpad, interpolation=cv2.INTER_LINEAR)    view_img=True,
 
@@ -108,7 +108,7 @@ def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleF
 
     left, right = int(round(dw - 0.1)), int(round(dw + 0.1))    save_format=0,
 
-    im = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # add border    save_csv=False,
+    im = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)
 
     return im, ratio, (dw, dh)    save_conf=True,
 
@@ -116,9 +116,9 @@ def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleF
 
 def non_max_suppression_tf(boxes, scores, classes, max_detections=100, score_threshold=0.45, iou_threshold=0.45):    nosave=False, 
 
-    """Aplica Non-Maximum Suppression usando TensorFlow"""    classes=None, 
+        classes=None, 
 
-    # Converter para tensores do TensorFlow    agnostic_nms=False,
+
 
     boxes_tf = tf.constant(boxes, dtype=tf.float32)    augment=False, 
 
@@ -126,7 +126,7 @@ def non_max_suppression_tf(boxes, scores, classes, max_detections=100, score_thr
 
         update=False, 
 
-    # Aplicar NMS    project=ROOT / "runs/detect", 
+
 
     selected_indices = tf.image.non_max_suppression(    name="alfa_", 
 
@@ -136,7 +136,7 @@ def non_max_suppression_tf(boxes, scores, classes, max_detections=100, score_thr
 
         hide_labels=False, 
 
-    # Obter resultados filtrados    hide_conf=False,
+
 
     selected_indices = selected_indices.numpy()    half=False,  
 
@@ -154,17 +154,17 @@ def non_max_suppression_tf(boxes, scores, classes, max_detections=100, score_thr
 
 def xywh2xyxy(x):    is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
 
-    """Converte nx4 boxes de [x, y, w, h] para [x1, y1, x2, y2]"""    is_url = source.lower().startswith(("rtsp://", "rtmp://", "http://", "https://"))
+        is_url = source.lower().startswith(("rtsp://", "rtmp://", "http://", "https://"))
 
     y = np.copy(x)    webcam = source.isnumeric() or source.endswith(".streams") or (is_url and not is_file)
 
-    y[:, 0] = x[:, 0] - x[:, 2] / 2  # top left x    screenshot = source.lower().startswith("screen")
+    y[:, 0] = x[:, 0] - x[:, 2] / 2
 
-    y[:, 1] = x[:, 1] - x[:, 3] / 2  # top left y    if is_url and is_file:
+    y[:, 1] = x[:, 1] - x[:, 3] / 2
 
-    y[:, 2] = x[:, 0] + x[:, 2] / 2  # bottom right x        source = check_file(source) 
+    y[:, 2] = x[:, 0] + x[:, 2] / 2
 
-    y[:, 3] = x[:, 1] + x[:, 3] / 2  # bottom right y
+    y[:, 3] = x[:, 1] + x[:, 3] / 2
 
     return y    save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  
 
@@ -172,17 +172,17 @@ def xywh2xyxy(x):    is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FOR
 
 def xyxy2xywh(x):
 
-    """Converte nx4 boxes de [x1, y1, x2, y2] para [x, y, w, h]"""    device = select_device(device)
+        device = select_device(device)
 
     y = np.copy(x)    model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
 
-    y[:, 0] = (x[:, 0] + x[:, 2]) / 2  # x center    stride, names, pt = model.stride, model.names, model.pt
+    y[:, 0] = (x[:, 0] + x[:, 2]) / 2
 
-    y[:, 1] = (x[:, 1] + x[:, 3]) / 2  # y center    imgsz = check_img_size(imgsz, s=stride) 
+    y[:, 1] = (x[:, 1] + x[:, 3]) / 2
 
-    y[:, 2] = x[:, 2] - x[:, 0]  # width
+    y[:, 2] = x[:, 2] - x[:, 0]
 
-    y[:, 3] = x[:, 3] - x[:, 1]  # height    bs = 1 
+    y[:, 3] = x[:, 3] - x[:, 1]
 
     return y    if webcam:
 
@@ -190,13 +190,13 @@ def xyxy2xywh(x):
 
 def scale_boxes(img1_shape, boxes, img0_shape, ratio_pad=None):        dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt, vid_stride=vid_stride)
 
-    """Reescala boxes de img1_shape para img0_shape"""        bs = len(dataset)
+            bs = len(dataset)
 
-    if ratio_pad is None:  # calculate from img0_shape    elif screenshot:
+    if ratio_pad is None:
 
-        gain = min(img1_shape[0] / img0_shape[0], img1_shape[1] / img0_shape[1])  # gain  = old / new        dataset = LoadScreenshots(source, img_size=imgsz, stride=stride, auto=pt)
+        gain = min(img1_shape[0] / img0_shape[0], img1_shape[1] / img0_shape[1])
 
-        pad = (img1_shape[1] - img0_shape[1] * gain) / 2, (img1_shape[0] - img0_shape[0] * gain) / 2  # wh padding    else:
+        pad = (img1_shape[1] - img0_shape[1] * gain) / 2, (img1_shape[0] - img0_shape[0] * gain) / 2
 
     else:        dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt, vid_stride=vid_stride)
 
@@ -206,15 +206,15 @@ def scale_boxes(img1_shape, boxes, img0_shape, ratio_pad=None):        dataset =
 
     model.warmup(imgsz=(1 if pt or model.triton else bs, 3, *imgsz))
 
-    boxes[:, [0, 2]] -= pad[0]  # x padding    seen, windows, dt = 0, [], (Profile(device=device), Profile(device=device), Profile(device=device))
+    boxes[:, [0, 2]] -= pad[0]
 
-    boxes[:, [1, 3]] -= pad[1]  # y padding    for path, im, im0s, vid_cap, s in dataset:
+    boxes[:, [1, 3]] -= pad[1]
 
     boxes[:, :4] /= gain        with dt[0]:
 
-    boxes[:, [0, 2]] = boxes[:, [0, 2]].clip(0, img0_shape[1])  # x1, x2            im = torch.from_numpy(im).to(model.device)
+    boxes[:, [0, 2]] = boxes[:, [0, 2]].clip(0, img0_shape[1])
 
-    boxes[:, [1, 3]] = boxes[:, [1, 3]].clip(0, img0_shape[0])  # y1, y2            im = im.half() if model.fp16 else im.float() 
+    boxes[:, [1, 3]] = boxes[:, [1, 3]].clip(0, img0_shape[0])
 
     return boxes            im /= 255
 
@@ -262,15 +262,11 @@ def run_tensorflow(                im = im[None]
 
 ):
 
-    """        def write_to_csv(image_name, prediction, confidence):
-
-    Executa detecção usando modelo TensorFlow Lite            data = {"Image Name": image_name, "Prediction": prediction, "Confidence": confidence}
-
-    """            file_exists = os.path.isfile(csv_path)
+                file_exists = os.path.isfile(csv_path)
 
                 with open(csv_path, mode="a", newline="") as f:
 
-    # Configurar caminhos                writer = csv.DictWriter(f, fieldnames=data.keys())
+
 
     source = str(source)                if not file_exists:
 
@@ -278,7 +274,7 @@ def run_tensorflow(                im = im[None]
 
                     writer.writerow(data)
 
-    # Criar diretório de salvamento
+
 
     save_dir = Path(project) / name        for i, det in enumerate(pred): 
 
@@ -298,7 +294,7 @@ def run_tensorflow(                im = im[None]
 
                 p = Path(p) 
 
-    # Carregar modelo TensorFlow Lite            save_path = str(save_dir / p.name)  
+
 
     print(f"Carregando modelo TensorFlow Lite: {weights}")            txt_path = str(save_dir / "labels" / p.stem) + ("" if dataset.mode == "image" else f"_{frame}")
 
@@ -308,7 +304,7 @@ def run_tensorflow(                im = im[None]
 
                 imc = im0.copy() if save_crop else im0 
 
-    # Obter detalhes do modelo            annotator = Annotator(im0, line_width=line_thickness, example=str(names))
+
 
     input_details = interpreter.get_input_details()            if len(det):
 
@@ -322,7 +318,7 @@ def run_tensorflow(                im = im[None]
 
                         s += f"{n} {names[int(c)]}{'s' * (n > 1)}, " 
 
-    # Configurar fonte de vídeo
+
 
     webcam = source.isnumeric() or source.lower().startswith(('rtsp://', 'rtmp://', 'http://', 'https://'))                for *xyxy, conf, cls in reversed(det):
 
@@ -340,7 +336,7 @@ def run_tensorflow(                im = im[None]
 
     else:                        write_to_csv(p.name, label, confidence_str)
 
-        # Para arquivos de imagem/vídeo
+
 
         if os.path.isfile(source):                    if save_txt:  
 
@@ -350,7 +346,7 @@ def run_tensorflow(                im = im[None]
 
             else:                                (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()
 
-                # Imagem única                            )  
+
 
                 img0 = cv2.imread(source)                        else:
 
@@ -364,7 +360,7 @@ def run_tensorflow(                im = im[None]
 
     
 
-    # CSV para salvar resultados                    if save_img or save_crop or view_img:
+
 
     csv_path = save_dir / "predictions.csv"                        c = int(cls)  
 
@@ -410,41 +406,41 @@ def run_tensorflow(                im = im[None]
 
                                     vid_path[i] = save_path
 
-            # Pré-processamento da imagem                        if isinstance(vid_writer[i], cv2.VideoWriter):
+
 
             img = letterbox(img0, imgsz, stride=32)[0]                            vid_writer[i].release()
 
-            img = img.transpose((2, 0, 1))[::-1]  # HWC para CHW, BGR para RGB                        if vid_cap:
+            img = img.transpose((2, 0, 1))[::-1]
 
             img = np.ascontiguousarray(img)                            fps = vid_cap.get(cv2.CAP_PROP_FPS)
 
-            img = img.astype(np.float32) / 255.0  # Normalizar                            w = int(vid_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            img = img.astype(np.float32) / 255.0
 
                                         h = int(vid_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
             if len(img.shape) == 3:                        else:
 
-                img = img[None]  # Adicionar dimensão do batch                            fps, w, h = 30, im0.shape[1], im0.shape[0]
+                img = img[None]
 
                                     save_path = str(Path(save_path).with_suffix(".mp4"))
 
-            # Inferência                        vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
+
 
             interpreter.set_tensor(input_details[0]['index'], img)                    vid_writer[i].write(im0)
 
             interpreter.invoke()
 
-            pred = interpreter.get_tensor(output_details[0]['index'])        # Print time (inference-only)
+            pred = interpreter.get_tensor(output_details[0]['index'])
 
                     LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1e3:.1f}ms")
 
-            # Processar detecções
 
-            pred = pred[0]  # Remover dimensão do batch    # Print results
+
+            pred = pred[0]
 
                 t = tuple(x.t / seen * 1e3 for x in dt)
 
-            # Filtrar por confiança    LOGGER.info(f"Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}" % t)
+
 
             conf_mask = pred[:, 4] > conf_thres    if save_txt or save_img:
 
@@ -468,17 +464,17 @@ def run_tensorflow(                im = im[None]
 
                 parser.add_argument("--weights", nargs="+", type=str, default=ROOT / "../alfabeto.pt")
 
-            # Extrair boxes, scores e classes    parser.add_argument("--source", type=str, default= "0")
 
-            boxes = pred[:, :4]  # x, y, w, h    parser.add_argument("--data", type=str, default=ROOT / "data/data.yaml")
 
-            scores = pred[:, 4]  # objectness    parser.add_argument("--imgsz", "--img", "--img-size", nargs="+", type=int, default=[640])
+            boxes = pred[:, :4]
 
-            class_scores = pred[:, 5:]  # class scores    parser.add_argument("--conf-thres", type=float, default=0.65)
+            scores = pred[:, 4]
+
+            class_scores = pred[:, 5:]
 
                 parser.add_argument("--iou-thres", type=float, default=0.75)
 
-            # Obter classe com maior score    parser.add_argument("--max-det", type=int, default=3)
+
 
             class_ids = np.argmax(class_scores, axis=1)    parser.add_argument("--device", default="")
 
@@ -486,29 +482,29 @@ def run_tensorflow(                im = im[None]
 
                 parser.add_argument("--save-txt", action="store_true")
 
-            # Score final = objectness * class_confidence    parser.add_argument("--save-format", type=int, default=0)
+
 
             final_scores = scores * class_confidences    parser.add_argument("--save-csv", action="store_true")
 
                 parser.add_argument("--save-conf", action="store_true")
 
-            # Converter boxes para formato xyxy    parser.add_argument("--save-crop", action="store_true")
+
 
             boxes_xyxy = xywh2xyxy(boxes)    parser.add_argument("--nosave", action="store_false")
 
                 parser.add_argument("--classes", nargs="+", type=int)
 
-            # Reescalar boxes para o tamanho original da imagem    parser.add_argument("--agnostic-nms", action="store_true")
+
 
             boxes_xyxy = scale_boxes(img.shape[2:], boxes_xyxy, img0.shape)    parser.add_argument("--augment", action="store_true")
 
                 parser.add_argument("--visualize", action="store_true")
 
-            # Aplicar NMS    parser.add_argument("--update", action="store_true")
+
 
             try:    parser.add_argument("--project", default=ROOT / "runs/detect")
 
-                # Converter para formato [y1, x1, y2, x2] para tf.image.non_max_suppression    parser.add_argument("--name", default="exp")
+
 
                 boxes_tf_format = boxes_xyxy[:, [1, 0, 3, 2]]    parser.add_argument("--exist-ok", action="store_true")
 
@@ -530,7 +526,7 @@ def run_tensorflow(                im = im[None]
 
                     print_args(vars(opt))
 
-                # Filtrar detecções    return opt
+
 
                 final_boxes = boxes_xyxy[selected_indices]
 
@@ -548,11 +544,11 @@ def run_tensorflow(                im = im[None]
 
                 main(opt)
 
-            # Desenhar detecções
+
             for i, (box, score, cls) in enumerate(zip(final_boxes, final_scores_filtered, final_classes)):
                 x1, y1, x2, y2 = box.astype(int)
                 
-                # Validar classe
+
                 if cls < len(CLASSES):
                     label = CLASSES[cls]
                 else:
@@ -560,14 +556,14 @@ def run_tensorflow(                im = im[None]
                 
                 confidence = score
                 
-                # Salvar em CSV se solicitado
+
                 if save_csv:
                     write_to_csv(f"frame_{frame_count}", label, f"{confidence:.2f}")
                 
-                # Salvar coordenadas em arquivo texto se solicitado
+
                 if save_txt:
                     txt_path = save_dir / "labels" / f"frame_{frame_count}.txt"
-                    # Converter coordenadas para formato YOLO (normalizado)
+
                     img_h, img_w = img0.shape[:2]
                     x_center = ((x1 + x2) / 2) / img_w
                     y_center = ((y1 + y2) / 2) / img_h
@@ -580,41 +576,41 @@ def run_tensorflow(                im = im[None]
                         else:
                             f.write(f"{cls} {x_center} {y_center} {width} {height}\n")
                 
-                # Desenhar box e label
+
                 if not hide_labels:
                     if hide_conf:
                         display_label = label
                     else:
                         display_label = f"{label} {confidence:.2f}"
                     
-                    # Cor baseada na classe
+
                     color = (
                         int(np.random.randint(0, 255)),
                         int(np.random.randint(0, 255)),
                         int(np.random.randint(0, 255))
                     )
                     
-                    # Desenhar retângulo
+
                     cv2.rectangle(img0, (x1, y1), (x2, y2), color, line_thickness)
                     
-                    # Desenhar label
+
                     label_size = cv2.getTextSize(display_label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)[0]
                     cv2.rectangle(img0, (x1, y1 - label_size[1] - 10), (x1 + label_size[0], y1), color, -1)
                     cv2.putText(img0, display_label, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             
             print(f"Frame {frame_count}: {len(final_boxes)} detecções")
             
-            # Mostrar imagem
+
             if view_img:
                 cv2.imshow('SinalizAI - TensorFlow Lite', img0)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             
-            # Salvar imagem
+
             if save_img:
                 cv2.imwrite(str(save_dir / f"frame_{frame_count}.jpg"), img0)
             
-            # Para imagem única, parar após processar
+
             if cap is None:
                 break
                 

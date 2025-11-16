@@ -4,7 +4,7 @@
 
 [Representational State Transfer (REST)](https://en.wikipedia.org/wiki/Representational_state_transfer) [Application Programming Interfaces (APIs)](https://en.wikipedia.org/wiki/API) provide a standardized way to expose [Machine Learning (ML)](https://www.ultralytics.com/glossary/machine-learning-ml) models for use by other services or applications. This directory contains an example REST API built with the [Flask](https://flask.palletsprojects.com/en/stable/) web framework to serve the [Ultralytics YOLOv5s](https://docs.ultralytics.com/models/yolov5/) model, loaded directly from [PyTorch Hub](https://pytorch.org/hub/ultralytics_yolov5/). This setup allows you to easily integrate YOLOv5 [object detection](https://docs.ultralytics.com/tasks/detect/) capabilities into your web applications or microservices, aligning with common [model deployment options](https://docs.ultralytics.com/guides/model-deployment-options/).
 
-## 💻 Requirements
+##  Requirements
 
 The primary requirement is the [Flask](https://flask.palletsprojects.com/en/stable/) web framework. You can install it using pip:
 
@@ -14,7 +14,7 @@ pip install Flask
 
 You will also need `torch` and `yolov5`. These are implicitly handled by the script when it loads the model from PyTorch Hub. Ensure you have a functioning Python environment set up.
 
-## ▶️ Run the API
+##  Run the API
 
 Once Flask is installed, you can start the API server using the following command:
 
@@ -75,6 +75,6 @@ The API processes the submitted image using the YOLOv5s model and returns the de
 
 An example Python script, `example_request.py`, is included to demonstrate how to perform inference using the popular [requests](https://requests.readthedocs.io/en/latest/) library. This script offers a straightforward method for interacting with the running API programmatically.
 
-## 🤝 Contribute
+##  Contribute
 
 Contributions to enhance this Flask API example are highly encouraged! Whether you're interested in adding support for different YOLO models, improving error handling, or implementing new features, please feel free to fork the repository, apply your changes, and submit a pull request. For more comprehensive contribution guidelines, please refer to the main [Ultralytics YOLOv5 repository](https://github.com/ultralytics/yolov5) and the general [Ultralytics documentation](https://docs.ultralytics.com/).

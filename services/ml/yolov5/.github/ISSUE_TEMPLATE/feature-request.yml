@@ -1,6 +1,6 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+# Ultralytics  AGPL-3.0 License - https://ultralytics.com/license
 
-name: 🚀 Feature Request
+name:  Feature Request
 description: Suggest a YOLOv5 idea
 # title: " "
 labels: [enhancement]
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for submitting a YOLOv5 🚀 Feature Request!
+        Thank you for submitting a YOLOv5  Feature Request!
 
   - type: checkboxes
     attributes:

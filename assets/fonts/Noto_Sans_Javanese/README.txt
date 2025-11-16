@@ -10,7 +10,7 @@ This means all the styles are contained in a single file:
   Noto_Sans_Javanese/NotoSansJavanese-VariableFont_wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
-that aren’t available as static fonts. Not all apps support variable fonts, and
+that arent available as static fonts. Not all apps support variable fonts, and
 in those cases you can use the static font files for Noto Sans Javanese:
   Noto_Sans_Javanese/static/NotoSansJavanese-Regular.ttf
   Noto_Sans_Javanese/static/NotoSansJavanese-Medium.ttf
@@ -35,7 +35,7 @@ Learn more about variable fonts
 In desktop apps
 
   https://theblog.adobe.com/can-variable-fonts-illustrator-cc
-  https://helpx.adobe.com/nz/photoshop/using/fonts.html#variable_fonts
+  https://helpx.adobe.com/nz/photoshop/using/fonts.html
 
 Online
 
@@ -59,7 +59,7 @@ License
 Please read the full license text (OFL.txt) to understand the permissions,
 restrictions and requirements for usage, redistribution, and modification.
 
-You can use them in your products & projects – print or digital,
+You can use them in your products & projects  print or digital,
 commercial or otherwise.
 
 This isn't legal advice, please consider consulting a lawyer and see the full

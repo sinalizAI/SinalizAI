@@ -1,13 +1,13 @@
 <DetectionScreen>:
     name: 'detection'
     
-    # Layout principal sobre a câmera
+
     FloatLayout:
         id: camera_display
         size: root.size
         pos: root.pos
         
-        # Indicador de status (discreto)
+
         MDLabel:
             id: status_label
             text: ""
@@ -15,10 +15,10 @@
             size: self.texture_size
             pos_hint: {"x": 0.05, "y": 0.05}
             theme_text_color: "Custom"
-            text_color: 1, 1, 1, 0.7  # Branco semi-transparente
+            text_color: 1, 1, 1, 0.7
             font_size: "14sp"
             
-        # Label para mostrar a letra detectada (centro superior)
+
         MDLabel:
             id: detection_result
             text: ""
@@ -26,12 +26,12 @@
             size: self.texture_size
             pos_hint: {"center_x": 0.5, "top": 0.85}
             theme_text_color: "Custom"
-            text_color: 0, 1, 0, 1  # Verde
+            text_color: 0, 1, 0, 1
             font_size: "32sp"
             bold: True
             halign: "center"
 
-    # Botão X SEMPRE POR CIMA - quadrado branco simples
+
     RelativeLayout:
         size: root.size
         pos: root.pos
@@ -42,19 +42,19 @@
             size_hint: None, None
             size: "60dp", "60dp"
             pos_hint: {"right": 0.95, "top": 0.95}
-            background_color: 1, 1, 1, 1  # Fundo branco sólido
-            color: 0, 0, 0, 1  # Texto preto
+            background_color: 1, 1, 1, 1
+            color: 0, 0, 0, 1
             font_size: "24sp"
             bold: True
-            # Design simples e limpo - quadrado branco
+
             canvas.before:
                 Color:
-                    rgba: 1, 1, 1, 1  # Fundo branco
+                    rgba: 1, 1, 1, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
                 Color:
-                    rgba: 0, 0, 0, 1  # Borda preta
+                    rgba: 0, 0, 0, 1
                 Line:
                     rectangle: (self.x, self.y, self.width, self.height)
                     width: 2

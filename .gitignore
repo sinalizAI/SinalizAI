@@ -1,4 +1,14 @@
 # Arquivos de configuração sensível
+.runtimeconfig.json
+functions/.runtimeconfig.json
+firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# Firebase
+.firebaserc
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
 
 # Arquivos Python
 __pycache__/
@@ -140,3 +150,15 @@ Thumbs.db
 # Environment files
 .env
 .env_emailJS
+
+# Additional sensitive files and patterns
+SECURITY_SUMMARY.md
+/functions/node_modules/
+*.pem
+*.p12
+*.key
+*.crt
+credentials.json
+*.serviceAccount.json
+*.google-services.json
+/.firebase/

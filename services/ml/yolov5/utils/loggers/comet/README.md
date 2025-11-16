@@ -11,13 +11,13 @@ Welcome to the guide for integrating [Ultralytics YOLO](https://github.com/ultra
 [![Ultralytics Forums](https://img.shields.io/discourse/users?server=https%3A%2F%2Fcommunity.ultralytics.com&logo=discourse&label=Forums&color=blue)](https://community.ultralytics.com/)
 [![Ultralytics Reddit](https://img.shields.io/reddit/subreddit-subscribers/ultralytics?style=flat&logo=reddit&logoColor=white&label=Reddit&color=blue)](https://reddit.com/r/ultralytics)
 
-## 🧪 About Comet
+##  About Comet
 
 [Comet](https://www.comet.com/site/) provides tools for data scientists, engineers, and teams to accelerate and optimize [deep learning](https://www.ultralytics.com/glossary/deep-learning-dl) and machine learning models.
 
 With Comet, you can track and visualize model metrics in real time, save [hyperparameters](https://docs.ultralytics.com/guides/hyperparameter-tuning/), datasets, and model checkpoints, and visualize predictions using Custom Panels. Comet ensures you never lose track of your work and makes sharing results and collaborating across teams seamless. For more details, see the [Comet Documentation](https://www.comet.com/docs/v2/).
 
-## 🚀 Getting Started
+##  Getting Started
 
 Follow these steps to set up Comet for your YOLO projects.
 
@@ -65,7 +65,7 @@ Comet automatically logs hyperparameters, command-line arguments, and training/v
 
 <img width="1920" alt="Comet UI showing YOLO training metrics" src="https://user-images.githubusercontent.com/26833433/202851203-164e94e1-2238-46dd-91f8-de020e9d6b41.png">
 
-## ✨ Try an Example!
+##  Try an Example!
 
 Explore a completed YOLO training run tracked with Comet:
 
@@ -75,7 +75,7 @@ Run the example yourself using this [Google Colab](https://colab.research.google
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/comet-ml/comet-examples/blob/master/integrations/model-training/yolov5/notebooks/Comet_and_YOLOv5.ipynb)
 
-## 📊 Automatic Logging
+##  Automatic Logging
 
 Comet automatically logs the following information by default:
 
@@ -96,7 +96,7 @@ Comet automatically logs the following information by default:
 - **Curves:** PR and F1 curves across all classes
 - **Label Correlogram:** Correlation visualization of class labels
 
-## ⚙️ Advanced Configuration
+##  Advanced Configuration
 
 Customize Comet's logging behavior using command-line flags or environment variables.
 
@@ -175,7 +175,7 @@ env COMET_LOG_PER_CLASS_METRICS=true python train.py \
   --weights yolov5s.pt
 ```
 
-## 💾 Dataset Management With Comet Artifacts
+##  Dataset Management With Comet Artifacts
 
 Use [Comet Artifacts](https://www.comet.com/docs/v2/guides/artifacts/using-artifacts/) to version, store, and manage your datasets.
 
@@ -229,7 +229,7 @@ python train.py \
 Artifacts track data lineage, showing which experiments used specific dataset versions.
 <img width="1391" alt="Comet Artifact lineage graph" src="https://user-images.githubusercontent.com/7529846/186929264-4c4014fa-fe51-4f3c-a5c5-f6d24649b1b4.png">
 
-## 🔄 Resuming Training Runs
+##  Resuming Training Runs
 
 If a training run is interrupted (for example, due to connection issues), you can resume it using the `--resume` flag with the Comet Run Path (`comet://YOUR_WORKSPACE/YOUR_PROJECT/EXPERIMENT_ID`).
 
@@ -240,7 +240,7 @@ python train.py \
   --resume "comet://YOUR_WORKSPACE/YOUR_PROJECT/EXPERIMENT_ID"
 ```
 
-## 🔍 Hyperparameter Optimization (HPO)
+##  Hyperparameter Optimization (HPO)
 
 YOLO integrates with the [Comet Optimizer](https://www.comet.com/docs/v2/guides/optimizer/configure-optimizer/) for easy hyperparameter sweeps and visualization. This helps you find the best set of parameters for your model, a process often referred to as [Hyperparameter Tuning](https://docs.ultralytics.com/guides/hyperparameter-tuning/).
 
@@ -281,6 +281,6 @@ Comet offers various visualizations for analyzing sweep results, such as paralle
 
 <img width="1626" alt="Comet HPO visualization" src="https://user-images.githubusercontent.com/7529846/186914869-7dc1de14-583f-4323-967b-c9a66a29e495.png">
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions to enhance the YOLO-Comet integration are welcome! Please see the [Ultralytics Contributing Guide](https://docs.ultralytics.com/help/contributing/) for more information on how to get involved. Thank you for helping improve this integration!

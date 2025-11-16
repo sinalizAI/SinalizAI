@@ -59,7 +59,7 @@ def _show_snackbar(text, duration):
     if _snackbar and _snackbar.parent:
         _snackbar.dismiss()
 
-    # Allow multiline messages: estimate width and number of lines
+
     core_label = CoreLabel(text=text, font_size=dp(14), markup=True)
     core_label.refresh()
     text_width = core_label.texture.size[0]
@@ -68,9 +68,9 @@ def _show_snackbar(text, duration):
     max_w = Window.width * 0.95
     padding = dp(40)
     final_w = min(max(text_width + padding, min_w), max_w)
-    # calculate number of lines assuming approx final_w
+
     approx_char_per_line = max(20, Math.floor((final_w / dp(8))))
-    # fallback to 1 line height of 48dp, else more
+
     num_lines = max(1, Math.ceil(len(text) / approx_char_per_line))
     h = min(dp(120), dp(24) * num_lines + dp(16))
 
@@ -135,13 +135,13 @@ def show_exit_dialog(screen_instance):
             buttons=[
                 MDFlatButton(
                     text="SAIR",
-                    text_color=(1, 0, 0, 1),  # vermelho
+                    text_color=(1, 0, 0, 1),
                     md_bg_color=(0, 0, 0, 0),
                     on_release=lambda *args: _confirm_exit(screen_instance)
                 ),
                 MDFlatButton(
                     text="CANCELAR",
-                    text_color=get_color_from_hex("#2196F3"),  # azul
+                    text_color=get_color_from_hex("#2196F3"),
                     on_release=lambda *args: _exit_dialog.dismiss()
                 ),
             ],

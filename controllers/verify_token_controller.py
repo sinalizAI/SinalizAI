@@ -6,7 +6,7 @@ from utils.message_helper import show_message
 class VerifyTokenScreen(BaseScreen):
 
     def on_pre_enter(self):
-        # Limpa o campo
+
         if 'verify_input' in self.ids:
             self.ids.verify_input.text = ''
 
@@ -29,12 +29,12 @@ class VerifyTokenScreen(BaseScreen):
         status, resp = backend_client.verify_token(uid, token_text.strip())
         if status == 200 and isinstance(resp, dict) and resp.get('success'):
             show_message('Email verificado com sucesso!')
-            # marcar localmente
+
             self.manager.user_data['emailVerified'] = True
             self.go_to_home()
             return
 
-        # erro
+
         msg = None
         if isinstance(resp, dict):
             msg = resp.get('message')

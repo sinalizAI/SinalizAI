@@ -4,7 +4,7 @@
 
 <img align="center" src="https://github.com/thepycoder/clearml_screenshots/raw/main/logos_dark.png#gh-light-mode-only" alt="ClearML"><img align="center" src="https://github.com/thepycoder/clearml_screenshots/raw/main/logos_light.png#gh-dark-mode-only" alt="ClearML">
 
-## ℹ️ About ClearML
+##  About ClearML
 
 [ClearML](https://clear.ml/) is an [open-source MLOps platform](https://github.com/clearml/clearml) designed to streamline your machine learning workflow and maximize productivity. Integrating ClearML with [Ultralytics YOLO](https://docs.ultralytics.com/models/yolov5/) unlocks a robust suite of tools for experiment tracking, data management, and scalable deployment:
 
@@ -18,7 +18,7 @@ You can use ClearML's experiment manager alone or combine these features into a 
 
 ![ClearML scalars dashboard](https://raw.githubusercontent.com/thepycoder/clearml_screenshots/main/experiment_manager_with_compare.gif)
 
-## 🦾 Setting Up ClearML
+##  Setting Up ClearML
 
 ClearML requires a server to track experiments and data. You have two main options:
 
@@ -36,7 +36,7 @@ To get started:
    _Note: The `clearml` package is included in the YOLO requirements._
 
 2. **Connect the ClearML SDK to your server:**  
-   [Create credentials](https://app.clear.ml/settings/workspace-configuration) (Settings → Workspace → Create new credentials), then run:
+   [Create credentials](https://app.clear.ml/settings/workspace-configuration) (Settings  Workspace  Create new credentials), then run:
 
    ```bash
    clearml-init
@@ -46,7 +46,7 @@ To get started:
 
 For a general Ultralytics setup, see the [Quickstart Guide](https://docs.ultralytics.com/quickstart/).
 
-## 🚀 Training YOLO with ClearML
+##  Training YOLO with ClearML
 
 When the `clearml` package is installed, experiment tracking is automatically enabled for every [YOLO training run](https://docs.ultralytics.com/modes/train/). All experiment details are captured and stored in the ClearML experiment manager.
 
@@ -82,7 +82,7 @@ ClearML automatically logs:
 
 All this information can be visualized in the ClearML UI. You can customize table views, sort experiments by metrics, and compare multiple runs. This enables advanced features like hyperparameter optimization and remote execution.
 
-## 🔗 Dataset Version Management
+##  Dataset Version Management
 
 Versioning your [datasets](https://docs.ultralytics.com/datasets/) independently from code is essential for reproducibility and collaboration. ClearML's Data Versioning Tool streamlines this process. YOLO supports ClearML dataset version IDs, automatically downloading data as needed. The dataset ID is saved as a task parameter, ensuring traceability for every experiment.
 
@@ -94,28 +94,28 @@ YOLO uses [YAML files](https://www.ultralytics.com/glossary/yaml) to define data
 
 ```
 ../
-├── yolov5/          # Your YOLO repository clone
-└── datasets/
-    └── coco128/
-        ├── images/
-        ├── labels/
-        ├── LICENSE
-        └── README.txt
+ yolov5/          # Your YOLO repository clone
+ datasets/
+     coco128/
+         images/
+         labels/
+         LICENSE
+         README.txt
 ```
 
 Ensure your custom dataset follows a similar structure.
 
-Next, ⚠️ **copy the corresponding dataset `.yaml` file into the root of your dataset folder**. This file contains essential information (`path`, `train`, `test`, `val`, `nc`, `names`) required by ClearML.
+Next,  **copy the corresponding dataset `.yaml` file into the root of your dataset folder**. This file contains essential information (`path`, `train`, `test`, `val`, `nc`, `names`) required by ClearML.
 
 ```
 ../
-└── datasets/
-    └── coco128/
-        ├── images/
-        ├── labels/
-        ├── coco128.yaml  # <---- Place the YAML file here!
-        ├── LICENSE
-        └── README.txt
+ datasets/
+     coco128/
+         images/
+         labels/
+         coco128.yaml  # <---- Place the YAML file here!
+         LICENSE
+         README.txt
 ```
 
 ### Upload Your Dataset
@@ -151,7 +151,7 @@ Once your dataset is versioned in ClearML, you can use it for training by provid
 python train.py --img 640 --batch 16 --epochs 3 --data clearml://YOUR_DATASET_ID --weights yolov5s.pt --cache
 ```
 
-## 👀 Hyperparameter Optimization
+##  Hyperparameter Optimization
 
 With experiments and data versioned, you can leverage ClearML for [hyperparameter optimization](https://docs.ultralytics.com/guides/hyperparameter-tuning/). ClearML captures all necessary information (code, packages, environment), making experiments fully reproducible. Its HPO tools clone an existing experiment, modify hyperparameters, and rerun it automatically.
 
@@ -169,7 +169,7 @@ The script uses [Optuna](https://optuna.org/) by default if installed, or falls 
 
 ![HPO in ClearML UI](https://raw.githubusercontent.com/thepycoder/clearml_screenshots/main/hpo.png)
 
-## 🤯 Remote Execution (Advanced)
+##  Remote Execution (Advanced)
 
 ClearML Agent enables you to execute experiments on remote machines, including on-premise servers or cloud GPUs such as [AWS](https://aws.amazon.com/), [Google Cloud](https://cloud.google.com/), or [Azure](https://azure.microsoft.com/). The agent listens to task queues, reproduces the experiment environment, runs the task, and reports results back to the ClearML server.
 
@@ -223,7 +223,7 @@ Watch the Autoscalers getting started video:
 
 [![Watch the ClearML Autoscalers video](https://img.youtube.com/vi/j4XVMAaUt3E/0.jpg)](https://youtu.be/j4XVMAaUt3E)
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions to enhance the ClearML integration are welcome! Please see the [Ultralytics Contributing Guide](https://docs.ultralytics.com/help/contributing/) for details on how to get involved.
 

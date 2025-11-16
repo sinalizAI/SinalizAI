@@ -1,7 +1,7 @@
 from kivymd.uix.screen import MDScreen
 from utils.base_screen import BaseScreen
 from kivy.uix.screenmanager import SlideTransition
-from utils.message_helper import show_message  # Import do seu popup customizado
+from utils.message_helper import show_message
 
 class WelcomeScreen(BaseScreen):
     def go_to_login(self):

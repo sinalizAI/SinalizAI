@@ -1,12 +1,12 @@
 <SignsDetectionScreen>:
     name: 'signs_detection'
     
-    # Layout principal sobre a câmera
+
     FloatLayout:
         id: camera_display
         size: root.size
         pos: root.pos
-        # Status (canto inferior esquerdo) - apenas para debug
+
         MDLabel:
             id: status_label
             text: "Preparando câmera..."
@@ -14,14 +14,14 @@
             size: self.texture_size
             pos_hint: {"x": 0.05, "y": 0.02}
             theme_text_color: "Custom"
-            text_color: 1, 1, 1, 0.5  # Branco bem transparente
+            text_color: 1, 1, 1, 0.5
             font_size: "10sp"
 
-    # Camada de feedback SEMPRE POR CIMA
+
     FloatLayout:
         size: root.size
         pos: root.pos
-        # FEEDBACK VISUAL PRINCIPAL - canto superior esquerdo
+
         MDLabel:
             id: feedback_label
             text: "Pressione REC para gravar"
@@ -31,7 +31,7 @@
             height: self.texture_size[1] + 20
             pos_hint: {"x": 0.02, "top": 0.98}
             theme_text_color: "Custom"
-            text_color: 1, 1, 1, 1  # Branco sólido
+            text_color: 1, 1, 1, 1
             font_size: "24sp"
             bold: True
             halign: "left"
@@ -39,13 +39,13 @@
             text_size: self.width, None
             canvas.before:
                 Color:
-                    rgba: 0.2, 0.4, 0.8, 0.8  # Azul semi-transparente
+                    rgba: 0.2, 0.4, 0.8, 0.8
                 RoundedRectangle:
                     pos: self.x, self.y
                     size: self.width, self.height
                     radius: [10]
 
-    # Camada de resultado lateral SEMPRE POR CIMA DE TUDO
+
     FloatLayout:
         size: root.size
         pos: root.pos
@@ -58,21 +58,21 @@
             height: self.texture_size[1] + 20
             pos_hint: {"x": 0.36, "top": 0.98}
             theme_text_color: "Custom"
-            text_color: 0, 1, 0, 1  # Verde
+            text_color: 0, 1, 0, 1
             font_size: "22sp"
             bold: True
             halign: "left"
             valign: "top"
             text_size: self.width, None
-            opacity: 0  # Inicialmente invisível
+            opacity: 0
             canvas.before:
                 Color:
-                    rgba: 0, 0.4, 0, 0.7  # Verde escuro semi-transparente
+                    rgba: 0, 0.4, 0, 0.7
                 RoundedRectangle:
                     pos: self.x, self.y
                     size: self.width, self.height
                     radius: [10]
-        # RESULTADO GRANDE - centro da tela
+
         MDLabel:
             id: result_label
             text: ""
@@ -80,20 +80,20 @@
             size: self.texture_size
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
             theme_text_color: "Custom"
-            text_color: 0, 1, 0, 1  # Verde
+            text_color: 0, 1, 0, 1
             font_size: "36sp"
             bold: True
             halign: "center"
-            opacity: 0  # Inicialmente invisível
+            opacity: 0
             canvas.before:
                 Color:
-                    rgba: 0, 0, 0, 0.7  # Preto semi-transparente
+                    rgba: 0, 0, 0, 0.7
                 RoundedRectangle:
                     pos: self.x - 30, self.y - 20
                     size: self.width + 60, self.height + 40
                     radius: [15]
 
-    # Botão X SEMPRE POR CIMA - igual ao detection.kv
+
     RelativeLayout:
         size: root.size
         pos: root.pos
@@ -104,49 +104,49 @@
             size_hint: None, None
             size: "60dp", "60dp"
             pos_hint: {"right": 0.95, "top": 0.95}
-            background_color: 1, 1, 1, 1  # Fundo branco sólido
-            color: 0, 0, 0, 1  # Texto preto
+            background_color: 1, 1, 1, 1
+            color: 0, 0, 0, 1
             font_size: "24sp"
             bold: True
-            # Design simples e limpo - quadrado branco
+
             canvas.before:
                 Color:
-                    rgba: 1, 1, 1, 1  # Fundo branco
+                    rgba: 1, 1, 1, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
                 Color:
-                    rgba: 0, 0, 0, 1  # Borda preta
+                    rgba: 0, 0, 0, 1
                 Line:
                     rectangle: (self.x, self.y, self.width, self.height)
                     width: 2
             on_release: root.go_back()
             
-        # Botão de gravação manual (canto inferior direito)
+
         Button:
             id: record_button
             text: "REC"
             size_hint: None, None
             size: "80dp", "50dp"
             pos_hint: {"right": 0.95, "y": 0.05}
-            background_color: 1, 0, 0, 0.8  # Vermelho semi-transparente
-            color: 1, 1, 1, 1  # Texto branco
+            background_color: 1, 0, 0, 0.8
+            color: 1, 1, 1, 1
             font_size: "16sp"
             bold: True
             canvas.before:
                 Color:
-                    rgba: 1, 0, 0, 0.8  # Fundo vermelho
+                    rgba: 1, 0, 0, 0.8
                 Rectangle:
                     pos: self.pos
                     size: self.size
                 Color:
-                    rgba: 1, 1, 1, 1  # Borda branca
+                    rgba: 1, 1, 1, 1
                 Line:
                     rectangle: (self.x, self.y, self.width, self.height)
                     width: 2
             on_release: root.start_manual_recording()
             
-    # Card de instruções flutuante (inicialmente visível)
+
     MDCard:
         id: instruction_card
         size_hint: None, None
@@ -171,7 +171,7 @@
                 halign: "center"
                 
             MDLabel:
-                text: "• Posicione-se na frente da câmera\n• Faça o sinal com as mãos\n• O sistema detectará automaticamente\n• Aguarde 4 segundos para gravação"
+                text: " Posicione-se na frente da câmera\n Faça o sinal com as mãos\n O sistema detectará automaticamente\n Aguarde 4 segundos para gravação"
                 font_style: "Body2"
                 theme_text_color: "Secondary"
                 text_size: self.width - dp(40), None

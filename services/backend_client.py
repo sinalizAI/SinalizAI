@@ -2,14 +2,14 @@ import os
 import requests
 from typing import Optional
 
-# Try to derive FUNCTIONS base URL from environment or project config
+
 DEFAULT_BASE = os.environ.get('FUNCTIONS_BASE_URL')
 if not DEFAULT_BASE:
-    # if running against emulator, use localhost
+
     if os.environ.get('FIRESTORE_EMULATOR_HOST') or os.environ.get('FIREBASE_EMULATOR_HUB'):
         DEFAULT_BASE = 'http://127.0.0.1:5001/sinalizai-tcc-2025/us-central1/api'
     else:
-        # try to infer project id from config manager to build the correct cloudfunctions domain
+
         try:
             from config.config_manager import firebase_config
             project_id = firebase_config.get('projectId') or firebase_config.get('project_id')
@@ -19,7 +19,7 @@ if not DEFAULT_BASE:
         if project_id:
             DEFAULT_BASE = f'https://us-central1-{project_id}.cloudfunctions.net/api'
         else:
-            # fallback to older domain if project id not available
+
             DEFAULT_BASE = 'https://us-central1-sinalizai.cloudfunctions.net/api'
 
 
@@ -36,7 +36,7 @@ def _post(path: str, data: dict, token: Optional[str] = None):
 
 
 def register(email: str, password: str, displayName: str):
-    # retorna (status_code, body). Espera-se que body contenha { success: true, data: { idToken, refreshToken, expiresIn, localId } }
+
     return _post('register', {'email': email, 'password': password, 'displayName': displayName})
 
 

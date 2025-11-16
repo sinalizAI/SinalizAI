@@ -1,10 +1,10 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
 
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
+
+
+
+
+
 
 from functools import partial
 
@@ -21,7 +21,7 @@ from .modules.transformer import TwoWayTransformer
 
 
 def build_sam_vit_h(checkpoint=None):
-    """Builds and returns a Segment Anything Model (SAM) h-size model with specified encoder parameters."""
+    
     return _build_sam(
         encoder_embed_dim=1280,
         encoder_depth=32,
@@ -32,7 +32,7 @@ def build_sam_vit_h(checkpoint=None):
 
 
 def build_sam_vit_l(checkpoint=None):
-    """Builds and returns a Segment Anything Model (SAM) l-size model with specified encoder parameters."""
+    
     return _build_sam(
         encoder_embed_dim=1024,
         encoder_depth=24,
@@ -43,7 +43,7 @@ def build_sam_vit_l(checkpoint=None):
 
 
 def build_sam_vit_b(checkpoint=None):
-    """Constructs and returns a Segment Anything Model (SAM) with b-size architecture and optional checkpoint."""
+    
     return _build_sam(
         encoder_embed_dim=768,
         encoder_depth=12,
@@ -54,7 +54,7 @@ def build_sam_vit_b(checkpoint=None):
 
 
 def build_mobile_sam(checkpoint=None):
-    """Builds and returns a Mobile Segment Anything Model (Mobile-SAM) for efficient image segmentation."""
+    
     return _build_sam(
         encoder_embed_dim=[64, 128, 160, 320],
         encoder_depth=[2, 2, 6, 2],
@@ -66,7 +66,7 @@ def build_mobile_sam(checkpoint=None):
 
 
 def build_sam2_t(checkpoint=None):
-    """Builds and returns a Segment Anything Model 2 (SAM2) tiny-size model with specified architecture parameters."""
+    
     return _build_sam2(
         encoder_embed_dim=96,
         encoder_stages=[1, 2, 7, 2],
@@ -79,7 +79,7 @@ def build_sam2_t(checkpoint=None):
 
 
 def build_sam2_s(checkpoint=None):
-    """Builds and returns a small-size Segment Anything Model (SAM2) with specified architecture parameters."""
+    
     return _build_sam2(
         encoder_embed_dim=96,
         encoder_stages=[1, 2, 11, 2],
@@ -92,7 +92,7 @@ def build_sam2_s(checkpoint=None):
 
 
 def build_sam2_b(checkpoint=None):
-    """Builds and returns a SAM2 base-size model with specified architecture parameters."""
+    
     return _build_sam2(
         encoder_embed_dim=112,
         encoder_stages=[2, 3, 16, 3],
@@ -106,7 +106,7 @@ def build_sam2_b(checkpoint=None):
 
 
 def build_sam2_l(checkpoint=None):
-    """Builds and returns a large-size Segment Anything Model (SAM2) with specified architecture parameters."""
+    
     return _build_sam2(
         encoder_embed_dim=144,
         encoder_stages=[2, 6, 36, 4],
@@ -126,24 +126,7 @@ def _build_sam(
     checkpoint=None,
     mobile_sam=False,
 ):
-    """
-    Builds a Segment Anything Model (SAM) with specified encoder parameters.
-
-    Args:
-        encoder_embed_dim (int | List[int]): Embedding dimension for the encoder.
-        encoder_depth (int | List[int]): Depth of the encoder.
-        encoder_num_heads (int | List[int]): Number of attention heads in the encoder.
-        encoder_global_attn_indexes (List[int] | None): Indexes for global attention in the encoder.
-        checkpoint (str | None): Path to the model checkpoint file.
-        mobile_sam (bool): Whether to build a Mobile-SAM model.
-
-    Returns:
-        (SAMModel): A Segment Anything Model instance with the specified architecture.
-
-    Examples:
-        >>> sam = _build_sam(768, 12, 12, [2, 5, 8, 11])
-        >>> sam = _build_sam([64, 128, 160, 320], [2, 2, 6, 2], [2, 4, 5, 10], None, mobile_sam=True)
-    """
+    
     prompt_embed_dim = 256
     image_size = 1024
     vit_patch_size = 16
@@ -223,26 +206,7 @@ def _build_sam2(
     encoder_window_spec=[8, 4, 16, 8],
     checkpoint=None,
 ):
-    """
-    Builds and returns a Segment Anything Model 2 (SAM2) with specified architecture parameters.
-
-    Args:
-        encoder_embed_dim (int): Embedding dimension for the encoder.
-        encoder_stages (List[int]): Number of blocks in each stage of the encoder.
-        encoder_num_heads (int): Number of attention heads in the encoder.
-        encoder_global_att_blocks (List[int]): Indices of global attention blocks in the encoder.
-        encoder_backbone_channel_list (List[int]): Channel dimensions for each level of the encoder backbone.
-        encoder_window_spatial_size (List[int]): Spatial size of the window for position embeddings.
-        encoder_window_spec (List[int]): Window specifications for each stage of the encoder.
-        checkpoint (str | None): Path to the checkpoint file for loading pre-trained weights.
-
-    Returns:
-        (SAM2Model): A configured and initialized SAM2 model.
-
-    Examples:
-        >>> sam2_model = _build_sam2(encoder_embed_dim=96, encoder_stages=[1, 2, 7, 2])
-        >>> sam2_model.eval()
-    """
+    
     image_encoder = ImageEncoder(
         trunk=Hiera(
             embed_dim=encoder_embed_dim,
@@ -325,29 +289,9 @@ sam_model_map = {
 
 
 def build_sam(ckpt="sam_b.pt"):
-    """
-    Builds and returns a Segment Anything Model (SAM) based on the provided checkpoint.
-
-    Args:
-        ckpt (str | Path): Path to the checkpoint file or name of a pre-defined SAM model.
-
-    Returns:
-        (SAMModel | SAM2Model): A configured and initialized SAM or SAM2 model instance.
-
-    Raises:
-        FileNotFoundError: If the provided checkpoint is not a supported SAM model.
-
-    Examples:
-        >>> sam_model = build_sam("sam_b.pt")
-        >>> sam_model = build_sam("path/to/custom_checkpoint.pt")
-
-    Notes:
-        Supported pre-defined models include:
-        - SAM: 'sam_h.pt', 'sam_l.pt', 'sam_b.pt', 'mobile_sam.pt'
-        - SAM2: 'sam2_t.pt', 'sam2_s.pt', 'sam2_b.pt', 'sam2_l.pt'
-    """
+    
     model_builder = None
-    ckpt = str(ckpt)  # to allow Path ckpt types
+    ckpt = str(ckpt)
     for k in sam_model_map.keys():
         if ckpt.endswith(k):
             model_builder = sam_model_map.get(k)

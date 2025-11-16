@@ -1,27 +1,21 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
 
 from ultralytics.utils import LOGGER, SETTINGS, TESTS_RUNNING
 
 try:
-    assert not TESTS_RUNNING  # do not log pytest
-    assert SETTINGS["clearml"] is True  # verify integration is enabled
+    assert not TESTS_RUNNING
+    assert SETTINGS["clearml"] is True
     import clearml
     from clearml import Task
 
-    assert hasattr(clearml, "__version__")  # verify package is not directory
+    assert hasattr(clearml, "__version__")
 
 except (ImportError, AssertionError):
     clearml = None
 
 
 def _log_debug_samples(files, title: str = "Debug Samples") -> None:
-    """
-    Log files (images) as debug samples in the ClearML task.
-
-    Args:
-        files (List[Path]): A list of file paths in PosixPath format.
-        title (str): A title that groups together images with the same values.
-    """
+    
     import re
 
     if task := Task.current_task():
@@ -35,19 +29,13 @@ def _log_debug_samples(files, title: str = "Debug Samples") -> None:
 
 
 def _log_plot(title: str, plot_path: str) -> None:
-    """
-    Log an image as a plot in the plot section of ClearML.
-
-    Args:
-        title (str): The title of the plot.
-        plot_path (str): The path to the saved image file.
-    """
+    
     import matplotlib.image as mpimg
     import matplotlib.pyplot as plt
 
     img = mpimg.imread(plot_path)
     fig = plt.figure()
-    ax = fig.add_axes([0, 0, 1, 1], frameon=False, aspect="auto", xticks=[], yticks=[])  # no ticks
+    ax = fig.add_axes([0, 0, 1, 1], frameon=False, aspect="auto", xticks=[], yticks=[])
     ax.imshow(img)
 
     Task.current_task().get_logger().report_matplotlib_figure(
@@ -56,11 +44,11 @@ def _log_plot(title: str, plot_path: str) -> None:
 
 
 def on_pretrain_routine_start(trainer) -> None:
-    """Runs at start of pretraining routine; initializes and connects/logs task to ClearML."""
+    
     try:
         if task := Task.current_task():
-            # WARNING: make sure the automatic pytorch and matplotlib bindings are disabled!
-            # We are logging these plots and model files manually in the integration
+
+
             from clearml.binding.frameworks.pytorch_bind import PatchPyTorchModelIO
             from clearml.binding.matplotlib_bind import PatchedMatplotlib
 
@@ -85,12 +73,12 @@ def on_pretrain_routine_start(trainer) -> None:
 
 
 def on_train_epoch_end(trainer) -> None:
-    """Logs debug samples for the first epoch of YOLO training and reports current training progress."""
+    
     if task := Task.current_task():
-        # Log debug samples
+
         if trainer.epoch == 1:
             _log_debug_samples(sorted(trainer.save_dir.glob("train_batch*.jpg")), "Mosaic")
-        # Report the current training progress
+
         for k, v in trainer.label_loss_items(trainer.tloss, prefix="train").items():
             task.get_logger().report_scalar("train", k, v, iteration=trainer.epoch)
         for k, v in trainer.lr.items():
@@ -98,9 +86,9 @@ def on_train_epoch_end(trainer) -> None:
 
 
 def on_fit_epoch_end(trainer) -> None:
-    """Reports model information to logger at the end of an epoch."""
+    
     if task := Task.current_task():
-        # Report epoch time and validation metrics
+
         task.get_logger().report_scalar(
             title="Epoch Time", series="Epoch Time", value=trainer.epoch_time, iteration=trainer.epoch
         )
@@ -114,29 +102,29 @@ def on_fit_epoch_end(trainer) -> None:
 
 
 def on_val_end(validator) -> None:
-    """Logs validation results including labels and predictions."""
+    
     if Task.current_task():
-        # Log val_labels and val_pred
+
         _log_debug_samples(sorted(validator.save_dir.glob("val*.jpg")), "Validation")
 
 
 def on_train_end(trainer) -> None:
-    """Logs final model and its name on training completion."""
+    
     if task := Task.current_task():
-        # Log final results, CM matrix + PR plots
+
         files = [
             "results.png",
             "confusion_matrix.png",
             "confusion_matrix_normalized.png",
             *(f"{x}_curve.png" for x in ("F1", "PR", "P", "R")),
         ]
-        files = [(trainer.save_dir / f) for f in files if (trainer.save_dir / f).exists()]  # filter
+        files = [(trainer.save_dir / f) for f in files if (trainer.save_dir / f).exists()]
         for f in files:
             _log_plot(title=f.stem, plot_path=f)
-        # Report final metrics
+
         for k, v in trainer.validator.metrics.results_dict.items():
             task.get_logger().report_single_value(k, v)
-        # Log the final model
+
         task.update_output_model(model_path=str(trainer.best), model_name=trainer.args.name, auto_delete_file=False)
 
 

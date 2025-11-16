@@ -5,7 +5,7 @@
         orientation: 'vertical'
         md_bg_color: 0, 0, 0, 1
 
-        # Barra superior
+
         MDTopAppBar:
             title: "SinalizAI - Detecção LIBRAS"
             md_bg_color: 0.718, 0.780, 0.922, 1
@@ -13,13 +13,13 @@
             height: "56dp"
             left_action_items: [["arrow-left", lambda x: root.go_back()]]
 
-        # Área principal com câmera
+
         MDBoxLayout:
             orientation: 'vertical'
             spacing: "10dp"
             padding: "10dp"
 
-            # Status da detecção
+
             MDLabel:
                 id: status_label
                 text: "Pressione o botão para iniciar a câmera"
@@ -30,7 +30,7 @@
                 size_hint_y: None
                 height: "40dp"
 
-            # Área da câmera
+
             MDCard:
                 size_hint: 1, 1 
                 md_bg_color: 0.1, 0.1, 0.1, 1
@@ -41,14 +41,14 @@
                     orientation: 'vertical'
                     padding: "5dp"
 
-                    # Imagem da câmera
+
                     Image:
                         id: camera_image
                         allow_stretch: True
                         keep_ratio: True
                         size_hint: 1, 1
 
-                    # Placeholder quando câmera não está ativa
+
                     MDBoxLayout:
                         orientation: 'vertical'
                         size_hint: 1, 1
@@ -72,7 +72,7 @@
                             size_hint_y: None
                             height: "30dp"
 
-            # Controles
+
             MDBoxLayout:
                 orientation: 'horizontal'
                 size_hint_y: None
@@ -82,7 +82,7 @@
 
                 Widget:
 
-                # Botão principal
+
                 MDRaisedButton:
                     id: camera_button
                     text: "Iniciar Câmera"
@@ -97,7 +97,7 @@
 
                 Widget:
 
-            # Informações adicionais
+
             MDCard:
                 size_hint_y: None
                 height: "100dp"
@@ -111,7 +111,7 @@
                     spacing: "5dp"
 
                     MDLabel:
-                        text: "💡 DICAS:"
+                        text: " DICAS:"
                         font_size: "14sp"
                         theme_text_color: "Custom"
                         text_color: 0.718, 0.780, 0.922, 1
@@ -119,7 +119,7 @@
                         height: "20dp"
 
                     MDLabel:
-                        text: "• Posicione sua mão bem visível na frente da câmera\\n• Mantenha boa iluminação\\n• Aguarde o reconhecimento aparecer na tela"
+                        text: " Posicione sua mão bem visível na frente da câmera\\n Mantenha boa iluminação\\n Aguarde o reconhecimento aparecer na tela"
                         font_size: "12sp"
                         theme_text_color: "Custom"
                         text_color: 1, 1, 1, 0.8

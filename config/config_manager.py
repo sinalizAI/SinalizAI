@@ -1,25 +1,25 @@
-"""
-Gerenciador de configuração seguro para o projeto SinalizAI.
-Carrega as configurações a partir de variáveis de ambiente para manter
-as credenciais sensíveis fora do código fonte.
-"""
+
+
+
+
+
 
 import os
 from typing import Dict, Any
 
 
 class ConfigError(Exception):
-    """Exceção personalizada para erros de configuração."""
+    
     pass
 
 
 def load_env_file(file_path: str = '.env') -> None:
-    """
-    Carrega variáveis de ambiente a partir de um arquivo .env.
     
-    Args:
-        file_path: Caminho para o arquivo .env
-    """
+
+
+
+
+
     if not os.path.exists(file_path):
         return
         
@@ -32,7 +32,7 @@ def load_env_file(file_path: str = '.env') -> None:
                     key = key.strip()
                     value = value.strip()
                     
-                    # Remove aspas se existirem
+
                     if value.startswith('"') and value.endswith('"'):
                         value = value[1:-1]
                     elif value.startswith("'") and value.endswith("'"):
@@ -44,20 +44,20 @@ def load_env_file(file_path: str = '.env') -> None:
 
 
 def get_firebase_config() -> Dict[str, Any]:
-    """
-    Obtém as configurações do Firebase a partir das variáveis de ambiente.
     
-    Returns:
-        Dict contendo as configurações do Firebase
-        
-    Raises:
-        ConfigError: Se alguma variável obrigatória não for encontrada
-    """
-    # Primeiro tenta carregar o arquivo .env
+
+
+
+
+
+
+
+
+
     try:
         load_env_file()
     except ConfigError:
-        # Se não conseguir carregar o .env, continua usando variáveis de ambiente do sistema
+
         pass
     
     required_vars = [
@@ -77,7 +77,7 @@ def get_firebase_config() -> Dict[str, Any]:
         if not value:
             missing_vars.append(var)
         else:
-            # Converte o nome da variável para o formato esperado pelo Firebase
+
             config_key = var.replace('FIREBASE_', '').lower()
             if config_key == 'messaging_sender_id':
                 config_key = 'messagingSenderId'
@@ -105,16 +105,16 @@ def get_firebase_config() -> Dict[str, Any]:
 
 
 def get_config_value(key: str, default: Any = None) -> Any:
-    """
-    Obtém um valor de configuração específico.
     
-    Args:
-        key: Chave da configuração
-        default: Valor padrão caso a chave não seja encontrada
-        
-    Returns:
-        Valor da configuração ou valor padrão
-    """
+
+
+
+
+
+
+
+
+
     try:
         load_env_file()
     except ConfigError:
@@ -123,12 +123,12 @@ def get_config_value(key: str, default: Any = None) -> Any:
     return os.getenv(key, default)
 
 
-# Valida as configurações ao importar o módulo
+
 try:
     firebase_config = get_firebase_config()
 except ConfigError as e:
-    print(f"⚠️  AVISO: {e}")
-    # Define configuração vazia para evitar erros de importação
+    print(f"  AVISO: {e}")
+
     firebase_config = {
         'apiKey': '',
         'authDomain': '',

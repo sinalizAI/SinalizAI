@@ -1,0 +1,96 @@
+[
+  {
+    "timestamp": "2025-10-19T14:40:33.921829",
+    "acao": "registro",
+    "tempo_resposta": 3.282604217529297,
+    "detalhes": {
+      "email": "batatadoce@gmail.com",
+      "name": "Teste"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T14:41:16.921278",
+    "acao": "modelo_alfabeto",
+    "tempo_resposta": 0.00031280517578125
+  },
+  {
+    "timestamp": "2025-10-19T14:41:37.023089",
+    "acao": "alterar_nome",
+    "tempo_resposta": 0.9165408611297607,
+    "detalhes": {
+      "novo_nome": "Teste 123"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T14:42:01.208368",
+    "acao": "reset_senha",
+    "tempo_resposta": 0.7558653354644775,
+    "detalhes": {
+      "email": "rochinha0202@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T14:42:26.720939",
+    "acao": "login",
+    "tempo_resposta": 0.4861297607421875,
+    "detalhes": {
+      "email": "rochinha0202@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T14:42:42.084665",
+    "acao": "login",
+    "tempo_resposta": 0.6128830909729004,
+    "detalhes": {
+      "email": "rochinha0202@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T14:48:17.654982",
+    "acao": "login",
+    "tempo_resposta": 0.9660756587982178,
+    "detalhes": {
+      "email": "rochinha0202@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T14:56:28.239563",
+    "acao": "login",
+    "tempo_resposta": 0.5760960578918457,
+    "detalhes": {
+      "email": "rochinha0202@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T15:41:08.168679",
+    "acao": "login",
+    "tempo_resposta": 2.3276541233062744,
+    "detalhes": {
+      "email": "rochinha0202@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-10-19T19:04:16.572459",
+    "acao": "login",
+    "tempo_resposta": 2.5544095039367676,
+    "detalhes": {
+      "email": "hebertsrocha79@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-10-21T21:24:23.152051",
+    "acao": "login",
+    "tempo_resposta": 3.7576584815979004,
+    "detalhes": {
+      "email": "angelussantos22@gmail.com"
+    }
+  },
+  {
+    "timestamp": "2025-11-08T20:58:55.579291",
+    "acao": "login",
+    "tempo_resposta": 3.035446882247925,
+    "detalhes": {
+      "email": "hebertsrocha79@gmail.com"
+    }
+  }
+]

@@ -1,5 +1,5 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
-# python export.py --weights yolov5s.pt --include torchscript onnx openvino engine coreml tflite ...
+
+
 
 import argparse
 import contextlib
@@ -59,8 +59,8 @@ class iOSModel(torch.nn.Module):
             self.normalize = 1.0 / w
         else:
             self.normalize = torch.tensor([1.0 / w, 1.0 / h, 1.0 / w, 1.0 / h]) 
-            # np = model(im)[0].shape[1]  # number of points
-            # self.normalize = torch.tensor([1. / w, 1. / h, 1. / w, 1. / h]).expand(np, 4)  # explicit (faster, larger)
+
+
 
     def forward(self, x):
        
@@ -95,10 +95,10 @@ def try_export(inner_func):
         try:
             with Profile() as dt:
                 f, model = inner_func(*args, **kwargs)
-            LOGGER.info(f"{prefix} export success ✅ {dt.t:.1f}s, saved as {f} ({file_size(f):.1f} MB)")
+            LOGGER.info(f"{prefix} export success  {dt.t:.1f}s, saved as {f} ({file_size(f):.1f} MB)")
             return f, model
         except Exception as e:
-            LOGGER.info(f"{prefix} export failure ❌ {dt.t:.1f}s: {e}")
+            LOGGER.info(f"{prefix} export failure  {dt.t:.1f}s: {e}")
             return None, None
 
     return outer_func
@@ -326,7 +326,7 @@ def export_engine(
 
     if dynamic:
         if im.shape[0] <= 1:
-            LOGGER.warning(f"{prefix} WARNING ⚠️ --dynamic model requires maximum --batch-size argument")
+            LOGGER.warning(f"{prefix} WARNING  --dynamic model requires maximum --batch-size argument")
         profile = builder.create_optimization_profile()
         for inp in inputs:
             profile.set_shape(inp.name, (1, *im.shape[1:]), (max(1, im.shape[0] // 2), *im.shape[1:]), im.shape)
@@ -373,7 +373,7 @@ def export_saved_model(
     if tf.__version__ > "2.13.1":
         helper_url = "https://github.com/ultralytics/yolov5/issues/12489"
         LOGGER.info(
-            f"WARNING ⚠️ using Tensorflow {tf.__version__} > 2.13.1 might cause issue when exporting the model to tflite {helper_url}"
+            f"WARNING  using Tensorflow {tf.__version__} > 2.13.1 might cause issue when exporting the model to tflite {helper_url}"
         ) 
     f = str(file).replace(".pt", "_saved_model")
     batch_size, ch, *imgsz = list(im.shape)  
@@ -430,7 +430,7 @@ def export_tflite(
     import tensorflow as tf
 
     LOGGER.info(f"\n{prefix} starting export with tensorflow {tf.__version__}...")
-    batch_size, ch, *imgsz = list(im.shape)  # BCHW
+    batch_size, ch, *imgsz = list(im.shape)
     f = str(file).replace(".pt", "-fp16.tflite")
 
     converter = tf.lite.TFLiteConverter.from_keras_model(keras_model)
@@ -465,7 +465,7 @@ def export_edgetpu(file, prefix=colorstr("Edge TPU:")):
     assert platform.system() == "Linux", f"export only supported on Linux. See {help_url}"
     if subprocess.run(f"{cmd} > /dev/null 2>&1", shell=True).returncode != 0:
         LOGGER.info(f"\n{prefix} export requires Edge TPU compiler. Attempting install from {help_url}")
-        sudo = subprocess.run("sudo --version >/dev/null", shell=True).returncode == 0  # sudo installed on system
+        sudo = subprocess.run("sudo --version >/dev/null", shell=True).returncode == 0
         for c in (
             "curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -",
             'echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list',
@@ -575,7 +575,7 @@ def pipeline_coreml(model, im, file, names, y, mlmodel, prefix=colorstr("CoreML 
     out0, out1 = iter(spec.description.output)
     if platform.system() == "Darwin":
         img = Image.new("RGB", (w, h)) 
-        # img = torch.zeros((*opt.img_size, 3)).numpy()
+
         out = model.predict({"image": img})
         out0_shape, out1_shape = out[out0.name].shape, out[out1.name].shape
     else:
@@ -584,26 +584,26 @@ def pipeline_coreml(model, im, file, names, y, mlmodel, prefix=colorstr("CoreML 
 
     nx, ny = spec.description.input[0].type.imageType.width, spec.description.input[0].type.imageType.height
     na, nc = out0_shape
-    # na, nc = out0.type.multiArrayType.shape 
+
     assert len(names) == nc, f"{len(names)} names found for nc={nc}" 
 
     out0.type.multiArrayType.shape[:] = out0_shape  
     out1.type.multiArrayType.shape[:] = out1_shape 
-    # spec.neuralNetwork.preprocessing[0].featureName = '0'
 
-    # from coremltools.models.neural_network import flexible_shape_utils
-    # s = [] # shapes
-    # s.append(flexible_shape_utils.NeuralNetworkImageSize(320, 192))
-    # s.append(flexible_shape_utils.NeuralNetworkImageSize(640, 384))  # (height, width)
-    # flexible_shape_utils.add_enumerated_image_sizes(spec, feature_name='image', sizes=s)
-    # r = flexible_shape_utils.NeuralNetworkImageSizeRange()  # shape ranges
-    # r.add_height_range((192, 640))
-    # r.add_width_range((192, 640))
-    # flexible_shape_utils.update_image_size_range(spec, feature_name='image', size_range=r)
+
+
+
+
+
+
+
+
+
+
 
     print(spec.description)
 
-    # Model from spec
+
     weights_dir = None
     weights_dir = None if mlmodel else str(f / "Data/com.apple.CoreML/weights")
     model = ct.models.MLModel(spec, weights_dir=weights_dir)
@@ -802,9 +802,9 @@ def run(
         dir = Path("segment" if seg else "classify" if cls else "")
         h = "--half" if half else ""  
         s = (
-            "# WARNING ⚠️ ClassificationModel not yet supported for PyTorch Hub AutoShape inference"
+            "# WARNING  ClassificationModel not yet supported for PyTorch Hub AutoShape inference"
             if cls
-            else "# WARNING ⚠️ SegmentationModel not yet supported for PyTorch Hub AutoShape inference"
+            else "# WARNING  SegmentationModel not yet supported for PyTorch Hub AutoShape inference"
             if seg
             else ""
         )

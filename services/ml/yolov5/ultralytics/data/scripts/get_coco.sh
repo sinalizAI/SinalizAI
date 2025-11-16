@@ -1,12 +1,12 @@
 #!/bin/bash
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+# Ultralytics  AGPL-3.0 License - https://ultralytics.com/license
 
 # Download COCO 2017 dataset https://cocodataset.org
 # Example usage: bash data/scripts/get_coco.sh
 # parent
-# ├── ultralytics
-# └── datasets
-#     └── coco  ← downloads here
+#  ultralytics
+#  datasets
+#      coco   downloads here
 
 # Arguments (optional) Usage: bash data/scripts/get_coco.sh --train --val --test --segments
 if [ "$#" -gt 0 ]; then

@@ -1,4 +1,4 @@
-// Test SendGrid send using @sendgrid/mail
+
 const sgMail = require('@sendgrid/mail')
 const fs = require('fs')
 const path = require('path')
@@ -6,7 +6,7 @@ const path = require('path')
 let apiKey = process.env.SENDGRID_API_KEY
 
 if (!apiKey) {
-  // try to read functions/.runtimeconfig.json for sendgrid.api_key
+
   try {
     const rcPath = path.join(__dirname, '.runtimeconfig.json')
     if (fs.existsSync(rcPath)) {
@@ -17,7 +17,7 @@ if (!apiKey) {
       }
     }
   } catch (err) {
-    // ignore parse errors
+
   }
 }
 
@@ -28,7 +28,7 @@ if (!apiKey) {
 
 sgMail.setApiKey(apiKey)
 
-// Optional: set data residency to EU when requested
+
 let dataResidency = process.env.SENDGRID_DATA_RESIDENCY
 if (!dataResidency) {
   try {
@@ -40,7 +40,7 @@ if (!dataResidency) {
       }
     }
   } catch (e) {
-    // ignore
+
   }
 }
 
@@ -54,13 +54,13 @@ if (dataResidency && String(dataResidency).toLowerCase() === 'eu') {
 }
 
 const msg = {
-  to: process.env.SG_TO || 'teste@exemplo.com', // change to a real recipient for full test
-  from: process.env.SG_FROM || '***EMAIL_REMOVED***', // must be a verified sender in SendGrid
+  to: process.env.SG_TO || 'teste@exemplo.com',
+  from: process.env.SG_FROM || '***EMAIL_REMOVED***',
   subject: 'Sending with SendGrid is Fun',
   text: 'and easy to do anywhere, even with Node.js',
   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 }
-// optional replyTo
+
 if (process.env.SG_REPLY_TO) {
   msg.replyTo = process.env.SG_REPLY_TO
 }

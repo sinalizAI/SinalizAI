@@ -1,12 +1,12 @@
 #!/bin/bash
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+# Ultralytics  AGPL-3.0 License - https://ultralytics.com/license
 
 # Download ILSVRC2012 ImageNet dataset https://image-net.org
 # Example usage: bash data/scripts/get_imagenet.sh
 # parent
-# ├── ultralytics
-# └── datasets
-#     └── imagenet  ← downloads here
+#  ultralytics
+#  datasets
+#      imagenet   downloads here
 
 # Arguments (optional) Usage: bash data/scripts/get_imagenet.sh --train --val
 if [ "$#" -gt 0 ]; then

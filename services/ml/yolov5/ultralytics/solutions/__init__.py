@@ -1,4 +1,4 @@
-# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
 
 from .ai_gym import AIGym
 from .analytics import Analytics
